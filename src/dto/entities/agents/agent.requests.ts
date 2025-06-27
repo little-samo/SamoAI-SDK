@@ -27,7 +27,7 @@ export interface AgentsPaginatedResponseDto {
 }
 
 export const AgentUpdateConfigSchema = z.object({
-  agentId: z.bigint(),
+  agentId: z.coerce.bigint(),
   config: AgentConfigSchema.partial(),
 });
 
@@ -53,7 +53,7 @@ export interface AgentPresetsPaginatedResponseDto {
 }
 
 export const CreateAgentFromPresetSchema = z.object({
-  presetId: z.bigint(),
+  presetId: z.coerce.bigint(),
 });
 
 export type CreateAgentFromPresetDto = z.infer<

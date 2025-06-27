@@ -50,7 +50,7 @@ export interface LocationPresetsPaginatedResponseDto {
 }
 
 export const CreateLocationFromPresetSchema = z.object({
-  presetId: z.bigint(),
+  presetId: z.coerce.bigint(),
 });
 
 export type CreateLocationFromPresetDto = z.infer<
@@ -62,7 +62,7 @@ export interface CreateLocationFromPresetResponseDto {
 }
 
 export const LocationUpdateConfigSchema = z.object({
-  locationId: z.bigint(),
+  locationId: z.coerce.bigint(),
   config: LocationConfigSchema.partial(),
 });
 
@@ -71,7 +71,7 @@ export type LocationUpdateConfigDto = z.infer<
 >;
 
 export const GetAgentHelperLocationSchema = z.object({
-  agentId: z.bigint(),
+  agentId: z.coerce.bigint(),
 });
 
 export type GetAgentHelperLocationDto = z.infer<
@@ -83,7 +83,7 @@ export interface GetAgentHelperLocationResponseDto {
 }
 
 export const GetLocationHelperLocationSchema = z.object({
-  locationId: z.bigint(),
+  locationId: z.coerce.bigint(),
 });
 
 export type GetLocationHelperLocationDto = z.infer<
