@@ -81,25 +81,3 @@ export const LocationConfigSchema = z.object({
 });
 
 export type LocationConfig = z.infer<typeof LocationConfigSchema>;
-
-export const DEFAULT_LOCATION_CONFIG: LocationConfig = {
-  name: 'Empty Location',
-  environment: LocationEnvironment.CHAT,
-
-  core: {
-    name: 'round_robin',
-  },
-  description: '',
-
-  rules: [],
-
-  canvases: [],
-  agentCanvases: [
-    {
-      name: 'plan',
-      description:
-        'Your private workspace for strategic thinking and task management. **Use this canvas CONSISTENTLY for any task requiring multiple steps, long-term tracking, or persistent information.** Break down complex goals into actionable steps (Plan-Do-Check-Act cycle recommended: 1. Outline steps, 2. Execute first step(s), 3. Check progress/results, 4. Adjust plan). Draft sequences of actions, list required resources, track progress, and refine strategies here before using tools. Keep it updated and organized to ensure effective execution.',
-      maxLength: 1000,
-    },
-  ],
-};
