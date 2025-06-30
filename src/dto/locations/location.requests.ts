@@ -6,23 +6,77 @@ import { LocationBasicDto } from './location';
 import { LocationMessageDto } from './location.messages';
 import { LocationPresetDto } from './location.preset';
 
-export const LocationsPaginationQuerySchema = z.object({
-  page: z.coerce.number().int().min(1).optional().default(1),
-  limit: z.coerce.number().int().min(1).max(100).optional().default(10),
+// User locations DTOs
+export const UserLocationsQuerySchema = z.object({
+  cursor: z.string().optional().describe('Pagination cursor for next page'),
+  limit: z.coerce
+    .number()
+    .min(1)
+    .max(10)
+    .default(10)
+    .describe('Number of locations to return'),
 });
 
-export type LocationsPaginationQueryDto = z.infer<
-  typeof LocationsPaginationQuerySchema
->;
+export type UserLocationsQueryDto = z.infer<typeof UserLocationsQuerySchema>;
 
-export interface LocationsPaginatedResponseDto {
-  data: LocationBasicDto[];
+export interface UserLocationItemDto {
+  location: LocationBasicDto;
+  lastMessage: LocationMessageDto | null;
+  unreadCount: number;
+}
+
+export interface UserLocationsResponseDto {
+  data: UserLocationItemDto[];
   meta: {
     total: number;
-    page: number;
-    limit: number;
-    totalPages: number;
+    nextCursor?: string;
   };
+}
+
+// Mark location as read DTOs
+export const MarkLocationAsReadParamsSchema = z.object({
+  locationId: z.string().transform((val) => BigInt(val)),
+});
+
+export type MarkLocationAsReadParamsDto = z.infer<
+  typeof MarkLocationAsReadParamsSchema
+>;
+
+// Location unread count DTOs
+export const LocationUnreadCountParamsSchema = z.object({
+  locationId: z.string().transform((val) => BigInt(val)),
+});
+
+export type LocationUnreadCountParamsDto = z.infer<
+  typeof LocationUnreadCountParamsSchema
+>;
+
+export interface LocationUnreadCountResponseDto {
+  unreadCount: number;
+}
+
+// Multiple locations unread count DTOs
+export const LocationsUnreadCountQuerySchema = z.object({
+  locationIds: z
+    .string()
+    .transform((val) => val.split(',').map((id) => BigInt(id.trim())))
+    .refine((arr) => arr.length > 0 && arr.length <= 10, {
+      message: 'locationIds must contain 1-10 location IDs',
+    }),
+});
+
+export type LocationsUnreadCountQueryDto = z.infer<
+  typeof LocationsUnreadCountQuerySchema
+>;
+
+export interface LocationUnreadCountItemDto {
+  locationId: bigint;
+  unreadCount: number;
+  lastMessage: LocationMessageDto | null;
+}
+
+export interface LocationsUnreadCountResponseDto {
+  data: LocationUnreadCountItemDto[];
 }
 
 export interface LocationMessagesResponseDto {
@@ -62,8 +116,10 @@ export interface CreateLocationFromPresetResponseDto {
 }
 
 export const LocationUpdateConfigSchema = z.object({
-  locationId: z.coerce.bigint(),
-  config: LocationConfigSchema.partial(),
+  locationId: z.coerce.bigint().describe('ID of the location to update'),
+  config: LocationConfigSchema.partial().describe(
+    'Only the specific configuration fields that need to be updated (name, environment, core, description, etc.)'
+  ),
 });
 
 export type LocationUpdateConfigDto = z.infer<
