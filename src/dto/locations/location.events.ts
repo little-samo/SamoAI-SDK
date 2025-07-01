@@ -17,6 +17,7 @@ export type LocationEventType =
 
 export interface LocationEventDtoBase {
   locationId: number;
+  userIds?: UserId[];
   type: LocationEventType;
 }
 
