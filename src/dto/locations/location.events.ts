@@ -1,6 +1,6 @@
 import { UserId } from '@little-samo/samo-ai';
 
-import { UserDto } from '../entities';
+import { UserPublicDto } from '../entities';
 
 import { LocationMessageDto } from './location.messages';
 
@@ -32,7 +32,7 @@ export interface LocationAgentExecutionEventDto extends LocationEventDtoBase {
 
 export interface LocationUserJoinEventDto extends LocationEventDtoBase {
   type: typeof LocationEventType.UserJoin;
-  user: UserDto;
+  user: UserPublicDto;
 }
 
 export interface LocationUserLeaveEventDto extends LocationEventDtoBase {

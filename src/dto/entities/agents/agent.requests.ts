@@ -4,7 +4,7 @@ import {
 } from '@little-samo/samo-ai-sdk/models';
 import { z } from 'zod';
 
-import { AgentPrivateDto } from './agent';
+import { AgentPrivateDto, AgentPublicDto } from './agent';
 import { AgentPresetDto } from './agent.preset';
 
 export const AgentsPaginationQuerySchema = z.object({
@@ -24,6 +24,25 @@ export interface AgentsPaginatedResponseDto {
     limit: number;
     totalPages: number;
   };
+}
+
+export const GetAgentsByIdsQuerySchema = z.object({
+  agentIds: z
+    .string()
+    .transform((val) => val.split(',').map((id) => BigInt(id.trim())))
+    .refine((arr) => arr.length > 0 && arr.length <= 25, {
+      message: 'agentIds must contain 1-25 agent IDs',
+    }),
+});
+
+export type GetAgentsByIdsQueryDto = z.infer<typeof GetAgentsByIdsQuerySchema>;
+
+export interface GetAgentPublicsByIdsResponseDto {
+  agents: AgentPublicDto[];
+}
+
+export interface GetAgentPrivatesByIdsResponseDto {
+  agents: AgentPrivateDto[];
 }
 
 export const AgentUpdateConfigSchema = z.object({

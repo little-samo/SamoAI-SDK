@@ -1,8 +1,8 @@
-import { AgentDto, UserDto } from '../entities';
+import { AgentPublicDto, UserPublicDto } from '../entities';
 
 export interface ItemRankingDto {
   rank: number;
-  ownerAgent?: AgentDto;
-  ownerUser?: UserDto;
+  ownerAgent?: AgentPublicDto;
+  ownerUser?: UserPublicDto;
   count: number;
 }
