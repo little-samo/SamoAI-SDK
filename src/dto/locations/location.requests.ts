@@ -5,11 +5,7 @@ import {
   LocationConfigSchema,
 } from '../../models/locations/location.config';
 
-import {
-  LocationListItemDto,
-  LocationPrivateDto,
-  LocationPublicDto,
-} from './location';
+import { LocationListItemDto, LocationPrivateDto } from './location';
 import { LocationMessageDto } from './location.message';
 import { LocationPresetDto } from './location.preset';
 
@@ -42,7 +38,7 @@ export const GetLocationParamsSchema = z.object({
 export type GetLocationParamsDto = z.infer<typeof GetLocationParamsSchema>;
 
 export interface GetLocationResponseDto {
-  location: LocationPublicDto | LocationPrivateDto;
+  location: LocationListItemDto;
 }
 
 // Get Location Private DTOs
