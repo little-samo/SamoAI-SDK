@@ -5,7 +5,11 @@ import {
   LocationConfigSchema,
 } from '../../models/locations/location.config';
 
-import { LocationPrivateDto, LocationPublicDto } from './location';
+import {
+  LocationListItemDto,
+  LocationPrivateDto,
+  LocationPublicDto,
+} from './location';
 import { LocationMessageDto } from './location.message';
 import { LocationPresetDto } from './location.preset';
 
@@ -22,16 +26,8 @@ export const UserLocationsQuerySchema = z.object({
 
 export type UserLocationsQueryDto = z.infer<typeof UserLocationsQuerySchema>;
 
-export interface UserLocationItemDto {
-  location: LocationPrivateDto;
-  lastMessage: LocationMessageDto | null;
-  unreadCount: number;
-  agentCount: number;
-  userCount: number;
-}
-
 export interface UserLocationsResponseDto {
-  data: UserLocationItemDto[];
+  locations: LocationListItemDto[];
   meta: {
     total: number;
     nextCursor?: string;
@@ -47,6 +43,19 @@ export type GetLocationParamsDto = z.infer<typeof GetLocationParamsSchema>;
 
 export interface GetLocationResponseDto {
   location: LocationPublicDto | LocationPrivateDto;
+}
+
+// Get Location Private DTOs
+export const GetLocationPrivateParamsSchema = z.object({
+  locationId: z.string().transform((val) => BigInt(val)),
+});
+
+export type GetLocationPrivateParamsDto = z.infer<
+  typeof GetLocationPrivateParamsSchema
+>;
+
+export interface GetLocationPrivateResponseDto {
+  location: LocationPrivateDto;
 }
 
 // Mark location as read DTOs

@@ -5,6 +5,8 @@ import {
   LocationType,
 } from '@little-samo/samo-ai-sdk/models';
 
+import { LocationMessageDto } from './location.message';
+
 export interface LocationPublicDto {
   id: LocationId;
   name: string;
@@ -18,4 +20,12 @@ export interface LocationPublicDto {
 
 export interface LocationPrivateDto extends LocationPublicDto {
   config: LocationConfig;
+}
+
+export interface LocationListItemDto extends LocationPublicDto {
+  lastMessage: LocationMessageDto | null;
+  unreadCount: number;
+  agentCount: number;
+  userCount: number;
+  gimmickCount: number;
 }
