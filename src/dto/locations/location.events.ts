@@ -2,7 +2,7 @@ import { UserId } from '@little-samo/samo-ai';
 
 import { UserPublicDto } from '../entities';
 
-import { LocationMessageDto } from './location.messages';
+import { LocationMessageDto } from './location.message';
 
 export const LocationEventType = {
   AgentExecution: 'AgentExecution',

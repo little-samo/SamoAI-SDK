@@ -2,8 +2,8 @@ import { z } from 'zod';
 
 import { LocationConfigSchema } from '../../models/locations/location.config';
 
-import { LocationBasicDto } from './location';
-import { LocationMessageDto } from './location.messages';
+import { LocationPrivateDto, LocationPublicDto } from './location';
+import { LocationMessageDto } from './location.message';
 import { LocationPresetDto } from './location.preset';
 
 // User locations DTOs
@@ -20,7 +20,7 @@ export const UserLocationsQuerySchema = z.object({
 export type UserLocationsQueryDto = z.infer<typeof UserLocationsQuerySchema>;
 
 export interface UserLocationItemDto {
-  location: LocationBasicDto;
+  location: LocationPrivateDto;
   lastMessage: LocationMessageDto | null;
   unreadCount: number;
 }
@@ -31,6 +31,17 @@ export interface UserLocationsResponseDto {
     total: number;
     nextCursor?: string;
   };
+}
+
+// Get location DTOs
+export const GetLocationParamsSchema = z.object({
+  locationId: z.string().transform((val) => BigInt(val)),
+});
+
+export type GetLocationParamsDto = z.infer<typeof GetLocationParamsSchema>;
+
+export interface GetLocationResponseDto {
+  location: LocationPublicDto | LocationPrivateDto;
 }
 
 // Mark location as read DTOs
@@ -112,7 +123,7 @@ export type CreateLocationFromPresetDto = z.infer<
 >;
 
 export interface CreateLocationFromPresetResponseDto {
-  location: LocationBasicDto;
+  location: LocationPrivateDto;
 }
 
 export const LocationUpdateConfigSchema = z.object({
@@ -135,7 +146,7 @@ export type GetAgentHelperLocationDto = z.infer<
 >;
 
 export interface GetAgentHelperLocationResponseDto {
-  location: LocationBasicDto;
+  location: LocationPrivateDto;
 }
 
 export const GetLocationHelperLocationSchema = z.object({
@@ -147,5 +158,5 @@ export type GetLocationHelperLocationDto = z.infer<
 >;
 
 export interface GetLocationHelperLocationResponseDto {
-  location: LocationBasicDto;
+  location: LocationPrivateDto;
 }
