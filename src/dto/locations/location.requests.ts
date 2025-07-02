@@ -26,6 +26,8 @@ export interface UserLocationItemDto {
   location: LocationPrivateDto;
   lastMessage: LocationMessageDto | null;
   unreadCount: number;
+  agentCount: number;
+  userCount: number;
 }
 
 export interface UserLocationsResponseDto {
