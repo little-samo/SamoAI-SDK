@@ -80,6 +80,8 @@ export const LocationConfigGimmickSchema = z.object({
     ),
 });
 
+export type LocationConfigGimmick = z.infer<typeof LocationConfigGimmickSchema>;
+
 export const LocationConfigSchema = z.object({
   name: z.string().max(64).describe('Location name'),
   thumbnail: z
