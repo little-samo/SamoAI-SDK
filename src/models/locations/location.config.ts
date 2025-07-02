@@ -32,9 +32,52 @@ export const LocationConfigCanvasSchema = z.object({
   name: z
     .string()
     .max(16)
-    .regex(/^[a-zA-Z_]+$/, 'Name must contain only letters and underscores'),
-  description: z.string().max(500),
-  maxLength: z.number().min(100).max(1000),
+    .regex(/^[a-zA-Z_]+$/, 'Name must contain only letters and underscores')
+    .describe(
+      'Unique identifier for the canvas that agents use to reference it'
+    ),
+  description: z
+    .string()
+    .max(500)
+    .describe(
+      'Clear explanation of the canvas purpose and intended use for agents'
+    ),
+  maxLength: z
+    .number()
+    .min(100)
+    .max(1000)
+    .describe('Maximum character limit for canvas content'),
+});
+
+export const LocationConfigGimmickSchema = z.object({
+  core: z.union([
+    z
+      .literal('web_search')
+      .describe(
+        'Searches the web for up-to-date or missing information using an LLM, providing both a summary and detailed results. Execution takes approximately 30 seconds'
+      ),
+    z
+      .literal('x_twitter')
+      .describe(
+        'Interacts with X (Twitter) platform for social media operations and content management'
+      ),
+  ]),
+  name: z
+    .string()
+    .max(64)
+    .describe('Name of the gimmick that agents can reference'),
+  description: z
+    .string()
+    .max(500)
+    .describe(
+      'Clear description of what the gimmick does, its purpose, and expected execution time for agents to understand'
+    ),
+  appearance: z
+    .string()
+    .max(500)
+    .describe(
+      'How the gimmick appears to agents and users in the location context'
+    ),
 });
 
 export const LocationConfigSchema = z.object({
@@ -77,6 +120,13 @@ export const LocationConfigSchema = z.object({
     .max(4)
     .describe(
       'Private agent canvases for individual agent use, separate per location context'
+    ),
+
+  gimmicks: z
+    .array(LocationConfigGimmickSchema)
+    .max(4)
+    .describe(
+      'Interactive tools that agents can execute to perform specific tasks (e.g., web search, social media).'
     ),
 });
 
