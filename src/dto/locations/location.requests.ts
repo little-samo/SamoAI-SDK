@@ -104,6 +104,38 @@ export interface LocationsUnreadCountResponseDto {
   data: LocationUnreadCountItemDto[];
 }
 
+// Join agent to location DTOs
+export const JoinAgentToLocationParamsSchema = z.object({
+  locationId: z.string().transform((val) => BigInt(val)),
+});
+
+export type JoinAgentToLocationParamsDto = z.infer<
+  typeof JoinAgentToLocationParamsSchema
+>;
+
+export const JoinAgentToLocationBodySchema = z.object({
+  agentId: z.coerce.bigint(),
+});
+
+export type JoinAgentToLocationBodyDto = z.infer<
+  typeof JoinAgentToLocationBodySchema
+>;
+
+export interface JoinAgentToLocationResponseDto {
+  agentAdded: boolean;
+  message?: string;
+}
+
+// Join agent to location tool schema (combines params and body for tools)
+export const JoinAgentToLocationToolSchema = z.object({
+  locationId: z.coerce.bigint(),
+  agentId: z.coerce.bigint(),
+});
+
+export type JoinAgentToLocationToolDto = z.infer<
+  typeof JoinAgentToLocationToolSchema
+>;
+
 export interface LocationMessagesResponseDto {
   messages: LocationMessageDto[];
   cursor?: string;
