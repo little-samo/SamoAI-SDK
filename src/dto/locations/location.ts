@@ -1,12 +1,16 @@
 import { LocationId } from '@little-samo/samo-ai';
-import { LocationConfig } from '@little-samo/samo-ai-sdk/models';
+import {
+  LocationConfig,
+  LocationEnvironment,
+  LocationType,
+} from '@little-samo/samo-ai-sdk/models';
 
 export interface LocationPublicDto {
   id: LocationId;
   name: string;
 
-  platform: string;
-  type: string;
+  type: LocationType;
+  environment: LocationEnvironment;
 
   createdAt: Date;
   updatedAt: Date;

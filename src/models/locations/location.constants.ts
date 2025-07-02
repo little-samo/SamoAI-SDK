@@ -1,3 +1,12 @@
+export const LocationType = {
+  PRIVATE: 'PRIVATE',
+  GROUP: 'GROUP',
+  PUBLIC: 'PUBLIC',
+  SYSTEM: 'SYSTEM',
+} as const;
+
+export type LocationType = (typeof LocationType)[keyof typeof LocationType];
+
 export const LocationEnvironment = {
   CHAT: 'CHAT',
   AGENT_HELPER: 'AGENT_HELPER',
