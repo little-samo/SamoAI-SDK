@@ -7,7 +7,7 @@ export interface LocationPresetDto {
   presetDescription: string;
   name: string;
   description: string;
-  config: LocationConfig;
+  config: Partial<LocationConfig>;
   createdAt: Date;
   updatedAt: Date;
 }

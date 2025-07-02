@@ -5,7 +5,7 @@ export interface AgentPresetDto {
   presetName: string;
   presetShortDescription: string;
   presetDescription: string;
-  config: AgentConfig;
+  config: Partial<AgentConfig>;
   createdAt: Date;
   updatedAt: Date;
 }
