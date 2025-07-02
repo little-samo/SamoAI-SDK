@@ -1,4 +1,4 @@
-import { UserId } from '@little-samo/samo-ai';
+import { LocationId, UserId } from '@little-samo/samo-ai';
 
 import { UserPublicDto } from '../entities';
 
@@ -16,7 +16,7 @@ export type LocationEventType =
   (typeof LocationEventType)[keyof typeof LocationEventType];
 
 export interface LocationEventDtoBase {
-  locationId: number;
+  locationId: LocationId;
   userIds?: UserId[];
   type: LocationEventType;
 }
