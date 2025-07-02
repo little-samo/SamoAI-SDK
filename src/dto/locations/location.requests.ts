@@ -1,6 +1,9 @@
 import { z } from 'zod';
 
-import { LocationConfigSchema } from '../../models/locations/location.config';
+import {
+  LocationConfig,
+  LocationConfigSchema,
+} from '../../models/locations/location.config';
 
 import { LocationPrivateDto, LocationPublicDto } from './location';
 import { LocationMessageDto } from './location.message';
@@ -128,14 +131,18 @@ export interface CreateLocationFromPresetResponseDto {
 
 export const LocationUpdateConfigSchema = z.object({
   locationId: z.coerce.bigint().describe('ID of the location to update'),
-  config: LocationConfigSchema.partial().describe(
-    'Only the specific configuration fields that need to be updated (name, environment, core, description, etc.)'
-  ),
+  config: LocationConfigSchema.partial()
+    .strict()
+    .describe(
+      'Only the specific configuration fields that need to be updated (name, environment, core, description, etc.)'
+    ),
 });
 
 export type LocationUpdateConfigDto = z.infer<
   typeof LocationUpdateConfigSchema
 >;
+
+export type LocationUpdateConfigResponseDto = Partial<LocationConfig>;
 
 export const GetAgentHelperLocationQuerySchema = z.object({
   agentId: z.coerce.bigint(),

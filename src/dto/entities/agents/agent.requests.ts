@@ -1,4 +1,5 @@
 import {
+  AgentConfig,
   AgentConfigSchema,
   AgentHelperType,
 } from '@little-samo/samo-ai-sdk/models';
@@ -46,11 +47,17 @@ export interface GetAgentPrivatesByIdsResponseDto {
 }
 
 export const AgentUpdateConfigSchema = z.object({
-  agentId: z.coerce.bigint(),
-  config: AgentConfigSchema.partial(),
+  agentId: z.coerce.bigint().describe('ID of the agent to update'),
+  config: AgentConfigSchema.partial()
+    .strict()
+    .describe(
+      'Only the specific configuration fields that need to be updated (name, avatar, core, etc.)'
+    ),
 });
 
 export type AgentUpdateConfigDto = z.infer<typeof AgentUpdateConfigSchema>;
+
+export type AgentUpdateConfigResponseDto = Partial<AgentConfig>;
 
 export const AgentPresetsPaginationQuerySchema = z.object({
   page: z.coerce.number().int().min(1).optional().default(1),
