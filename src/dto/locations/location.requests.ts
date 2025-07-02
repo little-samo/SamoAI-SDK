@@ -137,26 +137,38 @@ export type LocationUpdateConfigDto = z.infer<
   typeof LocationUpdateConfigSchema
 >;
 
-export const GetAgentHelperLocationSchema = z.object({
+export const GetAgentHelperLocationQuerySchema = z.object({
   agentId: z.coerce.bigint(),
 });
 
 export type GetAgentHelperLocationDto = z.infer<
-  typeof GetAgentHelperLocationSchema
+  typeof GetAgentHelperLocationQuerySchema
 >;
 
 export interface GetAgentHelperLocationResponseDto {
   location: LocationPrivateDto;
 }
 
-export const GetLocationHelperLocationSchema = z.object({
+export const GetLocationHelperLocationQuerySchema = z.object({
   locationId: z.coerce.bigint(),
 });
 
 export type GetLocationHelperLocationDto = z.infer<
-  typeof GetLocationHelperLocationSchema
+  typeof GetLocationHelperLocationQuerySchema
 >;
 
 export interface GetLocationHelperLocationResponseDto {
+  location: LocationPrivateDto;
+}
+
+export const GetAgentDmLocationQuerySchema = z.object({
+  agentId: z.coerce.bigint(),
+});
+
+export type GetAgentDmLocationDto = z.infer<
+  typeof GetAgentDmLocationQuerySchema
+>;
+
+export interface GetAgentDmLocationResponseDto {
   location: LocationPrivateDto;
 }
