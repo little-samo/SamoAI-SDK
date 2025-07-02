@@ -1,4 +1,4 @@
-import { LocationId } from '@little-samo/samo-ai';
+import { AgentId, LocationId, UserId } from '@little-samo/samo-ai';
 import {
   LocationConfig,
   LocationEnvironment,
@@ -25,7 +25,7 @@ export interface LocationPrivateDto extends LocationPublicDto {
 export interface LocationListItemDto extends LocationPublicDto {
   lastMessage: LocationMessageDto | null;
   unreadCount: number;
-  agentCount: number;
-  userCount: number;
+  agentIds: AgentId[];
+  userIds: UserId[];
   gimmickCount: number;
 }
