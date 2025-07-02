@@ -136,6 +136,38 @@ export type JoinAgentToLocationToolDto = z.infer<
   typeof JoinAgentToLocationToolSchema
 >;
 
+// Remove agent from location DTOs
+export const RemoveAgentFromLocationParamsSchema = z.object({
+  locationId: z.string().transform((val) => BigInt(val)),
+});
+
+export type RemoveAgentFromLocationParamsDto = z.infer<
+  typeof RemoveAgentFromLocationParamsSchema
+>;
+
+export const RemoveAgentFromLocationBodySchema = z.object({
+  agentId: z.coerce.bigint(),
+});
+
+export type RemoveAgentFromLocationBodyDto = z.infer<
+  typeof RemoveAgentFromLocationBodySchema
+>;
+
+export interface RemoveAgentFromLocationResponseDto {
+  agentRemoved: boolean;
+  message?: string;
+}
+
+// Remove agent from location tool schema (combines params and body for tools)
+export const RemoveAgentFromLocationToolSchema = z.object({
+  locationId: z.coerce.bigint(),
+  agentId: z.coerce.bigint(),
+});
+
+export type RemoveAgentFromLocationToolDto = z.infer<
+  typeof RemoveAgentFromLocationToolSchema
+>;
+
 export interface LocationMessagesResponseDto {
   messages: LocationMessageDto[];
   cursor?: string;
