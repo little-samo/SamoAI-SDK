@@ -28,4 +28,6 @@ export interface LocationListItemDto extends LocationPublicDto {
   agentIds: AgentId[];
   userIds: UserId[];
   gimmickCount: number;
+  pauseUpdateUntil: Date | null;
+  pauseUpdateReason: string | null;
 }
