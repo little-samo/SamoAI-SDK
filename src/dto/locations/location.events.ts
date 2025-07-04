@@ -10,6 +10,7 @@ export const LocationEventType = {
   UserLeave: 'UserLeave',
   AddMessage: 'AddMessage',
   RenderingUpdated: 'RenderingUpdated',
+  PauseUpdateUntilUpdated: 'PauseUpdateUntilUpdated',
 } as const;
 
 export type LocationEventType =
@@ -19,11 +20,6 @@ export interface LocationEventDtoBase {
   locationId: LocationId;
   userIds?: UserId[];
   type: LocationEventType;
-}
-
-export interface LocationRenderingUpdatedEventDto extends LocationEventDtoBase {
-  type: typeof LocationEventType.RenderingUpdated;
-  rendering: string | null;
 }
 
 export interface LocationAgentExecutionEventDto extends LocationEventDtoBase {
@@ -46,9 +42,22 @@ export interface LocationAddMessageEventDto extends LocationEventDtoBase {
   message: LocationMessageDto;
 }
 
+export interface LocationRenderingUpdatedEventDto extends LocationEventDtoBase {
+  type: typeof LocationEventType.RenderingUpdated;
+  rendering: string | null;
+}
+
+export interface LocationPauseUpdateUntilUpdatedEventDto
+  extends LocationEventDtoBase {
+  type: typeof LocationEventType.PauseUpdateUntilUpdated;
+  pauseUpdateUntil: Date | null;
+  pauseUpdateReason: string | null;
+}
+
 export type LocationEventDto =
-  | LocationRenderingUpdatedEventDto
   | LocationAgentExecutionEventDto
   | LocationUserJoinEventDto
   | LocationUserLeaveEventDto
-  | LocationAddMessageEventDto;
+  | LocationAddMessageEventDto
+  | LocationRenderingUpdatedEventDto
+  | LocationPauseUpdateUntilUpdatedEventDto;
