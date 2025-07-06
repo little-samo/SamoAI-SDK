@@ -1,4 +1,4 @@
-import { LocationId, UserId } from '@little-samo/samo-ai';
+import { AgentId, LocationId, UserId } from '@little-samo/samo-ai';
 
 import { UserPublicDto } from '../entities';
 
@@ -24,7 +24,7 @@ export interface LocationEventDtoBase {
 
 export interface LocationAgentExecutionEventDto extends LocationEventDtoBase {
   type: typeof LocationEventType.AgentExecution;
-  name: string;
+  agentId: AgentId;
 }
 
 export interface LocationUserJoinEventDto extends LocationEventDtoBase {
