@@ -19,7 +19,7 @@ export interface LocationPublicDto {
 }
 
 export interface LocationPrivateDto extends LocationPublicDto {
-  config: LocationConfig;
+  config: LocationConfig | null;
 }
 
 export interface LocationListItemDto extends LocationPublicDto {
