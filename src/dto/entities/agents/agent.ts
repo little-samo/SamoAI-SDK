@@ -9,5 +9,5 @@ export interface AgentPublicDto {
 }
 
 export interface AgentPrivateDto extends AgentPublicDto {
-  config: AgentConfig;
+  config: AgentConfig | null;
 }
