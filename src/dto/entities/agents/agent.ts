@@ -4,7 +4,7 @@ import { AgentConfig } from '@little-samo/samo-ai-sdk/models';
 export interface AgentPublicDto {
   id: AgentId;
   name: string;
-  avatar: string;
+  avatar: string | null;
   ownerUserId: UserId;
 }
 
