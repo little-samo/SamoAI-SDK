@@ -178,9 +178,9 @@ export const AgentConfigSchema = z.object({
     .array(
       z.union([
         z
-          .literal('explore_web')
+          .literal('todo')
           .describe(
-            'Enables web exploration of the currently active browser tab when Chrome extension is activated. Allows the agent to navigate, interact with, and extract information from web pages.'
+            'Placeholder for future action capabilities - to be implemented'
           ),
         z
           .literal('todo')
