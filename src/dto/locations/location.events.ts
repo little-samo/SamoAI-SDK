@@ -52,6 +52,7 @@ export interface LocationPauseUpdateUntilUpdatedEventDto
   type: typeof LocationEventType.PauseUpdateUntilUpdated;
   pauseUpdateUntil: Date | null;
   pauseUpdateReason: string | null;
+  pauseUpdateNextAgentId: AgentId | null;
 }
 
 export type LocationEventDto =
