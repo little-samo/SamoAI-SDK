@@ -32,79 +32,15 @@ export const AgentConfigCoreSchema = z.object({
 
 export type AgentConfigCore = z.infer<typeof AgentConfigCoreSchema>;
 
-const CharacterPropertySchema = z.string().max(500).optional();
-
-const CharacterBackgroundSchema = z
-  .object({
-    role: CharacterPropertySchema.describe(
-      "Agent's primary role or profession (e.g., 'professor', 'assistant', 'coach', 'mentor'). This shapes how they approach interactions and what expertise they offer."
-    ),
-    gender: CharacterPropertySchema.describe(
-      'Gender identity of the agent, which may influence their communication style and perspective.'
-    ),
-    expertise: CharacterPropertySchema.describe(
-      "Specific areas of knowledge or skills (e.g., 'machine learning', 'creative writing', 'financial planning'). Determines what topics the agent can provide authoritative guidance on."
-    ),
-    backstory: CharacterPropertySchema.describe(
-      'Personal history and experiences that shaped the agent. This background informs their worldview, reactions, and decision-making patterns.'
-    ),
-    birthDate: CharacterPropertySchema.describe(
-      'Birth date in YYYY-MM-DD format'
-    ),
-    occupation: CharacterPropertySchema.describe('Current or past occupation'),
-  })
-  .catchall(CharacterPropertySchema)
-  .optional();
-
-const CharacterSpeechSchema = z
-  .object({
-    tone: CharacterPropertySchema.describe(
-      "Overall emotional quality of communication (e.g., 'friendly', 'formal', 'enthusiastic', 'calm'). Affects how messages are perceived by others."
-    ),
-    style: CharacterPropertySchema.describe(
-      "Conversation approach and structure (e.g., 'concise', 'detailed', 'humorous', 'analytical'). Determines message length and information density."
-    ),
-    formality: CharacterPropertySchema.describe(
-      "Level of formal language usage (e.g., 'casual', 'professional', 'academic'). Affects vocabulary choice and sentence structure."
-    ),
-  })
-  .catchall(CharacterPropertySchema)
-  .optional();
-
-const CharacterPersonalitySchema = z
-  .object({
-    traits: CharacterPropertySchema.describe(
-      "Core personality characteristics (e.g., 'empathetic', 'analytical', 'creative', 'decisive'). These drive behavioral patterns and response tendencies."
-    ),
-    interests: CharacterPropertySchema.describe(
-      'Topics and activities the agent finds engaging or enjoys discussing. Influences conversation direction and enthusiasm levels.'
-    ),
-    values: CharacterPropertySchema.describe(
-      'Fundamental beliefs and principles that guide decision-making. Affects moral stances and advice given to others.'
-    ),
-    quirks: CharacterPropertySchema.describe(
-      'Unique habits, mannerisms, or characteristics that make the agent distinctive. Adds personality depth and memorability.'
-    ),
-    mbti: CharacterPropertySchema.describe(
-      "Myers-Briggs personality type (e.g., 'ENFP', 'INTJ'). Provides structured personality framework for consistent behavior patterns."
-    ),
-  })
-  .catchall(CharacterPropertySchema)
-  .optional();
-
 const CharacterSchema = z
-  .object({
-    background: CharacterBackgroundSchema,
-    speech: CharacterSpeechSchema,
-    personality: CharacterPersonalitySchema,
-  })
-  .catchall(
-    z.union([
-      CharacterPropertySchema,
-      z.object({}).catchall(CharacterPropertySchema),
-    ])
-  )
-  .optional();
+  .record(z.record(z.string().max(500)))
+  .describe(
+    'Flexible 2-depth character configuration. Common suggested categories and properties: ' +
+      "background: {role (CRITICAL: Agent's core identity and primary function - defines how they approach ALL interactions, what expertise they provide, and their fundamental purpose. This shapes their entire behavioral pattern and response style), gender, expertise, backstory, birthDate, occupation} - " +
+      'speech: {tone, style, formality} - ' +
+      'personality: {traits, interests, values, quirks, mbti}. ' +
+      'All values are strings up to 500 characters. You can use any category and property names.'
+  );
 
 const LlmPresetSchema = z.union([
   z.literal('gemini-low').describe('Gemini - Low cost'),
