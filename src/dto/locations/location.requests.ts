@@ -1,3 +1,4 @@
+import { DayOfWeek } from '@little-samo/samo-ai/common';
 import { z } from 'zod';
 
 import {
@@ -8,6 +9,7 @@ import {
 import { LocationListItemDto, LocationPrivateDto } from './location';
 import { LocationMessageDto } from './location.message';
 import { LocationPresetDto } from './location.preset';
+import { LocationScheduledMessageDto } from './location.scheduled-message';
 
 // User locations DTOs
 export const UserLocationsQuerySchema = z.object({
@@ -250,3 +252,125 @@ export type GetAgentDmLocationDto = z.infer<
 export interface GetAgentDmLocationResponseDto {
   location: LocationPrivateDto;
 }
+
+// Get scheduled messages DTOs
+export const GetLocationScheduledMessagesParamsSchema = z.object({
+  locationId: z.string().transform((val) => BigInt(val)),
+});
+
+export type GetLocationScheduledMessagesParamsDto = z.infer<
+  typeof GetLocationScheduledMessagesParamsSchema
+>;
+
+export interface GetLocationScheduledMessagesResponseDto {
+  scheduledMessages: LocationScheduledMessageDto[];
+}
+
+// Create scheduled message DTOs
+export const CreateLocationScheduledMessageParamsSchema = z.object({
+  locationId: z.string().transform((val) => BigInt(val)),
+});
+
+export type CreateLocationScheduledMessageParamsDto = z.infer<
+  typeof CreateLocationScheduledMessageParamsSchema
+>;
+
+// Base schema for common repeat fields
+const LocationScheduledMessageBaseSchema = z.object({
+  repeatTimesOfDay: z
+    .array(z.string().regex(/^([01]?[0-9]|2[0-3]):[0-5][0-9]$/))
+    .min(1)
+    .max(24)
+    .describe('Times of day to repeat the message (24-hour format)'),
+  repeatDaysOfWeek: z
+    .array(z.nativeEnum(DayOfWeek))
+    .max(7)
+    .optional()
+    .default([])
+    .describe('Days of week to repeat the message'),
+});
+
+export const CreateLocationScheduledMessageBodySchema =
+  LocationScheduledMessageBaseSchema.extend({
+    message: z.string().max(500),
+  });
+
+export type CreateLocationScheduledMessageBodyDto = z.infer<
+  typeof CreateLocationScheduledMessageBodySchema
+>;
+
+export interface CreateLocationScheduledMessageResponseDto {
+  scheduledMessage: LocationScheduledMessageDto;
+}
+
+// Update scheduled message DTOs
+export const UpdateLocationScheduledMessageParamsSchema = z.object({
+  locationId: z.string().transform((val) => BigInt(val)),
+  messageId: z.string(),
+});
+
+export type UpdateLocationScheduledMessageParamsDto = z.infer<
+  typeof UpdateLocationScheduledMessageParamsSchema
+>;
+
+export const UpdateLocationScheduledMessageBodySchema =
+  LocationScheduledMessageBaseSchema.extend({
+    message: z.string().max(500).optional(),
+  });
+
+export type UpdateLocationScheduledMessageBodyDto = z.infer<
+  typeof UpdateLocationScheduledMessageBodySchema
+>;
+
+export interface UpdateLocationScheduledMessageResponseDto {
+  scheduledMessage: LocationScheduledMessageDto;
+}
+
+// Delete scheduled message DTOs
+export const DeleteLocationScheduledMessageParamsSchema = z.object({
+  locationId: z.string().transform((val) => BigInt(val)),
+  messageId: z.string(),
+});
+
+export type DeleteLocationScheduledMessageParamsDto = z.infer<
+  typeof DeleteLocationScheduledMessageParamsSchema
+>;
+
+export interface DeleteLocationScheduledMessageResponseDto {
+  deleted: boolean;
+}
+
+// Tool schemas that combine params and body for MCP tools
+const LocationScheduledMessageToolBaseSchema = z
+  .object({
+    locationId: z.coerce.bigint(),
+  })
+  .merge(LocationScheduledMessageBaseSchema);
+
+export const CreateLocationScheduledMessageToolSchema =
+  LocationScheduledMessageToolBaseSchema.extend({
+    message: z.string().max(500),
+  });
+
+export type CreateLocationScheduledMessageToolDto = z.infer<
+  typeof CreateLocationScheduledMessageToolSchema
+>;
+
+export const UpdateLocationScheduledMessageToolSchema =
+  LocationScheduledMessageToolBaseSchema.extend({
+    messageId: z.string(),
+    message: z.string().max(500).optional(),
+  });
+
+export type UpdateLocationScheduledMessageToolDto = z.infer<
+  typeof UpdateLocationScheduledMessageToolSchema
+>;
+
+export const DeleteLocationScheduledMessageToolSchema = z.object({
+  locationId: z.coerce.bigint(),
+  messageId: z.string(),
+});
+
+export type DeleteLocationScheduledMessageToolDto = z.infer<
+  typeof DeleteLocationScheduledMessageToolSchema
+>;
