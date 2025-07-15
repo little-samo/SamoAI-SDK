@@ -30,7 +30,9 @@ export interface AgentsPaginatedResponseDto {
 export const GetAgentsByIdsQuerySchema = z.object({
   agentIds: z
     .string()
-    .transform((val) => val.split(',').map((id) => BigInt(id.trim())))
+    .transform((val) =>
+      val.split(',').map((id) => z.coerce.bigint().parse(id.trim()))
+    )
     .refine((arr) => arr.length > 0 && arr.length <= 25, {
       message: 'agentIds must contain 1-25 agent IDs',
     }),

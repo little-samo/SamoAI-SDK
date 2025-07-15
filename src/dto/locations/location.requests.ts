@@ -34,7 +34,7 @@ export interface UserLocationsResponseDto {
 
 // Get location DTOs
 export const GetLocationParamsSchema = z.object({
-  locationId: z.string().transform((val) => BigInt(val)),
+  locationId: z.coerce.bigint(),
 });
 
 export type GetLocationParamsDto = z.infer<typeof GetLocationParamsSchema>;
@@ -45,7 +45,7 @@ export interface GetLocationResponseDto {
 
 // Get Location Private DTOs
 export const GetLocationPrivateParamsSchema = z.object({
-  locationId: z.string().transform((val) => BigInt(val)),
+  locationId: z.coerce.bigint(),
 });
 
 export type GetLocationPrivateParamsDto = z.infer<
@@ -58,7 +58,7 @@ export interface GetLocationPrivateResponseDto {
 
 // Mark location as read DTOs
 export const MarkLocationAsReadParamsSchema = z.object({
-  locationId: z.string().transform((val) => BigInt(val)),
+  locationId: z.coerce.bigint(),
 });
 
 export type MarkLocationAsReadParamsDto = z.infer<
@@ -67,7 +67,7 @@ export type MarkLocationAsReadParamsDto = z.infer<
 
 // Location unread count DTOs
 export const LocationUnreadCountParamsSchema = z.object({
-  locationId: z.string().transform((val) => BigInt(val)),
+  locationId: z.coerce.bigint(),
 });
 
 export type LocationUnreadCountParamsDto = z.infer<
@@ -82,7 +82,9 @@ export interface LocationUnreadCountResponseDto {
 export const LocationsUnreadCountQuerySchema = z.object({
   locationIds: z
     .string()
-    .transform((val) => val.split(',').map((id) => BigInt(id.trim())))
+    .transform((val) =>
+      val.split(',').map((id) => z.coerce.bigint().parse(id.trim()))
+    )
     .refine((arr) => arr.length > 0 && arr.length <= 10, {
       message: 'locationIds must contain 1-10 location IDs',
     }),
@@ -104,7 +106,7 @@ export interface LocationsUnreadCountResponseDto {
 
 // Join agent to location DTOs
 export const JoinAgentToLocationParamsSchema = z.object({
-  locationId: z.string().transform((val) => BigInt(val)),
+  locationId: z.coerce.bigint(),
 });
 
 export type JoinAgentToLocationParamsDto = z.infer<
@@ -136,7 +138,7 @@ export type JoinAgentToLocationToolDto = z.infer<
 
 // Remove agent from location DTOs
 export const RemoveAgentFromLocationParamsSchema = z.object({
-  locationId: z.string().transform((val) => BigInt(val)),
+  locationId: z.coerce.bigint(),
 });
 
 export type RemoveAgentFromLocationParamsDto = z.infer<
@@ -255,7 +257,7 @@ export interface GetAgentDmLocationResponseDto {
 
 // Get scheduled messages DTOs
 export const GetLocationScheduledMessagesParamsSchema = z.object({
-  locationId: z.string().transform((val) => BigInt(val)),
+  locationId: z.coerce.bigint(),
 });
 
 export type GetLocationScheduledMessagesParamsDto = z.infer<
@@ -268,7 +270,7 @@ export interface GetLocationScheduledMessagesResponseDto {
 
 // Create scheduled message DTOs
 export const CreateLocationScheduledMessageParamsSchema = z.object({
-  locationId: z.string().transform((val) => BigInt(val)),
+  locationId: z.coerce.bigint(),
 });
 
 export type CreateLocationScheduledMessageParamsDto = z.infer<
@@ -305,7 +307,7 @@ export interface CreateLocationScheduledMessageResponseDto {
 
 // Update scheduled message DTOs
 export const UpdateLocationScheduledMessageParamsSchema = z.object({
-  locationId: z.string().transform((val) => BigInt(val)),
+  locationId: z.coerce.bigint(),
   messageId: z.string(),
 });
 
@@ -328,7 +330,7 @@ export interface UpdateLocationScheduledMessageResponseDto {
 
 // Delete scheduled message DTOs
 export const DeleteLocationScheduledMessageParamsSchema = z.object({
-  locationId: z.string().transform((val) => BigInt(val)),
+  locationId: z.coerce.bigint(),
   messageId: z.string(),
 });
 
