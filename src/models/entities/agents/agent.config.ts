@@ -130,9 +130,7 @@ export const AgentConfigSchema = z.object({
       "Additional capabilities the agent can perform beyond basic conversation. Each action expands the agent's toolkit for specific use cases."
     ),
 
-  character: CharacterSchema.describe(
-    'Comprehensive personality and background configuration that shapes how the agent behaves, communicates, and makes decisions. This creates consistency and authenticity in interactions.'
-  ),
+  character: CharacterSchema,
 
   rules: z
     .array(z.string().max(200))

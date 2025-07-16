@@ -53,7 +53,9 @@ export const AgentUpdateConfigSchema = z.object({
   config: AgentConfigSchema.partial()
     .strict()
     .describe(
-      'Only the specific configuration fields that need to be updated (name, avatar, core, etc.)'
+      'Only the specific configuration fields that need to be updated (name, avatar, core, etc.). ' +
+        'For the character field: properties are merged at the individual level rather than replacing entire categories. ' +
+        'Empty string values ("") will delete the corresponding property. If a category becomes empty after deletions, the category itself is removed.'
     ),
 });
 
