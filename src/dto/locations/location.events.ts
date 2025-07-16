@@ -34,6 +34,7 @@ export interface LocationAgentExecutedEventDto extends LocationEventDtoBase {
   type: typeof LocationEventType.AgentExecuted;
   agentId: AgentId;
   success: boolean;
+  error?: string;
 }
 
 export interface LocationUserJoinEventDto extends LocationEventDtoBase {
@@ -55,6 +56,7 @@ export interface LocationGimmickExecutedEventDto extends LocationEventDtoBase {
   type: typeof LocationEventType.GimmickExecuted;
   gimmickId: GimmickId;
   success: boolean;
+  error?: string;
 }
 
 export interface LocationAddMessageEventDto extends LocationEventDtoBase {
