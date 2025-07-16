@@ -66,12 +66,6 @@ export const LocationConfigGimmickSchema = z.object({
     .string()
     .max(64)
     .describe('Name of the gimmick that agents can reference'),
-  description: z
-    .string()
-    .max(500)
-    .describe(
-      'Clear description of what the gimmick does, its purpose, and expected execution time for agents to understand'
-    ),
   appearance: z
     .string()
     .max(500)
