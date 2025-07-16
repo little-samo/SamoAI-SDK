@@ -5,7 +5,8 @@ import { UserPublicDto } from '../entities';
 import { LocationMessageDto } from './location.message';
 
 export const LocationEventType = {
-  AgentExecution: 'AgentExecution',
+  AgentExecuting: 'AgentExecuting',
+  AgentExecuted: 'AgentExecuted',
   UserJoin: 'UserJoin',
   UserLeave: 'UserLeave',
   AddMessage: 'AddMessage',
@@ -22,8 +23,13 @@ export interface LocationEventDtoBase {
   type: LocationEventType;
 }
 
-export interface LocationAgentExecutionEventDto extends LocationEventDtoBase {
-  type: typeof LocationEventType.AgentExecution;
+export interface LocationAgentExecutingEventDto extends LocationEventDtoBase {
+  type: typeof LocationEventType.AgentExecuting;
+  agentId: AgentId;
+}
+
+export interface LocationAgentExecutedEventDto extends LocationEventDtoBase {
+  type: typeof LocationEventType.AgentExecuted;
   agentId: AgentId;
 }
 
@@ -55,7 +61,8 @@ export interface LocationPauseUpdateUntilUpdatedEventDto
 }
 
 export type LocationEventDto =
-  | LocationAgentExecutionEventDto
+  | LocationAgentExecutingEventDto
+  | LocationAgentExecutedEventDto
   | LocationUserJoinEventDto
   | LocationUserLeaveEventDto
   | LocationAddMessageEventDto
