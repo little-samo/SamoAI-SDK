@@ -1,13 +1,11 @@
 import { z } from 'zod';
 
 export const PREDEFINED_AVATARS: Record<string, string> = {
-  Mimo: 'A lively 2D cartoon-style character with a square-shaped coral-pink body, bright round eyes, small energetic arms, and cute green ears. Radiates intelligence and confidence.',
-  Tamo: 'A vibrant 2D cartoon-style character with a sky-blue rounded body, wide curious eyes, energetic arms raised high, and playful yellow horns. Embodies bravery and enthusiasm.',
-  Zemo: 'A sleek, calm-looking 2D cartoon character with a deep-blue angular body, half-closed eyes suggesting skepticism, and small orange spikes on top. Portrays intelligence and analytical sharpness.',
-  Marimo:
-    'A gentle, soft-looking 2D cartoon character with a round lime-green body, large innocent eyes, raised curved arms, and a small blue sprout on top. Expresses innocence and curiosity.',
-  Casimo:
-    'An eccentric, quirky 2D cartoon character with a pinkish body, mischievous half-closed eyes, flexible arms in playful positions, and teal spikes on her head. Exudes unpredictability and whimsy.',
+  Mimo: `A confident, square-shaped, coral-pink Minimo with bright green horns. Her sharp eyes and poised stance radiate intelligence and leadership.`,
+  Tamo: `A vibrant, sky-blue, round Minimo with cheerful yellow horns and arms raised in excitement. His wide, curious eyes and energetic posture show he's always ready for action.`,
+  Marimo: `A gentle, round, lime-green Minimo with large innocent eyes and a small blue sprout on his head. He often looks sleepy or lost in thought, giving him an adorable and dreamy appearance.`,
+  Zemo: `A sharp, angular, dark-blue Minimo with skeptical, half-closed eyes and small orange fins on his head. His posture is observant and grounded, conveying a sense of vigilance and reliability.`,
+  Casimo: `An enigmatic, round, pink Minimo with mischievous, half-closed eyes and a teal tuft of hair. She seems to float rather than stand, her expression a constant, knowing smirk.`,
 };
 
 export const AgentConfigCoreSchema = z.object({
