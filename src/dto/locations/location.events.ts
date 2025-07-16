@@ -1,4 +1,4 @@
-import { AgentId, LocationId, UserId } from '@little-samo/samo-ai';
+import { AgentId, GimmickId, LocationId, UserId } from '@little-samo/samo-ai';
 
 import { UserPublicDto } from '../entities';
 
@@ -9,6 +9,8 @@ export const LocationEventType = {
   AgentExecuted: 'AgentExecuted',
   UserJoin: 'UserJoin',
   UserLeave: 'UserLeave',
+  GimmickExecuting: 'GimmickExecuting',
+  GimmickExecuted: 'GimmickExecuted',
   AddMessage: 'AddMessage',
   RenderingUpdated: 'RenderingUpdated',
   PauseUpdateUntilUpdated: 'PauseUpdateUntilUpdated',
@@ -31,6 +33,7 @@ export interface LocationAgentExecutingEventDto extends LocationEventDtoBase {
 export interface LocationAgentExecutedEventDto extends LocationEventDtoBase {
   type: typeof LocationEventType.AgentExecuted;
   agentId: AgentId;
+  success: boolean;
 }
 
 export interface LocationUserJoinEventDto extends LocationEventDtoBase {
@@ -41,6 +44,17 @@ export interface LocationUserJoinEventDto extends LocationEventDtoBase {
 export interface LocationUserLeaveEventDto extends LocationEventDtoBase {
   type: typeof LocationEventType.UserLeave;
   userId: UserId;
+}
+
+export interface LocationGimmickExecutingEventDto extends LocationEventDtoBase {
+  type: typeof LocationEventType.GimmickExecuting;
+  gimmickId: GimmickId;
+}
+
+export interface LocationGimmickExecutedEventDto extends LocationEventDtoBase {
+  type: typeof LocationEventType.GimmickExecuted;
+  gimmickId: GimmickId;
+  success: boolean;
 }
 
 export interface LocationAddMessageEventDto extends LocationEventDtoBase {
@@ -65,6 +79,8 @@ export type LocationEventDto =
   | LocationAgentExecutedEventDto
   | LocationUserJoinEventDto
   | LocationUserLeaveEventDto
+  | LocationGimmickExecutingEventDto
+  | LocationGimmickExecutedEventDto
   | LocationAddMessageEventDto
   | LocationRenderingUpdatedEventDto
   | LocationPauseUpdateUntilUpdatedEventDto;
