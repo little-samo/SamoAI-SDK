@@ -1,6 +1,6 @@
 {
   "name": "@little-samo/samo-ai-sdk",
-  "version": "0.1.1-rv7",
+  "version": "0.1.2",
   "description": "SamoAI SDK",
   "license": "MIT",
   "repository": {
@@ -84,7 +84,7 @@
     "zod": "^3.24.1"
   },
   "peerDependencies": {
-    "@little-samo/samo-ai": "^0.1.1-rv2",
+    "@little-samo/samo-ai": "^0.1.2",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.2",
     "zod": "^3.24.1"
