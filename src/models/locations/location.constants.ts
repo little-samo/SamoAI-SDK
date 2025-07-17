@@ -1,3 +1,10 @@
+export const LocationPlatform = {
+  API: 'API',
+  MINIMO: 'MINIMO',
+} as const;
+export type LocationPlatform =
+  (typeof LocationPlatform)[keyof typeof LocationPlatform];
+
 export const LocationType = {
   PRIVATE: 'PRIVATE',
   GROUP: 'GROUP',

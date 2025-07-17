@@ -2,6 +2,7 @@ import { AgentId, LocationId, UserId } from '@little-samo/samo-ai';
 import {
   LocationConfig,
   LocationEnvironment,
+  LocationPlatform,
   LocationType,
 } from '@little-samo/samo-ai-sdk/models';
 
@@ -11,6 +12,7 @@ export interface LocationPublicDto {
   id: LocationId;
   name: string;
 
+  platform: LocationPlatform;
   type: LocationType;
   environment: LocationEnvironment;
 

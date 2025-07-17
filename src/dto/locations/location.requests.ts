@@ -1,4 +1,5 @@
 import { DayOfWeek } from '@little-samo/samo-ai/common';
+import { LocationPlatform } from '@little-samo/samo-ai-sdk/models';
 import { z } from 'zod';
 
 import {
@@ -194,6 +195,10 @@ export interface LocationPresetsPaginatedResponseDto {
 
 export const CreateLocationFromPresetSchema = z.object({
   presetId: z.coerce.bigint(),
+  platform: z
+    .nativeEnum(LocationPlatform)
+    .optional()
+    .default(LocationPlatform.API),
 });
 
 export type CreateLocationFromPresetDto = z.infer<
@@ -221,6 +226,10 @@ export type LocationUpdateConfigResponseDto = Partial<LocationConfig>;
 
 export const GetAgentHelperLocationQuerySchema = z.object({
   agentId: z.coerce.bigint(),
+  platform: z
+    .nativeEnum(LocationPlatform)
+    .optional()
+    .default(LocationPlatform.API),
 });
 
 export type GetAgentHelperLocationDto = z.infer<
@@ -233,6 +242,10 @@ export interface GetAgentHelperLocationResponseDto {
 
 export const GetLocationHelperLocationQuerySchema = z.object({
   locationId: z.coerce.bigint(),
+  platform: z
+    .nativeEnum(LocationPlatform)
+    .optional()
+    .default(LocationPlatform.API),
 });
 
 export type GetLocationHelperLocationDto = z.infer<
@@ -245,6 +258,10 @@ export interface GetLocationHelperLocationResponseDto {
 
 export const GetAgentDmLocationQuerySchema = z.object({
   agentId: z.coerce.bigint(),
+  platform: z
+    .nativeEnum(LocationPlatform)
+    .optional()
+    .default(LocationPlatform.API),
 });
 
 export type GetAgentDmLocationDto = z.infer<
