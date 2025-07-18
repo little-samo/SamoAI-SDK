@@ -1,6 +1,7 @@
 import { EntityId, EntityType } from '@little-samo/samo-ai';
 
 export interface LocationMessageDto {
+  id: string;
   entityType: EntityType;
   entityId: EntityId;
   name: string;

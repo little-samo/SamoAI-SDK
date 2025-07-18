@@ -12,6 +12,7 @@ export const LocationEventType = {
   GimmickExecuting: 'GimmickExecuting',
   GimmickExecuted: 'GimmickExecuted',
   AddMessage: 'AddMessage',
+  MessageProcessed: 'MessageProcessed',
   RenderingUpdated: 'RenderingUpdated',
   PauseUpdateUntilUpdated: 'PauseUpdateUntilUpdated',
 } as const;
@@ -64,6 +65,11 @@ export interface LocationAddMessageEventDto extends LocationEventDtoBase {
   message: LocationMessageDto;
 }
 
+export interface LocationMessageProcessedEventDto extends LocationEventDtoBase {
+  type: typeof LocationEventType.MessageProcessed;
+  messageIds: string[];
+}
+
 export interface LocationRenderingUpdatedEventDto extends LocationEventDtoBase {
   type: typeof LocationEventType.RenderingUpdated;
   rendering: string | null;
@@ -84,5 +90,6 @@ export type LocationEventDto =
   | LocationGimmickExecutingEventDto
   | LocationGimmickExecutedEventDto
   | LocationAddMessageEventDto
+  | LocationMessageProcessedEventDto
   | LocationRenderingUpdatedEventDto
   | LocationPauseUpdateUntilUpdatedEventDto;
