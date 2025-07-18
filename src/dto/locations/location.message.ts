@@ -9,6 +9,7 @@ export interface LocationMessageDto {
   action?: string;
   emotion?: string;
   image?: string;
+  processed?: boolean;
   createdAt: Date;
   updatedAt: Date;
 }
