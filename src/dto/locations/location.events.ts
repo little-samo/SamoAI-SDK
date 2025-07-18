@@ -67,7 +67,7 @@ export interface LocationAddMessageEventDto extends LocationEventDtoBase {
 
 export interface LocationMessageProcessedEventDto extends LocationEventDtoBase {
   type: typeof LocationEventType.MessageProcessed;
-  messageIds: string[];
+  lastMessageId: string;
 }
 
 export interface LocationRenderingUpdatedEventDto extends LocationEventDtoBase {
