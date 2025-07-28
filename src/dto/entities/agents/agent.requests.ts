@@ -63,6 +63,47 @@ export type AgentUpdateConfigDto = z.infer<typeof AgentUpdateConfigSchema>;
 
 export type AgentUpdateConfigResponseDto = Partial<AgentConfig>;
 
+// Agent update credentials DTOs
+export const AgentUpdateCredentialSchema = z.object({
+  agentId: z.coerce.bigint(),
+  credential: z.union([
+    z.object({
+      type: z.literal('x_twitter'),
+      email: z.string().max(255),
+      password: z.string().max(255),
+      username: z.string().max(255),
+    }),
+    z.object({
+      type: z.literal('notion'),
+      token: z.string().max(255),
+    }),
+  ]),
+});
+
+export type AgentUpdateCredentialDto = z.infer<
+  typeof AgentUpdateCredentialSchema
+>;
+
+export interface AgentUpdateCredentialResponseDto {
+  success: boolean;
+  error?: string;
+}
+
+// Agent delete credential DTOs
+export const AgentDeleteCredentialSchema = z.object({
+  agentId: z.coerce.bigint(),
+  credentialType: z.string(),
+});
+
+export type AgentDeleteCredentialDto = z.infer<
+  typeof AgentDeleteCredentialSchema
+>;
+
+export interface AgentDeleteCredentialResponseDto {
+  success: boolean;
+  error?: string;
+}
+
 export const AgentPresetsPaginationQuerySchema = z.object({
   page: z.coerce.number().int().min(1).optional().default(1),
   limit: z.coerce.number().int().min(1).max(100).optional().default(20),
