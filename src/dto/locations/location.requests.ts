@@ -224,6 +224,33 @@ export type LocationUpdateConfigDto = z.infer<
 
 export type LocationUpdateConfigResponseDto = Partial<LocationConfig>;
 
+// Location update credentials DTOs
+export const LocationUpdateCredentialSchema = z.object({
+  locationId: z.coerce.bigint(),
+  credential: z.union([
+    z.null().describe('Delete credential'),
+    z.object({
+      type: z.literal('x_twitter'),
+      email: z.string().max(255),
+      password: z.string().max(255),
+      username: z.string().max(255),
+    }),
+    z.object({
+      type: z.literal('notion'),
+      token: z.string().max(255),
+    }),
+  ]),
+});
+
+export type LocationUpdateCredentialDto = z.infer<
+  typeof LocationUpdateCredentialSchema
+>;
+
+export interface LocationUpdateCredentialResponseDto {
+  success: boolean;
+  error?: string;
+}
+
 export const GetAgentHelperLocationQuerySchema = z.object({
   agentId: z.coerce.bigint(),
   platform: z

@@ -61,6 +61,11 @@ export const LocationConfigGimmickSchema = z.object({
       .describe(
         'Interacts with X (Twitter) platform for social media operations and content management'
       ),
+    z
+      .literal('notion')
+      .describe(
+        'Interacts with Notion platform for content management and collaboration'
+      ),
   ]),
   name: z
     .string()

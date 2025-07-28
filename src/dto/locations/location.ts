@@ -22,6 +22,7 @@ export interface LocationPublicDto {
 
 export interface LocationPrivateDto extends LocationPublicDto {
   config: LocationConfig | null;
+  credentialTypes: string[];
 }
 
 export interface LocationListItemDto extends LocationPublicDto {
