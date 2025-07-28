@@ -10,4 +10,5 @@ export interface AgentPublicDto {
 
 export interface AgentPrivateDto extends AgentPublicDto {
   config: AgentConfig | null;
+  credentialTypes: string[];
 }
