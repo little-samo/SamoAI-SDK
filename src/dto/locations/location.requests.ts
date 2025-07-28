@@ -228,7 +228,6 @@ export type LocationUpdateConfigResponseDto = Partial<LocationConfig>;
 export const LocationUpdateCredentialSchema = z.object({
   locationId: z.coerce.bigint(),
   credential: z.union([
-    z.null().describe('Delete credential'),
     z.object({
       type: z.literal('x_twitter'),
       email: z.string().max(255),
@@ -247,6 +246,21 @@ export type LocationUpdateCredentialDto = z.infer<
 >;
 
 export interface LocationUpdateCredentialResponseDto {
+  success: boolean;
+  error?: string;
+}
+
+// Location delete credential DTOs
+export const LocationDeleteCredentialSchema = z.object({
+  locationId: z.coerce.bigint(),
+  credentialType: z.string(),
+});
+
+export type LocationDeleteCredentialDto = z.infer<
+  typeof LocationDeleteCredentialSchema
+>;
+
+export interface LocationDeleteCredentialResponseDto {
   success: boolean;
   error?: string;
 }
