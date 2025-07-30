@@ -6,7 +6,6 @@ import {
   LocationConfig,
   LocationConfigSchema,
 } from '../../models/locations/location.config';
-import { ItemDto } from '../items/item';
 
 import { LocationListItemDto, LocationPrivateDto } from './location';
 import { LocationMessageDto } from './location.message';
@@ -619,15 +618,4 @@ export interface ResumeLocationUpdateResponseDto {
   locationId: bigint;
   delayMs: number;
   resumeAt: string; // ISO date string
-}
-
-// WS: getItems - Get user items by data IDs
-export const GetItemsSchema = z.object({
-  itemDataIds: z.array(z.number()),
-});
-
-export type GetItemsDto = z.infer<typeof GetItemsSchema>;
-
-export interface GetItemsResponseDto {
-  items: ItemDto[];
 }
