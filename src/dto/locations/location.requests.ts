@@ -6,13 +6,18 @@ import {
   LocationConfig,
   LocationConfigSchema,
 } from '../../models/locations/location.config';
+import { ItemDto } from '../items/item';
 
 import { LocationListItemDto, LocationPrivateDto } from './location';
 import { LocationMessageDto } from './location.message';
 import { LocationPresetDto } from './location.preset';
 import { LocationScheduledMessageDto } from './location.scheduled-message';
 
-// User locations DTOs
+// ================================
+// HTTP API DTOs
+// ================================
+
+// GET /locations - User locations list
 export const UserLocationsQuerySchema = z.object({
   cursor: z.string().optional().describe('Pagination cursor for next page'),
   limit: z.coerce
@@ -33,53 +38,7 @@ export interface UserLocationsResponseDto {
   };
 }
 
-// Get location DTOs
-export const GetLocationParamsSchema = z.object({
-  locationId: z.coerce.bigint(),
-});
-
-export type GetLocationParamsDto = z.infer<typeof GetLocationParamsSchema>;
-
-export interface GetLocationResponseDto {
-  location: LocationListItemDto;
-}
-
-// Get Location Private DTOs
-export const GetLocationPrivateParamsSchema = z.object({
-  locationId: z.coerce.bigint(),
-});
-
-export type GetLocationPrivateParamsDto = z.infer<
-  typeof GetLocationPrivateParamsSchema
->;
-
-export interface GetLocationPrivateResponseDto {
-  location: LocationPrivateDto;
-}
-
-// Mark location as read DTOs
-export const MarkLocationAsReadParamsSchema = z.object({
-  locationId: z.coerce.bigint(),
-});
-
-export type MarkLocationAsReadParamsDto = z.infer<
-  typeof MarkLocationAsReadParamsSchema
->;
-
-// Location unread count DTOs
-export const LocationUnreadCountParamsSchema = z.object({
-  locationId: z.coerce.bigint(),
-});
-
-export type LocationUnreadCountParamsDto = z.infer<
-  typeof LocationUnreadCountParamsSchema
->;
-
-export interface LocationUnreadCountResponseDto {
-  unreadCount: number;
-}
-
-// Multiple locations unread count DTOs
+// GET /locations/unread-counts - Multiple locations unread count
 export const LocationsUnreadCountQuerySchema = z.object({
   locationIds: z
     .string()
@@ -105,110 +64,7 @@ export interface LocationsUnreadCountResponseDto {
   data: LocationUnreadCountItemDto[];
 }
 
-// Join agent to location DTOs
-export const JoinAgentToLocationParamsSchema = z.object({
-  locationId: z.coerce.bigint(),
-});
-
-export type JoinAgentToLocationParamsDto = z.infer<
-  typeof JoinAgentToLocationParamsSchema
->;
-
-export const JoinAgentToLocationBodySchema = z.object({
-  agentId: z.coerce.bigint(),
-});
-
-export type JoinAgentToLocationBodyDto = z.infer<
-  typeof JoinAgentToLocationBodySchema
->;
-
-export interface JoinAgentToLocationResponseDto {
-  agentAdded: boolean;
-  message?: string;
-}
-
-// Join agent to location tool schema (combines params and body for tools)
-export const JoinAgentToLocationToolSchema = z.object({
-  locationId: z.coerce.bigint(),
-  agentId: z.coerce.bigint(),
-});
-
-export type JoinAgentToLocationToolDto = z.infer<
-  typeof JoinAgentToLocationToolSchema
->;
-
-// Remove agent from location DTOs
-export const RemoveAgentFromLocationParamsSchema = z.object({
-  locationId: z.coerce.bigint(),
-});
-
-export type RemoveAgentFromLocationParamsDto = z.infer<
-  typeof RemoveAgentFromLocationParamsSchema
->;
-
-export const RemoveAgentFromLocationBodySchema = z.object({
-  agentId: z.coerce.bigint(),
-});
-
-export type RemoveAgentFromLocationBodyDto = z.infer<
-  typeof RemoveAgentFromLocationBodySchema
->;
-
-export interface RemoveAgentFromLocationResponseDto {
-  agentRemoved: boolean;
-  message?: string;
-}
-
-// Remove agent from location tool schema (combines params and body for tools)
-export const RemoveAgentFromLocationToolSchema = z.object({
-  locationId: z.coerce.bigint(),
-  agentId: z.coerce.bigint(),
-});
-
-export type RemoveAgentFromLocationToolDto = z.infer<
-  typeof RemoveAgentFromLocationToolSchema
->;
-
-export interface LocationMessagesResponseDto {
-  messages: LocationMessageDto[];
-  cursor?: string;
-}
-
-export const LocationPresetsPaginationQuerySchema = z.object({
-  page: z.coerce.number().int().min(1).optional().default(1),
-  limit: z.coerce.number().int().min(1).max(100).optional().default(20),
-});
-
-export type LocationPresetsPaginationQueryDto = z.infer<
-  typeof LocationPresetsPaginationQuerySchema
->;
-
-export interface LocationPresetsPaginatedResponseDto {
-  data: LocationPresetDto[];
-  meta: {
-    total: number;
-    page: number;
-    limit: number;
-    totalPages: number;
-  };
-}
-
-export const CreateLocationFromPresetSchema = z.object({
-  presetId: z.coerce.bigint(),
-  platform: z
-    .nativeEnum(LocationPlatform)
-    .optional()
-    .default(LocationPlatform.API),
-});
-
-export type CreateLocationFromPresetDto = z.infer<
-  typeof CreateLocationFromPresetSchema
->;
-
-export interface CreateLocationFromPresetResponseDto {
-  location: LocationPrivateDto;
-}
-
+// PATCH /locations/config - Update location configuration
 export const LocationUpdateConfigSchema = z.object({
   locationId: z.coerce.bigint().describe('ID of the location to update'),
   config: LocationConfigSchema.partial()
@@ -224,7 +80,7 @@ export type LocationUpdateConfigDto = z.infer<
 
 export type LocationUpdateConfigResponseDto = Partial<LocationConfig>;
 
-// Location update credentials DTOs
+// PATCH /locations/credential - Update location credential
 export const LocationUpdateCredentialSchema = z.object({
   locationId: z.coerce.bigint(),
   credential: z.union([
@@ -250,7 +106,7 @@ export interface LocationUpdateCredentialResponseDto {
   error?: string;
 }
 
-// Location delete credential DTOs
+// DELETE /locations/credential - Delete location credential
 export const LocationDeleteCredentialSchema = z.object({
   locationId: z.coerce.bigint(),
   credentialType: z.string(),
@@ -265,6 +121,44 @@ export interface LocationDeleteCredentialResponseDto {
   error?: string;
 }
 
+// GET /locations/presets - Get location presets with pagination
+export const LocationPresetsPaginationQuerySchema = z.object({
+  page: z.coerce.number().int().min(1).optional().default(1),
+  limit: z.coerce.number().int().min(1).max(100).optional().default(20),
+});
+
+export type LocationPresetsPaginationQueryDto = z.infer<
+  typeof LocationPresetsPaginationQuerySchema
+>;
+
+export interface LocationPresetsPaginatedResponseDto {
+  data: LocationPresetDto[];
+  meta: {
+    total: number;
+    page: number;
+    limit: number;
+    totalPages: number;
+  };
+}
+
+// POST /locations/from-preset - Create location from preset
+export const CreateLocationFromPresetSchema = z.object({
+  presetId: z.coerce.bigint(),
+  platform: z
+    .nativeEnum(LocationPlatform)
+    .optional()
+    .default(LocationPlatform.API),
+});
+
+export type CreateLocationFromPresetDto = z.infer<
+  typeof CreateLocationFromPresetSchema
+>;
+
+export interface CreateLocationFromPresetResponseDto {
+  location: LocationPrivateDto;
+}
+
+// GET /locations/agent-helper - Get or create agent helper location
 export const GetAgentHelperLocationQuerySchema = z.object({
   agentId: z.coerce.bigint(),
   platform: z
@@ -281,6 +175,7 @@ export interface GetAgentHelperLocationResponseDto {
   location: LocationPrivateDto;
 }
 
+// GET /locations/location-helper - Get or create location helper location
 export const GetLocationHelperLocationQuerySchema = z.object({
   locationId: z.coerce.bigint(),
   platform: z
@@ -297,6 +192,7 @@ export interface GetLocationHelperLocationResponseDto {
   location: LocationPrivateDto;
 }
 
+// GET /locations/agent-dm - Get or create agent DM location
 export const GetAgentDmLocationQuerySchema = z.object({
   agentId: z.coerce.bigint(),
   platform: z
@@ -313,7 +209,117 @@ export interface GetAgentDmLocationResponseDto {
   location: LocationPrivateDto;
 }
 
-// Get scheduled messages DTOs
+// GET /locations/:locationId - Get single location
+export const GetLocationParamsSchema = z.object({
+  locationId: z.coerce.bigint(),
+});
+
+export type GetLocationParamsDto = z.infer<typeof GetLocationParamsSchema>;
+
+export interface GetLocationResponseDto {
+  location: LocationListItemDto;
+}
+
+// GET /locations/:locationId/private - Get location private details
+export const GetLocationPrivateParamsSchema = z.object({
+  locationId: z.coerce.bigint(),
+});
+
+export type GetLocationPrivateParamsDto = z.infer<
+  typeof GetLocationPrivateParamsSchema
+>;
+
+export interface GetLocationPrivateResponseDto {
+  location: LocationPrivateDto;
+}
+
+// POST /locations/:locationId/mark-read - Mark location messages as read
+export const MarkLocationAsReadParamsSchema = z.object({
+  locationId: z.coerce.bigint(),
+});
+
+export type MarkLocationAsReadParamsDto = z.infer<
+  typeof MarkLocationAsReadParamsSchema
+>;
+
+// GET /locations/:locationId/unread-count - Get location unread message count
+export const LocationUnreadCountParamsSchema = z.object({
+  locationId: z.coerce.bigint(),
+});
+
+export type LocationUnreadCountParamsDto = z.infer<
+  typeof LocationUnreadCountParamsSchema
+>;
+
+export interface LocationUnreadCountResponseDto {
+  unreadCount: number;
+}
+
+// POST /locations/:locationId/join-agent - Join agent to location
+export const JoinAgentToLocationParamsSchema = z.object({
+  locationId: z.coerce.bigint(),
+});
+
+export type JoinAgentToLocationParamsDto = z.infer<
+  typeof JoinAgentToLocationParamsSchema
+>;
+
+export const JoinAgentToLocationBodySchema = z.object({
+  agentId: z.coerce.bigint(),
+});
+
+export type JoinAgentToLocationBodyDto = z.infer<
+  typeof JoinAgentToLocationBodySchema
+>;
+
+export interface JoinAgentToLocationResponseDto {
+  agentAdded: boolean;
+  message?: string;
+}
+
+// Tool schema for MCP (combines params and body)
+export const JoinAgentToLocationToolSchema = z.object({
+  locationId: z.coerce.bigint(),
+  agentId: z.coerce.bigint(),
+});
+
+export type JoinAgentToLocationToolDto = z.infer<
+  typeof JoinAgentToLocationToolSchema
+>;
+
+// POST /locations/:locationId/remove-agent - Remove agent from location
+export const RemoveAgentFromLocationParamsSchema = z.object({
+  locationId: z.coerce.bigint(),
+});
+
+export type RemoveAgentFromLocationParamsDto = z.infer<
+  typeof RemoveAgentFromLocationParamsSchema
+>;
+
+export const RemoveAgentFromLocationBodySchema = z.object({
+  agentId: z.coerce.bigint(),
+});
+
+export type RemoveAgentFromLocationBodyDto = z.infer<
+  typeof RemoveAgentFromLocationBodySchema
+>;
+
+export interface RemoveAgentFromLocationResponseDto {
+  agentRemoved: boolean;
+  message?: string;
+}
+
+// Tool schema for MCP (combines params and body)
+export const RemoveAgentFromLocationToolSchema = z.object({
+  locationId: z.coerce.bigint(),
+  agentId: z.coerce.bigint(),
+});
+
+export type RemoveAgentFromLocationToolDto = z.infer<
+  typeof RemoveAgentFromLocationToolSchema
+>;
+
+// GET /locations/:locationId/scheduled-messages - Get scheduled messages
 export const GetLocationScheduledMessagesParamsSchema = z.object({
   locationId: z.coerce.bigint(),
 });
@@ -326,7 +332,7 @@ export interface GetLocationScheduledMessagesResponseDto {
   scheduledMessages: LocationScheduledMessageDto[];
 }
 
-// Create scheduled message DTOs
+// POST /locations/:locationId/scheduled-messages - Create scheduled message
 export const CreateLocationScheduledMessageParamsSchema = z.object({
   locationId: z.coerce.bigint(),
 });
@@ -363,7 +369,18 @@ export interface CreateLocationScheduledMessageResponseDto {
   scheduledMessage: LocationScheduledMessageDto;
 }
 
-// Update scheduled message DTOs
+// Tool schema for MCP (combines params and body)
+export const CreateLocationScheduledMessageToolSchema =
+  LocationScheduledMessageBaseSchema.extend({
+    locationId: z.coerce.bigint(),
+    message: z.string().max(500),
+  });
+
+export type CreateLocationScheduledMessageToolDto = z.infer<
+  typeof CreateLocationScheduledMessageToolSchema
+>;
+
+// PUT /locations/:locationId/scheduled-messages/:messageId - Update scheduled message
 export const UpdateLocationScheduledMessageParamsSchema = z.object({
   locationId: z.coerce.bigint(),
   messageId: z.string(),
@@ -386,7 +403,19 @@ export interface UpdateLocationScheduledMessageResponseDto {
   scheduledMessage: LocationScheduledMessageDto;
 }
 
-// Delete scheduled message DTOs
+// Tool schema for MCP (combines params and body)
+export const UpdateLocationScheduledMessageToolSchema =
+  LocationScheduledMessageBaseSchema.extend({
+    locationId: z.coerce.bigint(),
+    messageId: z.string(),
+    message: z.string().max(500).optional(),
+  });
+
+export type UpdateLocationScheduledMessageToolDto = z.infer<
+  typeof UpdateLocationScheduledMessageToolSchema
+>;
+
+// DELETE /locations/:locationId/scheduled-messages/:messageId - Delete scheduled message
 export const DeleteLocationScheduledMessageParamsSchema = z.object({
   locationId: z.coerce.bigint(),
   messageId: z.string(),
@@ -400,32 +429,7 @@ export interface DeleteLocationScheduledMessageResponseDto {
   deleted: boolean;
 }
 
-// Tool schemas that combine params and body for MCP tools
-const LocationScheduledMessageToolBaseSchema = z
-  .object({
-    locationId: z.coerce.bigint(),
-  })
-  .merge(LocationScheduledMessageBaseSchema);
-
-export const CreateLocationScheduledMessageToolSchema =
-  LocationScheduledMessageToolBaseSchema.extend({
-    message: z.string().max(500),
-  });
-
-export type CreateLocationScheduledMessageToolDto = z.infer<
-  typeof CreateLocationScheduledMessageToolSchema
->;
-
-export const UpdateLocationScheduledMessageToolSchema =
-  LocationScheduledMessageToolBaseSchema.extend({
-    messageId: z.string(),
-    message: z.string().max(500).optional(),
-  });
-
-export type UpdateLocationScheduledMessageToolDto = z.infer<
-  typeof UpdateLocationScheduledMessageToolSchema
->;
-
+// Tool schema for MCP (combines params and body)
 export const DeleteLocationScheduledMessageToolSchema = z.object({
   locationId: z.coerce.bigint(),
   messageId: z.string(),
@@ -434,3 +438,196 @@ export const DeleteLocationScheduledMessageToolSchema = z.object({
 export type DeleteLocationScheduledMessageToolDto = z.infer<
   typeof DeleteLocationScheduledMessageToolSchema
 >;
+
+// ================================
+// WebSocket DTOs
+// ================================
+
+// WS: joinLocation - Join a location room
+export const JoinLocationSchema = z.object({
+  locationId: z.coerce.bigint(),
+});
+
+export type JoinLocationDto = z.infer<typeof JoinLocationSchema>;
+
+export interface JoinLocationResponseDto {
+  success: boolean;
+  locationId: bigint;
+  joined: boolean;
+}
+
+// WS: leaveLocation - Leave a location room
+export const LeaveLocationSchema = z.object({
+  locationId: z.coerce.bigint(),
+});
+
+export type LeaveLocationDto = z.infer<typeof LeaveLocationSchema>;
+
+export interface LeaveLocationResponseDto {
+  success: boolean;
+  locationId: bigint;
+  left: boolean;
+}
+
+// WS: subscribeLocation - Subscribe to location updates
+export const SubscribeLocationSchema = z.object({
+  locationId: z.coerce.bigint(),
+});
+
+export type SubscribeLocationDto = z.infer<typeof SubscribeLocationSchema>;
+
+export interface SubscribeLocationResponseDto {
+  success: boolean;
+  locationId: bigint;
+  subscribed: boolean;
+}
+
+// WS: unsubscribeLocation - Unsubscribe from location updates
+export const UnsubscribeLocationSchema = z.object({
+  locationId: z.coerce.bigint(),
+});
+
+export type UnsubscribeLocationDto = z.infer<typeof UnsubscribeLocationSchema>;
+
+export interface UnsubscribeLocationResponseDto {
+  success: boolean;
+  locationId: bigint;
+  unsubscribed: boolean;
+}
+
+// WS: getLocationMessages - Get location messages with pagination
+export const GetLocationMessagesSchema = z.object({
+  locationId: z.coerce.bigint(),
+  cursor: z.string().optional(),
+});
+
+export type GetLocationMessagesDto = z.infer<typeof GetLocationMessagesSchema>;
+
+export interface LocationMessagesResponseDto {
+  messages: LocationMessageDto[];
+  nextCursor?: string;
+}
+
+// WS: sendMessage - Send message to location
+export const SendLocationMessageSchema = z.object({
+  locationId: z.coerce.bigint(),
+  message: z.string().max(2000),
+});
+
+export type SendLocationMessageDto = z.infer<typeof SendLocationMessageSchema>;
+
+export interface SendMessageResponseDto {
+  success: boolean;
+  messageId?: string;
+}
+
+// WS: sendUserMessage - Send Twitch user message to location
+export const SendUserMessageSchema = z.object({
+  locationId: z.coerce.bigint(),
+  twitchUserId: z.string(),
+  username: z.string(),
+  nickname: z.string(),
+  message: z.string().max(2000),
+});
+
+export type SendUserMessageDto = z.infer<typeof SendUserMessageSchema>;
+
+// Uses SendMessageResponseDto
+
+// WS: sendSystemMessage - Send system message to location
+export const SendSystemMessageSchema = z.object({
+  locationId: z.coerce.bigint(),
+  message: z.string().max(2000),
+  resumeUpdate: z.boolean().optional(),
+});
+
+export type SendSystemMessageDto = z.infer<typeof SendSystemMessageSchema>;
+
+// Uses SendMessageResponseDto
+
+// WS: updateLocationImage - Update location image
+export const UpdateLocationImageSchema = z.object({
+  locationId: z.coerce.bigint(),
+  image: z.string(),
+  index: z.number().int().min(0).optional(),
+});
+
+export type UpdateLocationImageDto = z.infer<typeof UpdateLocationImageSchema>;
+
+export interface UpdateLocationImageResponseDto {
+  success: boolean;
+  imageUrl?: string;
+}
+
+// WS: updateLocationRendering - Update location rendering
+export const UpdateLocationRenderingSchema = z.object({
+  locationId: z.coerce.bigint(),
+  rendering: z.string().nullable(),
+});
+
+export type UpdateLocationRenderingDto = z.infer<
+  typeof UpdateLocationRenderingSchema
+>;
+
+export interface UpdateLocationRenderingResponseDto {
+  success: boolean;
+  rendering?: string | null;
+}
+
+// WS: updateLocationAgentIsActive - Update agent active status
+export const UpdateLocationAgentIsActiveSchema = z.object({
+  locationId: z.coerce.bigint(),
+  agentId: z.coerce.bigint(),
+  isActive: z.boolean(),
+});
+
+export type UpdateLocationAgentIsActiveDto = z.infer<
+  typeof UpdateLocationAgentIsActiveSchema
+>;
+
+export interface UpdateLocationAgentIsActiveResponseDto {
+  success: boolean;
+  agentId: bigint;
+  isActive: boolean;
+}
+
+// WS: pauseLocationUpdate - Pause location updates
+export const PauseLocationUpdateSchema = z.object({
+  locationId: z.coerce.bigint(),
+});
+
+export type PauseLocationUpdateDto = z.infer<typeof PauseLocationUpdateSchema>;
+
+export interface PauseLocationUpdateResponseDto {
+  success: boolean;
+  locationId: bigint;
+  paused: boolean;
+}
+
+// WS: resumeLocationUpdate - Resume location updates with optional delay
+export const ResumeLocationUpdateSchema = z.object({
+  locationId: z.coerce.bigint(),
+  delayMs: z.number().int().min(0).max(60000).optional().default(0),
+});
+
+export type ResumeLocationUpdateDto = z.infer<
+  typeof ResumeLocationUpdateSchema
+>;
+
+export interface ResumeLocationUpdateResponseDto {
+  success: boolean;
+  locationId: bigint;
+  delayMs: number;
+  resumeAt: string; // ISO date string
+}
+
+// WS: getItems - Get user items by data IDs
+export const GetItemsSchema = z.object({
+  itemDataIds: z.array(z.number()),
+});
+
+export type GetItemsDto = z.infer<typeof GetItemsSchema>;
+
+export interface GetItemsResponseDto {
+  items: ItemDto[];
+}
