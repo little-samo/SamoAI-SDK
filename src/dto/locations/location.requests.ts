@@ -7,7 +7,11 @@ import {
   LocationConfigSchema,
 } from '../../models/locations/location.config';
 
-import { LocationListItemDto, LocationPrivateDto } from './location';
+import {
+  LocationContentDto,
+  LocationListItemDto,
+  LocationPrivateDto,
+} from './location';
 import { LocationMessageDto } from './location.message';
 import { LocationPresetDto } from './location.preset';
 import { LocationScheduledMessageDto } from './location.scheduled-message';
@@ -230,6 +234,19 @@ export type GetLocationPrivateParamsDto = z.infer<
 
 export interface GetLocationPrivateResponseDto {
   location: LocationPrivateDto;
+}
+
+// GET /locations/:locationId/content - Get location content
+export const GetLocationContentParamsSchema = z.object({
+  locationId: z.coerce.bigint(),
+});
+
+export type GetLocationContentParamsDto = z.infer<
+  typeof GetLocationContentParamsSchema
+>;
+
+export interface GetLocationContentResponseDto {
+  content: LocationContentDto;
 }
 
 // POST /locations/:locationId/mark-read - Mark location messages as read

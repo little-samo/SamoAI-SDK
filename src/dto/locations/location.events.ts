@@ -2,6 +2,7 @@ import { AgentId, GimmickId, LocationId, UserId } from '@little-samo/samo-ai';
 
 import { UserPublicDto } from '../entities';
 
+import { LocationCanvasDto } from './location';
 import { LocationMessageDto } from './location.message';
 
 export const LocationEventType = {
@@ -14,6 +15,7 @@ export const LocationEventType = {
   AddMessage: 'AddMessage',
   MessageProcessed: 'MessageProcessed',
   RenderingUpdated: 'RenderingUpdated',
+  CanvasUpdated: 'CanvasUpdated',
   PauseUpdateUntilUpdated: 'PauseUpdateUntilUpdated',
 } as const;
 
@@ -75,6 +77,12 @@ export interface LocationRenderingUpdatedEventDto extends LocationEventDtoBase {
   rendering: string | null;
 }
 
+export interface LocationCanvasUpdatedEventDto extends LocationEventDtoBase {
+  type: typeof LocationEventType.CanvasUpdated;
+  name: string;
+  canvas: LocationCanvasDto;
+}
+
 export interface LocationPauseUpdateUntilUpdatedEventDto
   extends LocationEventDtoBase {
   type: typeof LocationEventType.PauseUpdateUntilUpdated;
@@ -92,4 +100,5 @@ export type LocationEventDto =
   | LocationAddMessageEventDto
   | LocationMessageProcessedEventDto
   | LocationRenderingUpdatedEventDto
+  | LocationCanvasUpdatedEventDto
   | LocationPauseUpdateUntilUpdatedEventDto;

@@ -1,4 +1,10 @@
-import { AgentId, LocationId, UserId } from '@little-samo/samo-ai';
+import {
+  AgentId,
+  EntityId,
+  EntityType,
+  LocationId,
+  UserId,
+} from '@little-samo/samo-ai';
 import {
   LocationConfig,
   LocationEnvironment,
@@ -33,4 +39,17 @@ export interface LocationListItemDto extends LocationPublicDto {
   gimmickCount: number;
   pauseUpdateUntil: Date | null;
   pauseUpdateReason: string | null;
+}
+
+export interface LocationCanvasDto {
+  lastModifierEntityType: EntityType;
+  lastModifierEntityId: EntityId;
+  text: string;
+  updatedAt: Date;
+}
+
+export interface LocationContentDto {
+  id: LocationId;
+  canvases: Record<string, LocationCanvasDto>;
+  rendering: string | null;
 }
