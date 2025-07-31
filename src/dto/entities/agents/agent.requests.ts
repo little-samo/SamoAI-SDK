@@ -8,6 +8,11 @@ import { z } from 'zod';
 import { AgentPrivateDto, AgentPublicDto } from './agent';
 import { AgentPresetDto } from './agent.preset';
 
+// ================================
+// HTTP API DTOs
+// ================================
+
+// GET /agents - User agents list with pagination
 export const AgentsPaginationQuerySchema = z.object({
   page: z.coerce.number().int().min(1).optional().default(1),
   limit: z.coerce.number().int().min(1).max(100).optional().default(10),
@@ -27,6 +32,8 @@ export interface AgentsPaginatedResponseDto {
   };
 }
 
+// GET /agents/publics - Get public agents by IDs
+// GET /agents/privates - Get private agents by IDs
 export const GetAgentsByIdsQuerySchema = z.object({
   agentIds: z
     .string()
@@ -48,6 +55,7 @@ export interface GetAgentPrivatesByIdsResponseDto {
   agents: AgentPrivateDto[];
 }
 
+// PATCH /agents/config - Update agent configuration
 export const AgentUpdateConfigSchema = z.object({
   agentId: z.coerce.bigint().describe('ID of the agent to update'),
   config: AgentConfigSchema.partial()
@@ -63,7 +71,7 @@ export type AgentUpdateConfigDto = z.infer<typeof AgentUpdateConfigSchema>;
 
 export type AgentUpdateConfigResponseDto = Partial<AgentConfig>;
 
-// Agent update credentials DTOs
+// PATCH /agents/credential - Update agent credential
 export const AgentUpdateCredentialSchema = z.object({
   agentId: z.coerce.bigint(),
   credential: z.union([
@@ -89,7 +97,7 @@ export interface AgentUpdateCredentialResponseDto {
   error?: string;
 }
 
-// Agent delete credential DTOs
+// DELETE /agents/credential - Delete agent credential
 export const AgentDeleteCredentialSchema = z.object({
   agentId: z.coerce.bigint(),
   credentialType: z.string(),
@@ -104,6 +112,7 @@ export interface AgentDeleteCredentialResponseDto {
   error?: string;
 }
 
+// GET /agents/presets - Get agent presets with pagination
 export const AgentPresetsPaginationQuerySchema = z.object({
   page: z.coerce.number().int().min(1).optional().default(1),
   limit: z.coerce.number().int().min(1).max(100).optional().default(20),
@@ -123,6 +132,7 @@ export interface AgentPresetsPaginatedResponseDto {
   };
 }
 
+// POST /agents/from-preset - Create agent from preset
 export const CreateAgentFromPresetSchema = z.object({
   presetId: z.coerce.bigint(),
 });
@@ -135,6 +145,7 @@ export interface CreateAgentFromPresetResponseDto {
   agent: AgentPrivateDto;
 }
 
+// GET /agents/helper - Get or create helper agent
 export const GetHelperAgentSchema = z.object({
   helperType: z.nativeEnum(AgentHelperType),
 });
