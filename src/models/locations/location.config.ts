@@ -86,8 +86,8 @@ export const LocationConfigSchema = z.object({
   thumbnail: z
     .string()
     .max(2048)
-    .optional()
-    .describe('Location thumbnail URL that can only be modified by the system'),
+    .nullable()
+    .describe('Location thumbnail URL (png, jpeg, jpg files under 10MB only)'),
 
   environment: LocationEnvironmentSchema.describe(
     'Location environment that determines the context and behavior'
