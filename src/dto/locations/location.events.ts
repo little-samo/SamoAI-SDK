@@ -1,15 +1,17 @@
 import { AgentId, GimmickId, LocationId, UserId } from '@little-samo/samo-ai';
 
-import { UserPublicDto } from '../entities';
+import { AgentPublicDto, UserPublicDto } from '../entities';
 
 import { LocationCanvasDto } from './location';
 import { LocationMessageDto } from './location.message';
 
 export const LocationEventType = {
+  AgentJoined: 'AgentJoined',
+  AgentLeft: 'AgentLeft',
   AgentExecuting: 'AgentExecuting',
   AgentExecuted: 'AgentExecuted',
-  UserJoin: 'UserJoin',
-  UserLeave: 'UserLeave',
+  UserJoined: 'UserJoined',
+  UserLeft: 'UserLeft',
   GimmickExecuting: 'GimmickExecuting',
   GimmickExecuted: 'GimmickExecuted',
   AddMessage: 'AddMessage',
@@ -40,13 +42,23 @@ export interface LocationAgentExecutedEventDto extends LocationEventDtoBase {
   error?: string;
 }
 
-export interface LocationUserJoinEventDto extends LocationEventDtoBase {
-  type: typeof LocationEventType.UserJoin;
+export interface LocationAgentJoinedEventDto extends LocationEventDtoBase {
+  type: typeof LocationEventType.AgentJoined;
+  agent: AgentPublicDto;
+}
+
+export interface LocationAgentLeftEventDto extends LocationEventDtoBase {
+  type: typeof LocationEventType.AgentLeft;
+  agentId: AgentId;
+}
+
+export interface LocationUserJoinedEventDto extends LocationEventDtoBase {
+  type: typeof LocationEventType.UserJoined;
   user: UserPublicDto;
 }
 
-export interface LocationUserLeaveEventDto extends LocationEventDtoBase {
-  type: typeof LocationEventType.UserLeave;
+export interface LocationUserLeftEventDto extends LocationEventDtoBase {
+  type: typeof LocationEventType.UserLeft;
   userId: UserId;
 }
 
@@ -93,8 +105,10 @@ export interface LocationPauseUpdateUntilUpdatedEventDto
 export type LocationEventDto =
   | LocationAgentExecutingEventDto
   | LocationAgentExecutedEventDto
-  | LocationUserJoinEventDto
-  | LocationUserLeaveEventDto
+  | LocationAgentJoinedEventDto
+  | LocationAgentLeftEventDto
+  | LocationUserJoinedEventDto
+  | LocationUserLeftEventDto
   | LocationGimmickExecutingEventDto
   | LocationGimmickExecutedEventDto
   | LocationAddMessageEventDto
