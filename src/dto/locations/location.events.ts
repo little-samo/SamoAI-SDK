@@ -1,7 +1,5 @@
 import { AgentId, GimmickId, LocationId, UserId } from '@little-samo/samo-ai';
 
-import { AgentPublicDto, UserPublicDto } from '../entities';
-
 import { LocationCanvasDto } from './location';
 import { LocationMessageDto } from './location.message';
 
@@ -44,7 +42,7 @@ export interface LocationAgentExecutedEventDto extends LocationEventDtoBase {
 
 export interface LocationAgentJoinedEventDto extends LocationEventDtoBase {
   type: typeof LocationEventType.AgentJoined;
-  agent: AgentPublicDto;
+  agentId: AgentId;
 }
 
 export interface LocationAgentLeftEventDto extends LocationEventDtoBase {
@@ -54,7 +52,7 @@ export interface LocationAgentLeftEventDto extends LocationEventDtoBase {
 
 export interface LocationUserJoinedEventDto extends LocationEventDtoBase {
   type: typeof LocationEventType.UserJoined;
-  user: UserPublicDto;
+  userId: UserId;
 }
 
 export interface LocationUserLeftEventDto extends LocationEventDtoBase {
