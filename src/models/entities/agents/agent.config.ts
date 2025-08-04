@@ -33,11 +33,11 @@ export type AgentConfigCore = z.infer<typeof AgentConfigCoreSchema>;
 const CharacterSchema = z
   .record(z.record(z.string().max(500)))
   .describe(
-    'Flexible 2-depth character configuration. Common suggested categories and properties: ' +
-      "background: {role (CRITICAL: Agent's core identity and primary function - defines how they approach ALL interactions, what expertise they provide, and their fundamental purpose. This shapes their entire behavioral pattern and response style), gender, expertise, backstory, birthDate, occupation} - " +
-      'speech: {tone, style, formality} - ' +
-      'personality: {traits, interests, values, quirks, mbti}. ' +
-      'All values are strings up to 500 characters. You can use any category and property names.'
+    'Defines the agent\'s character using a flexible, two-level nested object: { "category": { "property": "value" } }. ' +
+      'You can create any custom categories and properties; the following are suggestions, not an exhaustive list. ' +
+      'For example: `background` (with `role`, `gender`, `expertise`, `backstory`), `speech` (with `tone`, `style`, `formality`), or `personality` (with `traits`, `interests`, `values`, `quirks`, `mbti`). ' +
+      "The `role` property under `background` is CRITICAL as it defines the agent's core identity and function. " +
+      'All values are strings up to 500 characters.'
   );
 
 const LlmPresetSchema = z.union([
