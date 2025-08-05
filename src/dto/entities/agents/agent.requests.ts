@@ -156,15 +156,15 @@ export interface GetHelperAgentResponseDto {
   agent: AgentPrivateDto;
 }
 
-// POST /agents/:agentId/upload-thumbnail - Upload agent thumbnail
-export const UploadAgentThumbnailParamsSchema = z.object({
+// POST /agents/:agentId/upload-avatar - Upload agent avatar
+export const UploadAgentAvatarParamsSchema = z.object({
   agentId: z.coerce.bigint(),
 });
 
-export type UploadAgentThumbnailParamsDto = z.infer<
-  typeof UploadAgentThumbnailParamsSchema
+export type UploadAgentAvatarParamsDto = z.infer<
+  typeof UploadAgentAvatarParamsSchema
 >;
 
-export interface UploadAgentThumbnailResponseDto {
+export interface UploadAgentAvatarResponseDto {
   thumbnailUrl: string;
 }
