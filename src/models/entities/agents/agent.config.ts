@@ -84,10 +84,10 @@ export const AgentConfigSchema = z.object({
       z
         .string()
         .max(2048)
-        .describe('Custom avatar identifier or URL (system use only)'),
+        .describe('Custom avatar URL (png, jpeg, jpg files under 10MB only)'),
     ])
     .describe(
-      'Visual representation identifier for the agent. Supports predefined avatar options or custom identifiers/URLs for system use. When a predefined avatar is selected, the appearance field will automatically update to match the avatar description.'
+      'Visual representation identifier for the agent. Supports predefined avatar options or custom URL. When a predefined avatar is selected, the appearance field will automatically update to match the avatar description.'
     ),
   appearance: z
     .string()
