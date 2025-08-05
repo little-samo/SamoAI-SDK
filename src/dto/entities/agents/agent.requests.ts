@@ -166,5 +166,5 @@ export type UploadAgentAvatarParamsDto = z.infer<
 >;
 
 export interface UploadAgentAvatarResponseDto {
-  thumbnailUrl: string;
+  avatarUrl: string;
 }
