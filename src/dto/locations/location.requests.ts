@@ -148,6 +148,10 @@ export interface LocationPresetsPaginatedResponseDto {
 export const CreateLocationSchema = z.object({
   name: z.string().max(64),
   description: z.string().max(500),
+  platform: z
+    .nativeEnum(LocationPlatform)
+    .optional()
+    .default(LocationPlatform.API),
 });
 
 export type CreateLocationDto = z.infer<typeof CreateLocationSchema>;
