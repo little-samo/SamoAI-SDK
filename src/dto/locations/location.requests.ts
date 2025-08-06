@@ -177,40 +177,6 @@ export interface CreateLocationFromPresetResponseDto {
   location: LocationPrivateDto;
 }
 
-// GET /locations/agent-helper - Get or create agent helper location
-export const GetAgentHelperLocationQuerySchema = z.object({
-  agentId: z.coerce.bigint(),
-  platform: z
-    .nativeEnum(LocationPlatform)
-    .optional()
-    .default(LocationPlatform.API),
-});
-
-export type GetAgentHelperLocationDto = z.infer<
-  typeof GetAgentHelperLocationQuerySchema
->;
-
-export interface GetAgentHelperLocationResponseDto {
-  location: LocationPrivateDto;
-}
-
-// GET /locations/location-helper - Get or create location helper location
-export const GetLocationHelperLocationQuerySchema = z.object({
-  locationId: z.coerce.bigint(),
-  platform: z
-    .nativeEnum(LocationPlatform)
-    .optional()
-    .default(LocationPlatform.API),
-});
-
-export type GetLocationHelperLocationDto = z.infer<
-  typeof GetLocationHelperLocationQuerySchema
->;
-
-export interface GetLocationHelperLocationResponseDto {
-  location: LocationPrivateDto;
-}
-
 // GET /locations/agent-dm - Get or create agent DM location
 export const GetAgentDmLocationQuerySchema = z.object({
   agentId: z.coerce.bigint(),
