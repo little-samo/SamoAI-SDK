@@ -9,9 +9,9 @@ export const LocationEnvironmentSchema = z.union([
       'Standard conversational environment for general agent interactions'
     ),
   z
-    .literal(LocationEnvironment.WEB_BROWSER)
+    .literal(LocationEnvironment.CHAT)
     .describe(
-      'Web browser environment that provides web browser content to agents'
+      'Standard conversational environment for general agent interactions'
     ),
 ]);
 

@@ -57,14 +57,14 @@ All property values are strings with a maximum length of 500 characters.
 const LlmPresetSchema = z.union([
   z.literal('gemini-low').describe('Gemini - Low cost'),
   z.literal('gemini-medium').describe('Gemini - Balanced'),
-  z.literal('gemini-high').describe('Gemini - High performance'),
-  z.literal('openai-low').describe('OpenAI - Low cost'),
-  z.literal('openai-medium').describe('OpenAI - Balanced'),
-  z.literal('anthropic-low').describe('Anthropic - Low cost'),
-  z.literal('anthropic-medium').describe('Anthropic - Balanced'),
-  z.literal('anthropic-high').describe('Anthropic - High performance'),
-  z.literal('deepseek-low').describe('DeepSeek - Low cost'),
-  z.literal('deepseek-medium').describe('DeepSeek - Balanced'),
+  // z.literal('gemini-high').describe('Gemini - High performance'),
+  // z.literal('openai-low').describe('OpenAI - Low cost'),
+  // z.literal('openai-medium').describe('OpenAI - Balanced'),
+  // z.literal('anthropic-low').describe('Anthropic - Low cost'),
+  // z.literal('anthropic-medium').describe('Anthropic - Balanced'),
+  // z.literal('anthropic-high').describe('Anthropic - High performance'),
+  // z.literal('deepseek-low').describe('DeepSeek - Low cost'),
+  // z.literal('deepseek-medium').describe('DeepSeek - Balanced'),
 ]);
 
 export type LlmPreset = z.infer<typeof LlmPresetSchema>;
