@@ -22,6 +22,11 @@ export interface LocationPublicDto {
   type: LocationType;
   environment: LocationEnvironment;
 
+  param1: bigint;
+  param2: bigint;
+  param3: bigint;
+  param4: bigint;
+
   createdAt: Date;
   updatedAt: Date;
 }
