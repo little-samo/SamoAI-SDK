@@ -177,6 +177,20 @@ export interface CreateLocationFromPresetResponseDto {
   location: LocationPrivateDto;
 }
 
+// GET /locations/helper - Get or create helper location
+export const GetHelperLocationQuerySchema = z.object({
+  platform: z
+    .nativeEnum(LocationPlatform)
+    .optional()
+    .default(LocationPlatform.API),
+});
+
+export type GetHelperLocationDto = z.infer<typeof GetHelperLocationQuerySchema>;
+
+export interface GetHelperLocationResponseDto {
+  location: LocationPrivateDto;
+}
+
 // GET /locations/agent-dm - Get or create agent DM location
 export const GetAgentDmLocationQuerySchema = z.object({
   agentId: z.coerce.bigint(),
