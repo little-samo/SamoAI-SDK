@@ -16,6 +16,7 @@ export type LocationType = (typeof LocationType)[keyof typeof LocationType];
 
 export const LocationEnvironment = {
   CHAT: 'CHAT',
+  MAIN_HELPER: 'MAIN_HELPER',
   AGENT_HELPER: 'AGENT_HELPER',
   LOCATION_HELPER: 'LOCATION_HELPER',
   AGENT_DM: 'AGENT_DM',
