@@ -2,6 +2,7 @@ import {
   AgentConfig,
   AgentConfigSchema,
   AgentHelperType,
+  PREDEFINED_AVATARS,
 } from '@little-samo/samo-ai-sdk/models';
 import { z } from 'zod';
 
@@ -130,6 +131,29 @@ export interface AgentPresetsPaginatedResponseDto {
     limit: number;
     totalPages: number;
   };
+}
+
+// POST /agents - Create agent
+export const CreateAgentSchema = z.object({
+  name: z.string().max(64),
+  role: z.string().max(500),
+  avatar: z
+    .union([
+      ...(Object.entries(PREDEFINED_AVATARS).map(([key, description]) =>
+        z.literal(key).describe(description)
+      ) as [
+        z.ZodLiteral<string>,
+        z.ZodLiteral<string>,
+        ...z.ZodLiteral<string>[],
+      ]),
+    ])
+    .describe('Visual representation identifier for the agent.'),
+});
+
+export type CreateAgentDto = z.infer<typeof CreateAgentSchema>;
+
+export interface CreateAgentResponseDto {
+  agent: AgentPrivateDto;
 }
 
 // POST /agents/from-preset - Create agent from preset

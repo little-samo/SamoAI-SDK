@@ -144,6 +144,18 @@ export interface LocationPresetsPaginatedResponseDto {
   };
 }
 
+// POST /locations - Create location
+export const CreateLocationSchema = z.object({
+  name: z.string().max(64),
+  description: z.string().max(500),
+});
+
+export type CreateLocationDto = z.infer<typeof CreateLocationSchema>;
+
+export interface CreateLocationResponseDto {
+  location: LocationPrivateDto;
+}
+
 // POST /locations/from-preset - Create location from preset
 export const CreateLocationFromPresetSchema = z.object({
   presetId: z.coerce.bigint(),
