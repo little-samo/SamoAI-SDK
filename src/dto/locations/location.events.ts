@@ -17,6 +17,7 @@ export const LocationEventType = {
   RenderingUpdated: 'RenderingUpdated',
   CanvasUpdated: 'CanvasUpdated',
   PauseUpdateUntilUpdated: 'PauseUpdateUntilUpdated',
+  LocationUpdated: 'LocationUpdated',
 } as const;
 
 export type LocationEventType =
@@ -100,6 +101,10 @@ export interface LocationPauseUpdateUntilUpdatedEventDto
   pauseUpdateReason: string | null;
 }
 
+export interface LocationUpdatedEventDto extends LocationEventDtoBase {
+  type: typeof LocationEventType.LocationUpdated;
+}
+
 export type LocationEventDto =
   | LocationAgentExecutingEventDto
   | LocationAgentExecutedEventDto
@@ -113,4 +118,5 @@ export type LocationEventDto =
   | LocationMessageProcessedEventDto
   | LocationRenderingUpdatedEventDto
   | LocationCanvasUpdatedEventDto
-  | LocationPauseUpdateUntilUpdatedEventDto;
+  | LocationPauseUpdateUntilUpdatedEventDto
+  | LocationUpdatedEventDto;
