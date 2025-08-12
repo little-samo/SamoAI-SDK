@@ -1,5 +1,5 @@
 import { DayOfWeek } from '@little-samo/samo-ai/common';
-import { AgentId, LocationId } from '@little-samo/samo-ai/models';
+import { LocationId } from '@little-samo/samo-ai/models';
 import { LocationPlatform } from '@little-samo/samo-ai-sdk/models';
 import { z } from 'zod';
 
@@ -570,9 +570,7 @@ export type UpdateLocationRenderingDto = z.infer<
   typeof UpdateLocationRenderingSchema
 >;
 
-export interface UpdateLocationRenderingResponseDto {
-  rendering?: string | null;
-}
+export interface UpdateLocationRenderingResponseDto {}
 
 // WS: updateLocationAgentIsActive - Update agent active status
 export const UpdateLocationAgentIsActiveSchema = z.object({
@@ -585,10 +583,7 @@ export type UpdateLocationAgentIsActiveDto = z.infer<
   typeof UpdateLocationAgentIsActiveSchema
 >;
 
-export interface UpdateLocationAgentIsActiveResponseDto {
-  agentId: AgentId;
-  isActive: boolean;
-}
+export interface UpdateLocationAgentIsActiveResponseDto {}
 
 // WS: pauseLocationUpdate - Pause location updates
 export const PauseLocationUpdateSchema = z.object({
@@ -597,9 +592,7 @@ export const PauseLocationUpdateSchema = z.object({
 
 export type PauseLocationUpdateDto = z.infer<typeof PauseLocationUpdateSchema>;
 
-export interface PauseLocationUpdateResponseDto {
-  paused: boolean;
-}
+export interface PauseLocationUpdateResponseDto {}
 
 // WS: resumeLocationUpdate - Resume location updates with optional delay
 export const ResumeLocationUpdateSchema = z.object({
@@ -612,6 +605,5 @@ export type ResumeLocationUpdateDto = z.infer<
 >;
 
 export interface ResumeLocationUpdateResponseDto {
-  delayMs: number;
   resumeAt: string; // ISO date string
 }
