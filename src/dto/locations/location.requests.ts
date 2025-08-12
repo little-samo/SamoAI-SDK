@@ -534,9 +534,7 @@ export const SendLocationMessageSchema = z.object({
 
 export type SendLocationMessageDto = z.infer<typeof SendLocationMessageSchema>;
 
-export interface SendMessageResponseDto {
-  messageId?: string;
-}
+export interface SendMessageResponseDto {}
 
 // WS: sendUserMessage - Send Twitch user message to location
 export const SendUserMessageSchema = z.object({
