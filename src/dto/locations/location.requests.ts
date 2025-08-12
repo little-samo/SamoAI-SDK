@@ -536,19 +536,6 @@ export type SendLocationMessageDto = z.infer<typeof SendLocationMessageSchema>;
 
 export interface SendMessageResponseDto {}
 
-// WS: sendUserMessage - Send Twitch user message to location
-export const SendUserMessageSchema = z.object({
-  locationId: z.coerce.bigint(),
-  twitchUserId: z.string(),
-  username: z.string(),
-  nickname: z.string(),
-  message: z.string().max(2000),
-});
-
-export type SendUserMessageDto = z.infer<typeof SendUserMessageSchema>;
-
-// Uses SendMessageResponseDto
-
 // WS: sendSystemMessage - Send system message to location
 export const SendSystemMessageSchema = z.object({
   locationId: z.coerce.bigint(),
@@ -558,7 +545,7 @@ export const SendSystemMessageSchema = z.object({
 
 export type SendSystemMessageDto = z.infer<typeof SendSystemMessageSchema>;
 
-// Uses SendMessageResponseDto
+export interface SendSystemMessageResponseDto {}
 
 // WS: updateLocationImage - Update location image
 export const UpdateLocationImageSchema = z.object({
