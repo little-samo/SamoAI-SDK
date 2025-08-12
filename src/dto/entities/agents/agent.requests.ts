@@ -195,7 +195,7 @@ export interface UploadAgentAvatarResponseDto {
 
 // DELETE /agents/:agentId - Delete agent
 export const DeleteAgentParamsSchema = z.object({
-  agentId: z.coerce.bigint().describe('ID of the agent to delete'),
+  agentId: z.coerce.bigint(),
 });
 
 export type DeleteAgentParamsDto = z.infer<typeof DeleteAgentParamsSchema>;

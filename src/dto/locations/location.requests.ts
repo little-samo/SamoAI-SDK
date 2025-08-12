@@ -246,6 +246,20 @@ export interface UploadLocationThumbnailResponseDto {
   thumbnailUrl: string;
 }
 
+// DELETE /locations/:locationId - Delete location
+export const DeleteLocationParamsSchema = z.object({
+  locationId: z.coerce.bigint(),
+});
+
+export type DeleteLocationParamsDto = z.infer<
+  typeof DeleteLocationParamsSchema
+>;
+
+export interface DeleteLocationResponseDto {
+  success: boolean;
+  error?: string;
+}
+
 // GET /locations/:locationId/content - Get location content
 export const GetLocationContentParamsSchema = z.object({
   locationId: z.coerce.bigint(),
