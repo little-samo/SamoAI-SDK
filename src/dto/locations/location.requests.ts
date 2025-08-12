@@ -1,4 +1,5 @@
 import { DayOfWeek } from '@little-samo/samo-ai/common';
+import { AgentId, LocationId } from '@little-samo/samo-ai/models';
 import { LocationPlatform } from '@little-samo/samo-ai-sdk/models';
 import { z } from 'zod';
 
@@ -58,7 +59,7 @@ export type LocationsUnreadCountQueryDto = z.infer<
 >;
 
 export interface LocationUnreadCountItemDto {
-  locationId: bigint;
+  locationId: LocationId;
   unreadCount: number;
   lastMessage: LocationMessageDto | null;
 }
@@ -476,8 +477,6 @@ export const JoinLocationSchema = z.object({
 export type JoinLocationDto = z.infer<typeof JoinLocationSchema>;
 
 export interface JoinLocationResponseDto {
-  success: boolean;
-  locationId: bigint;
   joined: boolean;
 }
 
@@ -489,8 +488,6 @@ export const LeaveLocationSchema = z.object({
 export type LeaveLocationDto = z.infer<typeof LeaveLocationSchema>;
 
 export interface LeaveLocationResponseDto {
-  success: boolean;
-  locationId: bigint;
   left: boolean;
 }
 
@@ -502,8 +499,6 @@ export const SubscribeLocationSchema = z.object({
 export type SubscribeLocationDto = z.infer<typeof SubscribeLocationSchema>;
 
 export interface SubscribeLocationResponseDto {
-  success: boolean;
-  locationId: bigint;
   subscribed: boolean;
 }
 
@@ -515,8 +510,6 @@ export const UnsubscribeLocationSchema = z.object({
 export type UnsubscribeLocationDto = z.infer<typeof UnsubscribeLocationSchema>;
 
 export interface UnsubscribeLocationResponseDto {
-  success: boolean;
-  locationId: bigint;
   unsubscribed: boolean;
 }
 
@@ -542,7 +535,6 @@ export const SendLocationMessageSchema = z.object({
 export type SendLocationMessageDto = z.infer<typeof SendLocationMessageSchema>;
 
 export interface SendMessageResponseDto {
-  success: boolean;
   messageId?: string;
 }
 
@@ -580,7 +572,6 @@ export const UpdateLocationImageSchema = z.object({
 export type UpdateLocationImageDto = z.infer<typeof UpdateLocationImageSchema>;
 
 export interface UpdateLocationImageResponseDto {
-  success: boolean;
   imageUrl?: string;
 }
 
@@ -595,7 +586,6 @@ export type UpdateLocationRenderingDto = z.infer<
 >;
 
 export interface UpdateLocationRenderingResponseDto {
-  success: boolean;
   rendering?: string | null;
 }
 
@@ -611,8 +601,7 @@ export type UpdateLocationAgentIsActiveDto = z.infer<
 >;
 
 export interface UpdateLocationAgentIsActiveResponseDto {
-  success: boolean;
-  agentId: bigint;
+  agentId: AgentId;
   isActive: boolean;
 }
 
@@ -624,8 +613,6 @@ export const PauseLocationUpdateSchema = z.object({
 export type PauseLocationUpdateDto = z.infer<typeof PauseLocationUpdateSchema>;
 
 export interface PauseLocationUpdateResponseDto {
-  success: boolean;
-  locationId: bigint;
   paused: boolean;
 }
 
@@ -640,8 +627,6 @@ export type ResumeLocationUpdateDto = z.infer<
 >;
 
 export interface ResumeLocationUpdateResponseDto {
-  success: boolean;
-  locationId: bigint;
   delayMs: number;
   resumeAt: string; // ISO date string
 }
