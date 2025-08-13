@@ -2,6 +2,11 @@ import { z } from 'zod';
 
 import { UserPublicDto } from './user';
 
+// ================================
+// HTTP API DTOs
+// ================================
+
+// GET /users/publics - Get multiple users by IDs
 export const GetUsersByIdsQuerySchema = z.object({
   userIds: z
     .string()
