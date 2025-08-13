@@ -21,5 +21,4 @@ export interface AgentCostDto {
 
   gimmickCost?: number;
   canvasCost?: number;
-  agentCanvasCost?: number;
 }
