@@ -49,24 +49,30 @@ export const LocationConfigCanvasSchema = z.object({
     .describe('Maximum character limit for canvas content'),
 });
 
+const GimmickCoreSchema = z.union([
+  z
+    .literal('web_search')
+    .describe(
+      'Searches the web for up-to-date or missing information using an LLM, providing both a summary and detailed results. Execution takes approximately 30 seconds'
+    ),
+  z
+    .literal('x_twitter')
+    .describe(
+      'Interacts with X (Twitter) platform for social media operations and content management'
+    ),
+  z
+    .literal('notion')
+    .describe(
+      'Interacts with Notion platform for content management and collaboration'
+    ),
+]);
+
+export type GimmickCore = z.infer<typeof GimmickCoreSchema>;
+
 export const LocationConfigGimmickSchema = z.object({
-  core: z.union([
-    z
-      .literal('web_search')
-      .describe(
-        'Searches the web for up-to-date or missing information using an LLM, providing both a summary and detailed results. Execution takes approximately 30 seconds'
-      ),
-    z
-      .literal('x_twitter')
-      .describe(
-        'Interacts with X (Twitter) platform for social media operations and content management'
-      ),
-    z
-      .literal('notion')
-      .describe(
-        'Interacts with Notion platform for content management and collaboration'
-      ),
-  ]),
+  core: GimmickCoreSchema.describe(
+    'Core gimmick behavior that determines how the gimmick is executed'
+  ),
   name: z
     .string()
     .max(64)
