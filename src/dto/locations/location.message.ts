@@ -5,6 +5,7 @@ export interface LocationMessageDto {
   entityType: EntityType;
   entityId: EntityId;
   name: string;
+  avatar?: string;
   expression?: string;
   message?: string;
   action?: string;

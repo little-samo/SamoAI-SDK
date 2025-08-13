@@ -17,6 +17,7 @@ import {
 import { LocationMessageDto } from './location.message';
 import { LocationPresetDto } from './location.preset';
 import { LocationScheduledMessageDto } from './location.scheduled-message';
+import { LocationSnapshotDto } from './location.snapshot';
 
 // ================================
 // HTTP API DTOs
@@ -285,6 +286,32 @@ export type GetLocationContentParamsDto = z.infer<
 
 export interface GetLocationContentResponseDto {
   content: LocationContentDto;
+}
+
+// POST /locations/:locationId/create-snapshot - Create message snapshot for sharing
+export const CreateLocationSnapshotParamsSchema = z.object({
+  locationId: z.coerce.bigint(),
+});
+
+export type CreateLocationSnapshotParamsDto = z.infer<
+  typeof CreateLocationSnapshotParamsSchema
+>;
+
+export interface CreateLocationSnapshotResponseDto {
+  snapshotKey: string;
+}
+
+// GET /locations/snapshots/:snapshotKey - Get snapshot by key
+export const GetLocationSnapshotParamsSchema = z.object({
+  snapshotKey: z.string().max(128),
+});
+
+export type GetLocationSnapshotParamsDto = z.infer<
+  typeof GetLocationSnapshotParamsSchema
+>;
+
+export interface GetLocationSnapshotResponseDto {
+  snapshot: LocationSnapshotDto;
 }
 
 // POST /locations/:locationId/mark-read - Mark location messages as read
