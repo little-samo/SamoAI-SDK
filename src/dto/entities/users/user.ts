@@ -13,4 +13,5 @@ export interface UserPrivateDto extends UserPublicDto {
   email: string | null;
   maxAgents: number;
   maxLocationAgents: number;
+  maxAgentLocations: number;
 }
