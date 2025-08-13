@@ -203,7 +203,7 @@ __metadata:
   dependencies:
     "@eslint/eslintrc": "npm:^3.1.0"
     "@eslint/js": "npm:^9.13.0"
-    "@little-samo/samo-ai": "npm:^0.1.3"
+    "@little-samo/samo-ai": "npm:^0.1.4"
     "@types/lodash": "npm:^4"
     "@types/node": "npm:^20.3.1"
     "@typescript-eslint/eslint-plugin": "npm:^8.0.0"
@@ -224,27 +224,27 @@ __metadata:
     typescript: "npm:^5.7.2"
     zod: "npm:^3.24.1"
   peerDependencies:
-    "@little-samo/samo-ai": ^0.1.3
+    "@little-samo/samo-ai": ^0.1.4
     class-transformer: ^0.5.1
     class-validator: ^0.14.2
     zod: ^3.24.1
   languageName: unknown
   linkType: soft
 
-"@little-samo/samo-ai@npm:^0.1.3":
-  version: 0.1.3
-  resolution: "@little-samo/samo-ai@npm:0.1.3"
+"@little-samo/samo-ai@npm:^0.1.4":
+  version: 0.1.4
+  resolution: "@little-samo/samo-ai@npm:0.1.4"
   dependencies:
     "@anthropic-ai/sdk": "npm:^0.54.0"
     "@google/genai": "npm:^1.5.0"
     "@modelcontextprotocol/sdk": "npm:^1.15.0"
     lodash: "npm:^4.17.21"
-    openai: "npm:^5.3.0"
+    openai: "npm:^5.12.1"
     reflect-metadata: "npm:^0.2.2"
     zod-to-json-schema: "npm:^3.24.1"
   peerDependencies:
     zod: ^3.24.1
-  checksum: 10c0/860fa01a7bcb933fa7aa66d16f62342c1dc80d65a70166ef2818fb82c1ccb0ecd163288cf330a72aafd068e1c17dc44ff992c84453de5f990e28f484bc88a22b
+  checksum: 10c0/fcdb8caf4cd2018c2f2bfbe467b7cec447e3aa90483f04bc4526c72ec829b2ddfd0712431d7b6d87e316e307975c9f7218b34d6a68f1d93a5c66730d3de59786
   languageName: node
   linkType: hard
 
@@ -2566,9 +2566,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"openai@npm:^5.3.0":
-  version: 5.8.1
-  resolution: "openai@npm:5.8.1"
+"openai@npm:^5.12.1":
+  version: 5.12.2
+  resolution: "openai@npm:5.12.2"
   peerDependencies:
     ws: ^8.18.0
     zod: ^3.23.8
@@ -2579,7 +2579,7 @@ __metadata:
       optional: true
   bin:
     openai: bin/cli
-  checksum: 10c0/fe5b85673ec87c5c83a99baf449d180bbd00ba4fca43c01e092ecd2358b5df1aadb6c81e308a835c7fb4d13f41af005b8c425924e6157ebb5cc7770a96a4ff7b
+  checksum: 10c0/7737b9b24edc81fcf9e6dcfb18a196cc0f8e29b6e839adf06a2538558c03908e3aa4cd94901b1a7f4a9dd62676fe9e34d6202281b2395090d998618ea1614c0c
   languageName: node
   linkType: hard
 
