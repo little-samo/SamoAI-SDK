@@ -17,6 +17,8 @@ import { LocationMessageDto } from './location.message';
 import { LocationPresetDto } from './location.preset';
 import { LocationScheduledMessageDto } from './location.scheduled-message';
 
+import type { AgentCostDto, GimmickCostDto } from '../entities';
+
 // ================================
 // HTTP API DTOs
 // ================================
@@ -231,6 +233,20 @@ export type GetLocationPrivateParamsDto = z.infer<
 
 export interface GetLocationPrivateResponseDto {
   location: LocationPrivateDto;
+}
+
+// GET /locations/:locationId/cost - Get location cost
+export const GetLocationCostParamsSchema = z.object({
+  locationId: z.coerce.bigint(),
+});
+
+export type GetLocationCostParamsDto = z.infer<
+  typeof GetLocationCostParamsSchema
+>;
+
+export interface GetLocationCostResponseDto {
+  agents: AgentCostDto[];
+  gimmicks: GimmickCostDto[];
 }
 
 // POST /locations/:locationId/upload-thumbnail - Upload location thumbnail

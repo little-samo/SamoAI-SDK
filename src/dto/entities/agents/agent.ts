@@ -12,3 +12,14 @@ export interface AgentPrivateDto extends AgentPublicDto {
   config: AgentConfig | null;
   credentialTypes: string[];
 }
+
+export interface AgentCostDto {
+  agentId: AgentId;
+  totalCost: number;
+
+  llmPresetCost: number;
+
+  gimmickCost?: number;
+  canvasCost?: number;
+  agentCanvasCost?: number;
+}

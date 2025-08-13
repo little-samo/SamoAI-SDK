@@ -6,7 +6,7 @@ import {
 } from '@little-samo/samo-ai-sdk/models';
 import { z } from 'zod';
 
-import { AgentPrivateDto, AgentPublicDto } from './agent';
+import { AgentCostDto, AgentPrivateDto, AgentPublicDto } from './agent';
 import { AgentPresetDto } from './agent.preset';
 
 // ================================
@@ -178,6 +178,17 @@ export type GetHelperAgentDto = z.infer<typeof GetHelperAgentSchema>;
 
 export interface GetHelperAgentResponseDto {
   agent: AgentPrivateDto;
+}
+
+// GET /agents/:agentId/cost - Get agent cost
+export const GetAgentCostParamsSchema = z.object({
+  agentId: z.coerce.bigint(),
+});
+
+export type GetAgentCostParamsDto = z.infer<typeof GetAgentCostParamsSchema>;
+
+export interface GetAgentCostResponseDto {
+  cost: AgentCostDto;
 }
 
 // POST /agents/:agentId/upload-avatar - Upload agent avatar
