@@ -1,10 +1,19 @@
 import { z } from 'zod';
 
-import { UserPublicDto } from './user';
+import { UserPrivateDto, UserPublicDto } from './user';
 
 // ================================
 // HTTP API DTOs
 // ================================
+
+// GET /users/me - Get current user
+export const GetCurrentUserQuerySchema = z.object({});
+
+export type GetCurrentUserQueryDto = z.infer<typeof GetCurrentUserQuerySchema>;
+
+export interface GetCurrentUserResponseDto {
+  user: UserPrivateDto;
+}
 
 // GET /users/publics - Get multiple users by IDs
 export const GetUsersByIdsQuerySchema = z.object({
