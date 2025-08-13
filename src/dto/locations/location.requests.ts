@@ -557,7 +557,8 @@ export interface LocationMessagesResponseDto {
 // WS: sendMessage - Send message to location
 export const SendLocationMessageSchema = z.object({
   locationId: z.coerce.bigint(),
-  message: z.string().max(2000),
+  message: z.string().max(2000).optional(),
+  action: z.string().max(2000).optional(),
 });
 
 export type SendLocationMessageDto = z.infer<typeof SendLocationMessageSchema>;
