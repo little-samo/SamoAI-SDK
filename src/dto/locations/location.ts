@@ -12,7 +12,9 @@ import {
   LocationType,
 } from '@little-samo/samo-ai-sdk/models';
 
-import { LocationMessageDto } from './location.message';
+import type { LocationMessageDto } from './location.message';
+import type { AgentCostDto } from '../entities/agents/agent';
+import type { GimmickCostDto } from '../entities/gimmicks/gimmick';
 
 export interface LocationPublicDto {
   id: LocationId;
@@ -57,4 +59,10 @@ export interface LocationContentDto {
   id: LocationId;
   canvases: Record<string, LocationCanvasDto>;
   rendering: string | null;
+}
+
+export interface LocationCostDto {
+  locationId: LocationId;
+  agents: AgentCostDto[];
+  gimmicks: GimmickCostDto[];
 }
