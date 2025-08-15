@@ -297,6 +297,14 @@ export type CreateLocationSnapshotParamsDto = z.infer<
   typeof CreateLocationSnapshotParamsSchema
 >;
 
+export const CreateLocationSnapshotBodySchema = z.object({
+  maxMessages: z.coerce.number().int().positive().optional().default(30),
+});
+
+export type CreateLocationSnapshotBodyDto = z.infer<
+  typeof CreateLocationSnapshotBodySchema
+>;
+
 export interface CreateLocationSnapshotResponseDto {
   snapshotKey: string;
 }
