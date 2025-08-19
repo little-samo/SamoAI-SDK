@@ -629,6 +629,10 @@ export const SendLocationMessageSchema = z.object({
   locationId: z.coerce.bigint(),
   message: z.string().max(2000).optional(),
   action: z.string().max(2000).optional(),
+  image: z
+    .string()
+    .max(4 * 1024 * 1024)
+    .optional(), // base64 encoded image, original max 3MB (encoded ~4MB)
 });
 
 export type SendLocationMessageDto = z.infer<typeof SendLocationMessageSchema>;
