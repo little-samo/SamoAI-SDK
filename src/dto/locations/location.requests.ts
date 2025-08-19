@@ -149,8 +149,9 @@ export interface LocationPresetsPaginatedResponseDto {
 
 // POST /locations - Create location
 export const CreateLocationSchema = z.object({
-  name: z.string().max(64),
-  description: z.string().max(500),
+  config: LocationConfigSchema.partial()
+    .strict()
+    .describe('Location configuration settings (e.g., name, description)'),
   platform: z
     .nativeEnum(LocationPlatform)
     .optional()
