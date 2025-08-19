@@ -94,7 +94,7 @@ export const LocationConfigSchema = z.object({
     .max(2048)
     .nullable()
     .describe(
-      'Location thumbnail URL (png, jpeg, jpg files under 10MB only). This will be replaced by the URL of the file uploaded to a CDN, not the original address.'
+      'Location thumbnail URL (png, jpeg, jpg files under 3MB only). This will be replaced by the URL of the file uploaded to a CDN, not the original address.'
     ),
 
   environment: LocationEnvironmentSchema.describe(

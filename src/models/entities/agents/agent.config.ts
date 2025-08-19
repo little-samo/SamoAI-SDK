@@ -85,7 +85,7 @@ export const AgentConfigSchema = z.object({
         .string()
         .max(2048)
         .describe(
-          'Custom avatar URL (png, jpeg, jpg files under 10MB only). This will be replaced by the URL of the file uploaded to a CDN, not the original address.'
+          'Custom avatar URL (png, jpeg, jpg files under 3MB only). This will be replaced by the URL of the file uploaded to a CDN, not the original address.'
         ),
     ])
     .describe(
