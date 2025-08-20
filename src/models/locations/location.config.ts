@@ -22,6 +22,9 @@ export const LocationConfigCoreSchema = z.object({
       .literal('update_forever')
       .describe('Continuously update agents without stopping'),
     z.literal('update_once').describe('Execute agents only once per cycle'),
+    z
+      .literal('update_until_idle')
+      .describe('Update agents continuously until no actions are available'),
   ]),
   sequential: z.boolean().optional().describe('Execute agents in fixed order'),
 });
