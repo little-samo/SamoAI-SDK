@@ -56,19 +56,6 @@ export interface GetAgentPrivatesByIdsResponseDto {
   agents: AgentPrivateDto[];
 }
 
-// GET /agents/locations - Get agent locations
-export const GetAgentLocationsQuerySchema = z.object({
-  agentId: z.coerce.bigint(),
-});
-
-export type GetAgentLocationsQueryDto = z.infer<
-  typeof GetAgentLocationsQuerySchema
->;
-
-export interface GetAgentLocationsResponseDto {
-  locationIds: LocationId[];
-}
-
 // PATCH /agents/config - Update agent configuration
 export const AgentUpdateConfigSchema = z.object({
   agentId: z.coerce.bigint().describe('ID of the agent to update'),
@@ -183,6 +170,19 @@ export type GetHelperAgentDto = z.infer<typeof GetHelperAgentSchema>;
 
 export interface GetHelperAgentResponseDto {
   agent: AgentPrivateDto;
+}
+
+// Get /agents/:agentId/locations - Get agent location ids
+export const GetAgentLocationsParamsSchema = z.object({
+  agentId: z.coerce.bigint(),
+});
+
+export type GetAgentLocationsParamsDto = z.infer<
+  typeof GetAgentLocationsParamsSchema
+>;
+
+export interface GetAgentLocationsResponseDto {
+  locationIds: LocationId[];
 }
 
 // GET /agents/:agentId/cost - Get agent cost
