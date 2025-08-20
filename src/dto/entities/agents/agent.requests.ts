@@ -1,3 +1,4 @@
+import { LocationId } from '@little-samo/samo-ai/models';
 import {
   AgentConfig,
   AgentConfigSchema,
@@ -53,6 +54,19 @@ export interface GetAgentPublicsByIdsResponseDto {
 
 export interface GetAgentPrivatesByIdsResponseDto {
   agents: AgentPrivateDto[];
+}
+
+// GET /agents/locations - Get agent locations
+export const GetAgentLocationsQuerySchema = z.object({
+  agentId: z.coerce.bigint(),
+});
+
+export type GetAgentLocationsQueryDto = z.infer<
+  typeof GetAgentLocationsQuerySchema
+>;
+
+export interface GetAgentLocationsResponseDto {
+  locationIds: LocationId[];
 }
 
 // PATCH /agents/config - Update agent configuration
