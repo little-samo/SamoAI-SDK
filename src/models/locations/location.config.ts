@@ -101,7 +101,7 @@ export const LocationConfigSchema = z.object({
         .describe(
           'Location thumbnail URL (http/https URL pointing to png, jpeg, jpg files under 3MB). This will be replaced by the URL of the file uploaded to a CDN, not the original address.'
         ),
-      z.string().max(16).describe('Location message image key for API usage'),
+      z.string().max(32).describe('Location message image key for API usage'),
     ])
     .nullable()
     .describe(
