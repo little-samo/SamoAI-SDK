@@ -84,12 +84,20 @@ export const AgentConfigSchema = z.object({
       z
         .string()
         .max(2048)
+        .regex(/^https?:\/\/.+\.(png|jpe?g)$/i)
         .describe(
-          'Custom avatar URL (png, jpeg, jpg files under 3MB only). This will be replaced by the URL of the file uploaded to a CDN, not the original address.'
+          'Custom avatar URL (http/https URL pointing to png, jpeg, jpg files under 3MB). This will be replaced by the URL of the file uploaded to a CDN, not the original address.'
+        ),
+      z
+        .string()
+        .max(4 * 1024 * 1024)
+        .regex(/^data:image\/(png|jpe?g);base64,/)
+        .describe(
+          'Custom avatar data URI (data:image/png, jpg, jpeg; base64 encoded, max 3MB). This will be replaced by the URL of the file uploaded to a CDN, not the original address.'
         ),
     ])
     .describe(
-      'Visual representation identifier for the agent. Supports predefined avatar options or custom URL. When a predefined avatar is selected, the appearance field will automatically update to match the avatar description.'
+      'Visual representation identifier for the agent. Supports predefined avatar options, custom URLs, or data URIs. When a predefined avatar is selected, the appearance field will automatically update to match the avatar description.'
     ),
   appearance: z
     .string()

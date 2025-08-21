@@ -93,11 +93,25 @@ export type LocationConfigGimmick = z.infer<typeof LocationConfigGimmickSchema>;
 export const LocationConfigSchema = z.object({
   name: z.string().max(64).describe('Location name'),
   thumbnail: z
-    .string()
-    .max(2048)
+    .union([
+      z
+        .string()
+        .max(2048)
+        .regex(/^https?:\/\/.+\.(png|jpe?g)$/i)
+        .describe(
+          'Location thumbnail URL (http/https URL pointing to png, jpeg, jpg files under 3MB). This will be replaced by the URL of the file uploaded to a CDN, not the original address.'
+        ),
+      z
+        .string()
+        .max(4 * 1024 * 1024)
+        .regex(/^data:image\/(png|jpe?g);base64,/)
+        .describe(
+          'Location thumbnail data URI (data:image/png, jpg, jpeg; base64 encoded, max 3MB). This will be replaced by the URL of the file uploaded to a CDN, not the original address.'
+        ),
+    ])
     .nullable()
     .describe(
-      'Location thumbnail URL (png, jpeg, jpg files under 3MB only). This will be replaced by the URL of the file uploaded to a CDN, not the original address.'
+      'Location thumbnail image. Supports HTTP/HTTPS URLs or data URIs for png, jpeg, jpg images. When provided, this will be replaced by the URL of the file uploaded to a CDN.'
     ),
 
   environment: LocationEnvironmentSchema.describe(
