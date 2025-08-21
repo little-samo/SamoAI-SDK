@@ -55,11 +55,27 @@ All property values are strings with a maximum length of 500 characters.
 );
 
 const LlmPresetSchema = z.union([
-  z.literal('gemini-low').describe('Gemini - Low cost'),
-  z.literal('gemini-medium').describe('Gemini - Balanced'),
+  z
+    .literal('gemini-low')
+    .describe(
+      'Gemini - Economical model optimized for straightforward tasks and basic interactions. Cost-effective choice for simple operations.'
+    ),
+  z
+    .literal('gemini-medium')
+    .describe(
+      'Gemini - Well-balanced model ideal for general-purpose applications. Recommended for most use cases requiring reliable performance.'
+    ),
   // z.literal('gemini-high').describe('Gemini - High performance'),
-  z.literal('openai-low').describe('OpenAI - Low cost'),
-  z.literal('openai-medium').describe('OpenAI - Balanced'),
+  z
+    .literal('openai-low')
+    .describe(
+      'OpenAI - Budget-friendly model designed for elementary tasks and routine operations. Efficient for basic conversational needs.'
+    ),
+  z
+    .literal('openai-medium')
+    .describe(
+      'OpenAI - Versatile model delivering solid performance across diverse scenarios. Optimal balance of capability and cost-effectiveness.'
+    ),
   // z.literal('anthropic-low').describe('Anthropic - Low cost'),
   // z.literal('anthropic-medium').describe('Anthropic - Balanced'),
   // z.literal('anthropic-high').describe('Anthropic - High performance'),
