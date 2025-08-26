@@ -30,7 +30,7 @@ export const AgentConfigCoreSchema = z.object({
 
 export type AgentConfigCore = z.infer<typeof AgentConfigCoreSchema>;
 
-const CharacterSchema = z
+export const CharacterSchema = z
   .object({
     background: z
       .object({
