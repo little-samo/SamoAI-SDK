@@ -34,7 +34,7 @@ export type LocationConfigCore = z.infer<typeof LocationConfigCoreSchema>;
 export const LocationConfigCanvasSchema = z.object({
   name: z
     .string()
-    .max(16)
+    .max(32)
     .regex(/^[a-zA-Z_]+$/, 'Name must contain only letters and underscores')
     .describe(
       'Unique identifier for the canvas that agents use to reference it'
