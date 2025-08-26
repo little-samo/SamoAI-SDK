@@ -61,7 +61,7 @@ const GimmickCoreSchema = z.union([
   z
     .literal('x_twitter')
     .describe(
-      'Interacts with X (Twitter) platform for social media operations and content management'
+      'Comprehensive X (Twitter) integration for social media operations including posting tweets, timeline management, engagement (likes, retweets, replies), user profile and follower management, content discovery through search and trends, and real-time interaction monitoring'
     ),
   z
     .literal('notion')
