@@ -30,29 +30,102 @@ export const AgentConfigCoreSchema = z.object({
 
 export type AgentConfigCore = z.infer<typeof AgentConfigCoreSchema>;
 
-const CharacterSchema = z.record(z.record(z.string().max(500))).describe(
-  `
-Defines the agent's character using a flexible, two-level nested object, such as \`{ "category": { "property": "value" } }\`.
-You can create any custom categories and properties. Below are some suggestions:
-*   **background**: Defines the agent's core identity and backstory.
-    *   \`role\`: **CRITICAL**. The agent's primary function and purpose (e.g., 'A helper agent for crafting new agents and discovering treasures.').
-    *   \`gender\`: The agent's gender identity (e.g., 'Male').
-    *   \`expertise\`: Specialized knowledge areas (e.g., 'Treasure hunting, making friends, spreading happiness.').
-    *   \`backstory\`: A brief history of the agent's experiences (e.g., 'Born in a warm home, loves making friends and going on adventures.').
-*   **speech**: Controls the agent's communication style.
-    *   \`tone\`: The emotional quality of the agent's voice (e.g., 'A cheerful yet polite bark.').
-    *   \`style\`: The agent's manner of expression (e.g., 'Friendly, enthusiastic, lively.').
-    *   \`formality\`: The level of conventionality in language (e.g., 'Playful, respectful, uplifting.').
-*   **personality**: Describes the agent's distinctive traits and behaviors.
-    *   \`traits\`: Key characteristics (e.g., 'Curious, creative, friendly, optimistic.').
-    *   \`interests\`: Hobbies and topics the agent enjoys (e.g., 'Treasures, adventures, and making new friends.').
-    *   \`values\`: Core principles that guide the agent's actions (e.g., 'Happiness, friendship, adventure, and harmony.').
-    *   \`quirks\`: Peculiar habits or eccentricities (e.g., 'Barks when excited, overly optimistic.').
-    *   \`mbti\`: Myers-Briggs Type Indicator for personality classification (e.g., 'ESFP').
+const CharacterSchema = z
+  .object({
+    background: z
+      .object({
+        role: z
+          .string()
+          .max(500)
+          .describe(
+            "**CRITICAL**. The agent's primary function and purpose (e.g., 'A helper agent for crafting new agents and discovering treasures)"
+          )
+          .optional(),
+        gender: z
+          .string()
+          .max(30)
+          .describe("The agent's gender identity")
+          .optional(),
+        expertise: z
+          .string()
+          .max(500)
+          .describe('Specialized knowledge areas')
+          .optional(),
+        backstory: z
+          .string()
+          .max(500)
+          .describe("A brief history of the agent's experiences")
+          .optional(),
+      })
+      .describe("Defines the agent's core identity and backstory")
+      .optional(),
 
-All property values are strings with a maximum length of 500 characters.
-`.trim()
-);
+    speech: z
+      .object({
+        tone: z
+          .string()
+          .max(500)
+          .describe("The emotional quality of the agent's voice")
+          .optional(),
+        style: z
+          .string()
+          .max(500)
+          .describe("The agent's manner of expression")
+          .optional(),
+        formality: z
+          .string()
+          .max(500)
+          .describe('The level of conventionality in language')
+          .optional(),
+      })
+      .describe("Controls the agent's communication style")
+      .optional(),
+
+    personality: z
+      .object({
+        traits: z.string().max(500).describe('Key characteristics').optional(),
+        interests: z
+          .string()
+          .max(500)
+          .describe('Hobbies and topics the agent enjoys')
+          .optional(),
+        values: z
+          .string()
+          .max(500)
+          .describe("Core principles that guide the agent's actions")
+          .optional(),
+        quirks: z
+          .string()
+          .max(500)
+          .describe('Peculiar habits or eccentricities')
+          .optional(),
+        mbti: z
+          .union([
+            z.literal('INTJ'),
+            z.literal('INTP'),
+            z.literal('ENTJ'),
+            z.literal('ENTP'),
+            z.literal('INFJ'),
+            z.literal('INFP'),
+            z.literal('ENFJ'),
+            z.literal('ENFP'),
+            z.literal('ISTJ'),
+            z.literal('ISFJ'),
+            z.literal('ESTJ'),
+            z.literal('ESFJ'),
+            z.literal('ISTP'),
+            z.literal('ISFP'),
+            z.literal('ESTP'),
+            z.literal('ESFP'),
+          ])
+          .optional(),
+      })
+      .describe("Describes the agent's distinctive traits and behaviors")
+      .optional(),
+  })
+  .describe(
+    "Defines the agent's character using a structured format with predefined categories and properties"
+  );
 
 const LlmPresetSchema = z.union([
   z
