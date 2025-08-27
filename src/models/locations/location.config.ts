@@ -41,14 +41,14 @@ export const LocationConfigCanvasSchema = z.object({
     ),
   description: z
     .string()
-    .max(1000)
+    .max(5000)
     .describe(
       'Clear explanation of the canvas purpose and intended use for agents'
     ),
   maxLength: z
     .number()
     .min(100)
-    .max(1000)
+    .max(5000)
     .describe('Maximum character limit for canvas content'),
 });
 
