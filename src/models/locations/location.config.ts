@@ -99,13 +99,13 @@ export const LocationConfigSchema = z.object({
         .max(2048)
         .regex(/^https?:\/\/.+\.(png|jpe?g)$/i)
         .describe(
-          'Location thumbnail URL (http/https URL pointing to png, jpeg, jpg files under 3MB). This will be replaced by the URL of the file uploaded to a CDN, not the original address.'
+          'Location thumbnail URL (http/https URL pointing to png, jpeg, jpg, webp files under 3MB). This will be replaced by the URL of the file uploaded to a CDN, not the original address.'
         ),
       z.string().max(32).describe('Location message image key for API usage'),
     ])
     .nullable()
     .describe(
-      'Location thumbnail image. Supports HTTP/HTTPS URLs for png, jpeg, jpg images and location message image keys for API usage. When provided, images will be replaced by CDN URLs when processed.'
+      'Location thumbnail image. Supports HTTP/HTTPS URLs for png, jpeg, jpg, webp images and location message image keys for API usage. When provided, images will be replaced by CDN URLs when processed.'
     ),
 
   environment: LocationEnvironmentSchema.describe(
