@@ -53,7 +53,7 @@ export const CharacterSchema = z
           .optional(),
         backstory: z
           .string()
-          .max(500)
+          .max(1000)
           .describe("A brief history of the agent's experiences")
           .optional(),
       })
