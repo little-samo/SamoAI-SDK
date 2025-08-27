@@ -138,7 +138,11 @@ const LlmPresetSchema = z.union([
     .describe(
       'Gemini - Well-balanced model ideal for general-purpose applications. Recommended for most use cases requiring reliable performance.'
     ),
-  // z.literal('gemini-high').describe('Gemini - High performance'),
+  z
+    .literal('gemini-high')
+    .describe(
+      'Gemini - Premium model with highest performance capabilities. Offers superior reasoning and complex task handling but comes with higher costs and slower processing times.'
+    ),
   z
     .literal('openai-low')
     .describe(
