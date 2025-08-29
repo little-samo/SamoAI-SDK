@@ -9,10 +9,8 @@ export const LocationEnvironmentSchema = z.union([
       'Standard conversational environment for general agent interactions'
     ),
   z
-    .literal(LocationEnvironment.CHAT)
-    .describe(
-      'Standard conversational environment for general agent interactions'
-    ),
+    .literal(LocationEnvironment.NOVEL)
+    .describe('Novel environment with UI designed for novel writing'),
 ]);
 
 export const LocationConfigCoreSchema = z.object({

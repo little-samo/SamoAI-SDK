@@ -20,8 +20,7 @@ export const LocationEnvironment = {
   AGENT_HELPER: 'AGENT_HELPER',
   LOCATION_HELPER: 'LOCATION_HELPER',
   AGENT_DM: 'AGENT_DM',
-  WEB_BROWSER: 'WEB_BROWSER',
-  VIDEO_GAME: 'VIDEO_GAME',
+  NOVEL: 'NOVEL',
 } as const;
 
 export type LocationEnvironment =
