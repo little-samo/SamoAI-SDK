@@ -50,7 +50,7 @@ export const LocationConfigCanvasSchema = z.object({
     .describe('Maximum character limit for canvas content'),
 });
 
-const GimmickCoreDescriptions = {
+export const GimmickCoreDescriptions = {
   web_search:
     'Searches the web for up-to-date or missing information using an LLM, providing both a summary and detailed results. Execution takes approximately 30 seconds',
   image_generator:
