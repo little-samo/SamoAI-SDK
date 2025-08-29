@@ -20,5 +20,6 @@ export interface AgentCostDto {
   llmPresetCost: number;
 
   gimmickCost?: number;
+  canvasMaxLength?: number;
   canvasCost?: number;
 }
