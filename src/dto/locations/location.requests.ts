@@ -447,6 +447,27 @@ export type RemoveAgentFromLocationToolDto = z.infer<
   typeof RemoveAgentFromLocationToolSchema
 >;
 
+// PUT /locations/:locationId - Update location settings
+export const UpdateLocationParamsSchema = z.object({
+  locationId: z.coerce.bigint(),
+});
+
+export type UpdateLocationParamsDto = z.infer<
+  typeof UpdateLocationParamsSchema
+>;
+
+export const UpdateLocationBodySchema = z.object({
+  visibility: z.enum(['private', 'public', 'publish']).optional(),
+  maxUsers: z.number().int().min(1).max(100).optional(),
+});
+
+export type UpdateLocationBodyDto = z.infer<typeof UpdateLocationBodySchema>;
+
+export interface UpdateLocationResponseDto {
+  success: boolean;
+  error?: string;
+}
+
 // GET /locations/:locationId/scheduled-messages - Get scheduled messages
 export const GetLocationScheduledMessagesParamsSchema = z.object({
   locationId: z.coerce.bigint(),
