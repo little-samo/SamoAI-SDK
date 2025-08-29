@@ -32,6 +32,8 @@ export interface LocationPublicDto {
   param3: bigint;
   param4: bigint;
 
+  isPublished: boolean;
+
   createdAt: Date;
   updatedAt: Date;
 }
