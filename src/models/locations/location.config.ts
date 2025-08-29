@@ -27,9 +27,11 @@ export const LocationConfigCoreSchema = z.object({
   sequential: z.boolean().optional().describe('Execute agents in fixed order'),
   interval: z
     .number()
+    .min(0)
+    .max(60 * 60 * 1000) // 1 hour
     .optional()
     .describe(
-      'Interval in seconds between agent executions. Use default value if not specified'
+      'Interval in milliseconds between agent executions. Use default value if not specified'
     ),
 });
 
