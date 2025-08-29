@@ -62,11 +62,6 @@ const GimmickCoreSchema = z.union([
       'Generates a image using an LLM. Execution takes approximately 30 seconds'
     ),
   z
-    .literal('x_twitter')
-    .describe(
-      'Comprehensive X (Twitter) integration for social media operations including posting tweets, timeline management, engagement (likes, retweets, replies), user profile and follower management, content discovery through search and trends, and real-time interaction monitoring'
-    ),
-  z
     .literal('notion')
     .describe(
       'Interacts with Notion platform for content management and collaboration'
