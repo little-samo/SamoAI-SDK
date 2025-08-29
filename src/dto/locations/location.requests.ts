@@ -91,10 +91,8 @@ export const LocationUpdateCredentialSchema = z.object({
   locationId: z.coerce.bigint(),
   credential: z.union([
     z.object({
-      type: z.literal('x_twitter'),
-      email: z.string().max(255),
-      password: z.string().max(255),
-      username: z.string().max(255),
+      type: z.literal('notion'),
+      token: z.string().max(255),
     }),
     z.object({
       type: z.literal('notion'),
