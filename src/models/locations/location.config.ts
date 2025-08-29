@@ -25,6 +25,12 @@ export const LocationConfigCoreSchema = z.object({
       .describe('Update agents continuously until no actions are available'),
   ]),
   sequential: z.boolean().optional().describe('Execute agents in fixed order'),
+  interval: z
+    .number()
+    .optional()
+    .describe(
+      'Interval in seconds between agent executions. Use default value if not specified'
+    ),
 });
 
 export type LocationConfigCore = z.infer<typeof LocationConfigCoreSchema>;
@@ -112,7 +118,7 @@ export const LocationConfigSchema = z.object({
   ),
 
   core: LocationConfigCoreSchema.describe(
-    'Core behavior configuration that determines how agents are executed in this location'
+    'Core behavior configuration that determines how agents are executed in this location. Use default values unless specifically needed.'
   ),
   description: z
     .string()
