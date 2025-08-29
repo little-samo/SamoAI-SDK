@@ -333,7 +333,13 @@ export type CreateLocationSnapshotParamsDto = z.infer<
 >;
 
 export const CreateLocationSnapshotBodySchema = z.object({
-  maxMessages: z.coerce.number().int().positive().optional().default(30),
+  maxMessages: z.coerce
+    .number()
+    .int()
+    .positive()
+    .max(100)
+    .optional()
+    .default(30),
 });
 
 export type CreateLocationSnapshotBodyDto = z.infer<
