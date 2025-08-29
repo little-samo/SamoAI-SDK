@@ -24,6 +24,9 @@ export interface LocationPublicDto {
   type: LocationType;
   environment: LocationEnvironment;
 
+  thumbnail: string | null;
+  ownerUserId: UserId | null;
+
   param1: bigint;
   param2: bigint;
   param3: bigint;
