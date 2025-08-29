@@ -59,7 +59,7 @@ const GimmickCoreSchema = z.union([
       'Searches the web for up-to-date or missing information using an LLM, providing both a summary and detailed results. Execution takes approximately 30 seconds'
     ),
   z
-    .literal('image_generator')
+    .literal('image_generation')
     .describe(
       'Generates a image using an LLM. Execution takes approximately 30 seconds'
     ),
