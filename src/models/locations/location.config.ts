@@ -59,6 +59,11 @@ const GimmickCoreSchema = z.union([
       'Searches the web for up-to-date or missing information using an LLM, providing both a summary and detailed results. Execution takes approximately 30 seconds'
     ),
   z
+    .literal('image_generator')
+    .describe(
+      'Generates a image using an LLM. Execution takes approximately 30 seconds'
+    ),
+  z
     .literal('x_twitter')
     .describe(
       'Comprehensive X (Twitter) integration for social media operations including posting tweets, timeline management, engagement (likes, retweets, replies), user profile and follower management, content discovery through search and trends, and real-time interaction monitoring'
