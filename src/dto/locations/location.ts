@@ -34,6 +34,7 @@ export interface LocationPublicDto {
 
   isPublic: boolean;
   isPublished: boolean;
+  isAdminChat: boolean;
 
   createdAt: Date;
   updatedAt: Date;
