@@ -10,7 +10,6 @@ export const LocationEventType = {
   AgentExecuted: 'AgentExecuted',
   UserJoined: 'UserJoined',
   UserLeft: 'UserLeft',
-  UserKicked: 'UserKicked',
   GimmickExecuting: 'GimmickExecuting',
   GimmickExecuted: 'GimmickExecuted',
   AddMessage: 'AddMessage',
@@ -51,11 +50,6 @@ export interface LocationAgentJoinedEventDto extends LocationEventDtoBase {
 export interface LocationAgentLeftEventDto extends LocationEventDtoBase {
   type: typeof LocationEventType.AgentLeft;
   agentId: AgentId;
-}
-
-export interface LocationUserKickedEventDto extends LocationEventDtoBase {
-  type: typeof LocationEventType.UserKicked;
-  userId: UserId;
 }
 
 export interface LocationUserJoinedEventDto extends LocationEventDtoBase {
@@ -125,7 +119,6 @@ export type LocationEventDto =
   | LocationAgentLeftEventDto
   | LocationUserJoinedEventDto
   | LocationUserLeftEventDto
-  | LocationUserKickedEventDto
   | LocationGimmickExecutingEventDto
   | LocationGimmickExecutedEventDto
   | LocationAddMessageEventDto
