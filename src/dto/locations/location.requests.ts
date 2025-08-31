@@ -636,6 +636,24 @@ export interface UnsubscribeLocationResponseDto {
   unsubscribed: boolean;
 }
 
+// WS: banUserFromLocation - Ban user from location
+export const BanUserFromLocationSchema = z.object({
+  locationId: z.coerce.bigint(),
+  userId: z.coerce.bigint(),
+  durationMs: z
+    .number()
+    .int()
+    .min(60 * 1000) // 1 minute
+    .max(30 * 24 * 60 * 60 * 1000) // 30 days
+    .optional(), // omit for permanent ban
+});
+
+export type BanUserFromLocationDto = z.infer<typeof BanUserFromLocationSchema>;
+
+export interface BanUserFromLocationResponseDto {
+  bannedUntil: Date;
+}
+
 // WS: getLocationMessages - Get location messages with pagination
 export const GetLocationMessagesSchema = z.object({
   locationId: z.coerce.bigint(),
