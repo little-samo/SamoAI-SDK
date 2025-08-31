@@ -30,3 +30,16 @@ export type GetUsersByIdsQueryDto = z.infer<typeof GetUsersByIdsQuerySchema>;
 export interface GetUserPublicsByIdsResponseDto {
   users: UserPublicDto[];
 }
+
+// ================================
+// WebSocket DTOs
+// ================================
+
+// WS: me - Get current user
+export const GetCurrentUserSchema = z.object({});
+
+export type GetCurrentUserDto = z.infer<typeof GetCurrentUserSchema>;
+
+export interface GetCurrentUserResponseDto {
+  user: UserPrivateDto;
+}
