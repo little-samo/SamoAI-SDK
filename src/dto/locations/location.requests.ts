@@ -499,6 +499,9 @@ export type UpdateLocationParamsDto = z.infer<
 export const UpdateLocationBodySchema = z.object({
   visibility: z.enum(['private', 'public', 'publish']).optional(),
   maxUsers: z.number().int().min(1).max(99).optional(),
+  useLocationCreditOnly: z.boolean().optional(),
+  creditCostPerChat: z.number().int().positive().optional(),
+  chatRequiresPaidCredit: z.boolean().optional(),
   isAdminChat: z.boolean().optional(),
 });
 
