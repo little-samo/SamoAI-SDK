@@ -2,7 +2,7 @@ export interface ItemDto {
   id: number;
   itemDataId: number;
   name: string;
-  description?: string;
+  description: string | null;
   count: number;
   param1: number;
   param2: number;
