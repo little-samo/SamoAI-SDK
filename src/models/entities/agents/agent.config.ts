@@ -190,7 +190,7 @@ export const AgentConfigSchema = z.object({
     .string()
     .max(500)
     .describe(
-      "Internal character description used by the agent for role-playing and behavioral consistency. This field is automatically updated when avatar changes to a predefined option, but can also be manually edited independently. Helps the agent understand and embody its character during interactions, influencing communication style, decision-making patterns, and personality expression. Primarily for agent's internal reference rather than user display."
+      "Internal character description used by the agent for role-playing and behavioral consistency. This field is automatically updated when avatar changes to a predefined option, but should also be updated when using custom images to maintain character consistency. Can be manually edited independently. Helps the agent understand and embody its character during interactions, influencing communication style, decision-making patterns, and personality expression. Primarily for agent's internal reference rather than user display."
     ),
 
   core: AgentConfigCoreSchema.describe(
