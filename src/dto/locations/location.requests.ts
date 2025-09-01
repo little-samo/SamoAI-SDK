@@ -331,8 +331,7 @@ export type DepositCreditsParamsDto = z.infer<
 >;
 
 export const DepositCreditsBodySchema = z.object({
-  freeCreditAmount: z.number().int().positive(),
-  paidCreditAmount: z.number().int().positive(),
+  amount: z.number().int().positive(),
 });
 
 export type DepositCreditsBodyDto = z.infer<typeof DepositCreditsBodySchema>;
