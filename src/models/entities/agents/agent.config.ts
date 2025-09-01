@@ -146,12 +146,12 @@ const LlmPresetSchema = z.union([
   z
     .literal('openai-low')
     .describe(
-      'OpenAI - Budget-friendly model designed for elementary tasks and routine operations. Efficient for basic conversational needs.'
+      'OpenAI GPT - Budget-friendly model designed for elementary tasks and routine operations. Efficient for basic conversational needs.'
     ),
   z
     .literal('openai-medium')
     .describe(
-      'OpenAI - Versatile model delivering solid performance across diverse scenarios. Optimal balance of capability and cost-effectiveness.'
+      'OpenAI GPT - Versatile model delivering solid performance across diverse scenarios. Optimal balance of capability and cost-effectiveness.'
     ),
   // z.literal('anthropic-low').describe('Anthropic - Low cost'),
   // z.literal('anthropic-medium').describe('Anthropic - Balanced'),
