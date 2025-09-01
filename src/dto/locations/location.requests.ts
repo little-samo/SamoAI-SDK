@@ -255,6 +255,20 @@ export interface GetLocationResponseDto {
   location: LocationListItemDto;
 }
 
+// DELETE /locations/:locationId - Delete location
+export const DeleteLocationParamsSchema = z.object({
+  locationId: z.coerce.bigint(),
+});
+
+export type DeleteLocationParamsDto = z.infer<
+  typeof DeleteLocationParamsSchema
+>;
+
+export interface DeleteLocationResponseDto {
+  success: boolean;
+  error?: string;
+}
+
 // GET /locations/:locationId/private - Get location private details
 export const GetLocationPrivateParamsSchema = z.object({
   locationId: z.coerce.bigint(),
@@ -294,20 +308,6 @@ export interface UploadLocationThumbnailResponseDto {
   thumbnailUrl: string;
 }
 
-// DELETE /locations/:locationId - Delete location
-export const DeleteLocationParamsSchema = z.object({
-  locationId: z.coerce.bigint(),
-});
-
-export type DeleteLocationParamsDto = z.infer<
-  typeof DeleteLocationParamsSchema
->;
-
-export interface DeleteLocationResponseDto {
-  success: boolean;
-  error?: string;
-}
-
 // GET /locations/:locationId/content - Get location content
 export const GetLocationContentParamsSchema = z.object({
   locationId: z.coerce.bigint(),
@@ -319,6 +319,46 @@ export type GetLocationContentParamsDto = z.infer<
 
 export interface GetLocationContentResponseDto {
   content: LocationContentDto;
+}
+
+// POST /locations/:locationId/deposit-credits - Deposit credits to location
+export const DepositCreditsParamsSchema = z.object({
+  locationId: z.coerce.bigint(),
+});
+
+export type DepositCreditsParamsDto = z.infer<
+  typeof DepositCreditsParamsSchema
+>;
+
+export const DepositCreditsBodySchema = z.object({
+  amount: z.number().int().positive(),
+});
+
+export type DepositCreditsBodyDto = z.infer<typeof DepositCreditsBodySchema>;
+
+export interface DepositCreditsResponseDto {
+  success: boolean;
+  error?: string;
+}
+
+// POST /locations/:locationId/withdraw-credits - Withdraw credits from location
+export const WithdrawCreditsParamsSchema = z.object({
+  locationId: z.coerce.bigint(),
+});
+
+export type WithdrawCreditsParamsDto = z.infer<
+  typeof WithdrawCreditsParamsSchema
+>;
+
+export const WithdrawCreditsBodySchema = z.object({
+  amount: z.number().int().positive(),
+});
+
+export type WithdrawCreditsBodyDto = z.infer<typeof WithdrawCreditsBodySchema>;
+
+export interface WithdrawCreditsResponseDto {
+  success: boolean;
+  error?: string;
 }
 
 // POST /locations/:locationId/create-snapshot - Create message snapshot for sharing

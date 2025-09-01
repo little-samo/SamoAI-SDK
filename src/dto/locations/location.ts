@@ -32,6 +32,12 @@ export interface LocationPublicDto {
   param3: bigint;
   param4: bigint;
 
+  freeCreditBalance: number;
+  paidCreditBalance: number;
+  useLocationCreditOnly: boolean;
+  creditCostPerChat: number;
+  chatRequiresPaidCredit: boolean;
+
   isPublic: boolean;
   isPublished: boolean;
   isAdminChat: boolean;
