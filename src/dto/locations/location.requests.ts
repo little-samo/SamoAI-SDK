@@ -721,9 +721,6 @@ export const SendLocationMessageSchema = z.object({
     .string()
     .max(4 * 1024 * 1024)
     .optional(), // base64 encoded image, original max 3MB (encoded ~4MB)
-
-  freeCreditAmount: z.number().int().positive().optional(),
-  paidCreditAmount: z.number().int().positive().optional(),
 });
 
 export type SendLocationMessageDto = z.infer<typeof SendLocationMessageSchema>;
