@@ -47,7 +47,7 @@ export const LocationConfigCanvasSchema = z.object({
     ),
   description: z
     .string()
-    .max(5000)
+    .max(1000)
     .describe(
       'Clear explanation of the canvas purpose and intended use for agents'
     ),
