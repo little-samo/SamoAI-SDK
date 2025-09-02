@@ -23,6 +23,7 @@ export interface LocationPublicDto {
   platform: LocationPlatform;
   type: LocationType;
   environment: LocationEnvironment;
+  maxUsers: number;
 
   thumbnail: string | null;
   ownerUserId: UserId | null;
