@@ -44,6 +44,37 @@ export interface UserLocationsResponseDto {
   };
 }
 
+// GET /locations/published - Get published locations
+export const PublishedLocationsQuerySchema = z.object({
+  page: z.coerce.number().int().min(1).optional().default(1),
+  limit: z.coerce.number().min(1).max(10).default(10),
+});
+
+export type PublishedLocationsQueryDto = z.infer<
+  typeof PublishedLocationsQuerySchema
+>;
+
+export interface PublishedLocationsResponseDto {
+  locations: LocationListItemDto[];
+  meta: {
+    total: number;
+    page: number;
+    limit: number;
+    totalPages: number;
+  };
+}
+
+// GET /locations/trending - Get trending locations
+export const TrendingLocationsQuerySchema = z.object({});
+
+export type TrendingLocationsQueryDto = z.infer<
+  typeof TrendingLocationsQuerySchema
+>;
+
+export interface TrendingLocationsResponseDto {
+  locations: LocationListItemDto[];
+}
+
 // GET /locations/unread-counts - Multiple locations unread count
 export const LocationsUnreadCountQuerySchema = z.object({
   locationIds: z
