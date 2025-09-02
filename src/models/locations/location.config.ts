@@ -62,7 +62,7 @@ export const GimmickCoreDescriptions = {
   web_search:
     'Searches the web for up-to-date or missing information using an LLM, providing both a summary and detailed results. Execution takes approximately 30 seconds',
   image_generator:
-    'Generates a image using an LLM. Execution takes approximately 30 seconds',
+    'Generates an image using an LLM based on text prompts and optional reference images. Execution takes approximately 30 seconds',
   notion:
     'Interacts with Notion platform for content management and collaboration',
 } as const;
@@ -92,6 +92,27 @@ export const LocationConfigGimmickSchema = z.object({
     .max(500)
     .describe(
       'How the gimmick appears to agents and users in the location context'
+    ),
+  images: z
+    .array(
+      z.union([
+        z
+          .string()
+          .max(2048)
+          .regex(/^https?:\/\/.+\.(png|jpe?g|webp)$/i)
+          .describe(
+            'Reference image URL (http/https URL pointing to png, jpeg, jpg, webp files under 3MB). This will be replaced by the URL of the file uploaded to a CDN, not the original address.'
+          ),
+        z
+          .string()
+          .max(32)
+          .describe('Reference message image key for API usage'),
+      ])
+    )
+    .max(4)
+    .optional()
+    .describe(
+      'Optional reference images used by image_generator gimmick for AI image generation. Supports HTTP/HTTPS URLs for png, jpeg, jpg, webp images and message image keys for API usage. When provided, images will be replaced by CDN URLs when processed.'
     ),
 });
 
