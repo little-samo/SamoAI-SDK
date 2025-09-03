@@ -67,7 +67,7 @@ export const LocationConfigGimmickImageSchema = z.object({
     z
       .string()
       .max(2048)
-      .regex(/^https?:\/\/.+\.(png|jpe?g|webp)$/i)
+      .regex(/^https?:\/\/.+/)
       .describe(
         'Reference image URL (http/https URL pointing to png, jpeg, jpg, webp files under 3MB). This will be replaced by the URL of the file uploaded to a CDN, not the original address.'
       ),
@@ -117,7 +117,7 @@ export const LocationConfigSchema = z.object({
       z
         .string()
         .max(2048)
-        .regex(/^https?:\/\/.+\.(png|jpe?g)$/i)
+        .regex(/^https?:\/\/.+/)
         .describe(
           'Location thumbnail URL (http/https URL pointing to png, jpeg, jpg, webp files under 3MB). This will be replaced by the URL of the file uploaded to a CDN, not the original address.'
         ),

@@ -177,7 +177,7 @@ export const AgentConfigSchema = z.object({
       z
         .string()
         .max(2048)
-        .regex(/^https?:\/\/.+\.(png|jpe?g)$/i)
+        .regex(/^https?:\/\/.+/)
         .describe(
           'Custom avatar URL (http/https URL pointing to png, jpeg, jpg, webp files under 3MB). This will be replaced by the URL of the file uploaded to a CDN, not the original address.'
         ),
