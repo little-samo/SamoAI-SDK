@@ -59,6 +59,31 @@ export const LocationConfigCanvasSchema = z.object({
     .describe('Maximum character limit for canvas content'),
 });
 
+export type LocationConfigCanvas = z.infer<typeof LocationConfigCanvasSchema>;
+
+export const LocationConfigGimmickImageSchema = z.object({
+  image: z.union([
+    z
+      .string()
+      .max(2048)
+      .regex(/^https?:\/\/.+\.(png|jpe?g|webp)$/i)
+      .describe(
+        'Reference image URL (http/https URL pointing to png, jpeg, jpg, webp files under 3MB). This will be replaced by the URL of the file uploaded to a CDN, not the original address.'
+      ),
+    z.string().max(32).describe('Reference message image key for API usage'),
+  ]),
+  description: z
+    .string()
+    .max(500)
+    .describe(
+      'Description of the image used by the gimmick for AI image generation.'
+    ),
+});
+
+export type LocationConfigGimmickImage = z.infer<
+  typeof LocationConfigGimmickImageSchema
+>;
+
 export const LocationConfigGimmickSchema = z.object({
   core: GimmickCoreSchema.describe(
     'Core gimmick behavior that determines how the gimmick is executed'
@@ -74,21 +99,7 @@ export const LocationConfigGimmickSchema = z.object({
       'How the gimmick appears to agents and users in the location context'
     ),
   images: z
-    .array(
-      z.union([
-        z
-          .string()
-          .max(2048)
-          .regex(/^https?:\/\/.+\.(png|jpe?g|webp)$/i)
-          .describe(
-            'Reference image URL (http/https URL pointing to png, jpeg, jpg, webp files under 3MB). This will be replaced by the URL of the file uploaded to a CDN, not the original address.'
-          ),
-        z
-          .string()
-          .max(32)
-          .describe('Reference message image key for API usage'),
-      ])
-    )
+    .array(LocationConfigGimmickImageSchema)
     .max(4)
     .optional()
     .describe(
