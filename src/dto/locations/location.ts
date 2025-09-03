@@ -33,6 +33,10 @@ export interface LocationPublicDto {
   ownerUserId: UserId | null;
   gimmicks: GimmickPublicDto[];
 
+  isPublished: boolean;
+  publishedAt: Date | null;
+  publishDescription: string | null;
+
   param1: bigint;
   param2: bigint;
   param3: bigint;
@@ -45,7 +49,6 @@ export interface LocationPublicDto {
   chatRequiresPaidCredit: boolean;
 
   isPublic: boolean;
-  isPublished: boolean;
   isAdminChat: boolean;
 
   createdAt: Date;
