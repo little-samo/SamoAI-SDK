@@ -1,5 +1,6 @@
-import { GimmickCoreSchema } from '@little-samo/samo-ai-sdk/dto';
 import { z } from 'zod';
+
+import { GimmickCoreSchema } from '../../dto/entities/gimmicks';
 
 import { LocationEnvironment } from './location.constants';
 
