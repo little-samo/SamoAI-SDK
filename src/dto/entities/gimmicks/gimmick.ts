@@ -1,6 +1,6 @@
 import { GimmickId } from '@little-samo/samo-ai/models';
 
-import type { GimmickCore } from '@little-samo/samo-ai-sdk/models';
+import type { GimmickCore } from './gimmick.config';
 
 export interface GimmickPublicDto {
   id: GimmickId;
