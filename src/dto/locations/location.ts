@@ -5,7 +5,8 @@ import {
   LocationId,
   UserId,
 } from '@little-samo/samo-ai';
-import {
+
+import type {
   LocationConfig,
   LocationEnvironment,
   LocationPlatform,
@@ -14,7 +15,10 @@ import {
 
 import type { LocationMessageDto } from './location.message';
 import type { AgentCostDto } from '../entities/agents/agent';
-import type { GimmickCostDto } from '../entities/gimmicks/gimmick';
+import type {
+  GimmickCostDto,
+  GimmickPublicDto,
+} from '../entities/gimmicks/gimmick';
 
 export interface LocationPublicDto {
   id: LocationId;
@@ -27,6 +31,7 @@ export interface LocationPublicDto {
 
   thumbnail: string | null;
   ownerUserId: UserId | null;
+  gimmicks: GimmickPublicDto[];
 
   param1: bigint;
   param2: bigint;
@@ -57,7 +62,6 @@ export interface LocationListItemDto extends LocationPublicDto {
   unreadCount: number;
   agentIds: AgentId[];
   userIds: UserId[];
-  gimmickCount: number;
   pauseUpdateUntil: Date | null;
   pauseUpdateReason: string | null;
 }
