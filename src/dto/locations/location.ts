@@ -62,6 +62,7 @@ export interface LocationPrivateDto extends LocationPublicDto {
 
 export interface LocationListItemDto extends LocationPublicDto {
   lastMessage: LocationMessageDto | null;
+  messageCount: number;
   unreadCount: number;
   agentIds: AgentId[];
   userIds: UserId[];
