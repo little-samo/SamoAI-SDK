@@ -62,7 +62,7 @@ export const LocationConfigCanvasSchema = z.object({
 export type LocationConfigCanvas = z.infer<typeof LocationConfigCanvasSchema>;
 
 export const LocationConfigGimmickImageSchema = z.object({
-  image: z.union([
+  url: z.union([
     z
       .string()
       .max(2048)
