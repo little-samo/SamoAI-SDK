@@ -137,7 +137,7 @@ export const LocationConfigSchema = z.object({
   ),
   description: z
     .string()
-    .max(500)
+    .max(1000)
     .describe(
       'Description of the location that provides context to agents about where they are'
     ),
