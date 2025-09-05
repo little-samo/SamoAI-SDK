@@ -777,7 +777,7 @@ export interface SendSystemMessageResponseDto {}
 // WS: updateLocationImage - Update location image
 export const UpdateLocationImageSchema = z.object({
   locationId: z.coerce.bigint(),
-  image: z.string(),
+  image: z.string().max(4 * 1024 * 1024),
   index: z.number().int().min(0).max(2).optional(),
 });
 
