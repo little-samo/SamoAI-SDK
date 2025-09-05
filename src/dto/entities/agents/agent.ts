@@ -5,6 +5,7 @@ export interface AgentPublicDto {
   id: AgentId;
   name: string;
   avatar: string | null;
+  role: string | null;
   ownerUserId: UserId;
 }
 
