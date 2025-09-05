@@ -778,7 +778,7 @@ export interface SendSystemMessageResponseDto {}
 export const UpdateLocationImageSchema = z.object({
   locationId: z.coerce.bigint(),
   image: z.string(),
-  index: z.number().int().min(0).optional(),
+  index: z.number().int().min(0).max(2).optional(),
 });
 
 export type UpdateLocationImageDto = z.infer<typeof UpdateLocationImageSchema>;
@@ -790,7 +790,7 @@ export interface UpdateLocationImageResponseDto {
 // WS: updateLocationRendering - Update location rendering
 export const UpdateLocationRenderingSchema = z.object({
   locationId: z.coerce.bigint(),
-  rendering: z.string().nullable(),
+  rendering: z.string().max(5000).nullable(),
 });
 
 export type UpdateLocationRenderingDto = z.infer<
