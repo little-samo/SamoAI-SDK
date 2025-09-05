@@ -101,7 +101,7 @@ export const LocationConfigGimmickSchema = z.object({
     ),
   images: z
     .array(LocationConfigGimmickImageSchema)
-    .max(4)
+    .max(6)
     .optional()
     .describe(
       'Optional reference images used by image_generator gimmick to maintain visual consistency in AI image generation. These can include character appearance references, art style samples, scene compositions, or background settings. Supports HTTP/HTTPS URLs for png, jpeg, jpg, webp images and message image keys for API usage. When provided, images will be replaced by CDN URLs when processed.'
