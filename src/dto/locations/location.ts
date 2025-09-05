@@ -44,6 +44,8 @@ export interface LocationPublicDto {
 
   freeCreditBalance: number;
   paidCreditBalance: number;
+  totalUsedCredit: number;
+  lastChargedCredit: number;
   useLocationCreditOnly: boolean;
   creditCostPerChat: number;
   chatRequiresPaidCredit: boolean;
