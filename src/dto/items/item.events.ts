@@ -1,3 +1,5 @@
+import { ItemId } from '@little-samo/samo-ai';
+
 import { ItemDto, ItemUpdateDto } from './item';
 
 export const ItemEventType = {
@@ -8,7 +10,7 @@ export const ItemEventType = {
 export type ItemEventType = (typeof ItemEventType)[keyof typeof ItemEventType];
 
 export interface ItemEventDtoBase {
-  itemId: number;
+  itemId: ItemId;
   type: ItemEventType;
 }
 
