@@ -2,6 +2,7 @@ import { ItemEventDto } from '../../items';
 
 export const UserEventType = {
   ItemEvent: 'ItemEvent',
+  UserUpdated: 'UserUpdated',
 } as const;
 
 export type UserEventType = (typeof UserEventType)[keyof typeof UserEventType];
@@ -16,4 +17,8 @@ export interface UserItemEventDto extends UserEventDtoBase {
   itemEvent: ItemEventDto;
 }
 
-export type UserEventDto = UserItemEventDto;
+export interface UserUpdatedEventDto extends UserEventDtoBase {
+  type: typeof UserEventType.UserUpdated;
+}
+
+export type UserEventDto = UserItemEventDto | UserUpdatedEventDto;
