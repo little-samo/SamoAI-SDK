@@ -15,6 +15,20 @@ export interface GetCurrentUserResponseDto {
   user: UserPrivateDto;
 }
 
+// PUT /users/me - Update current user
+export const UpdateCurrentUserBodySchema = z.object({
+  isAllowSensitive: z.boolean().optional(),
+});
+
+export type UpdateCurrentUserBodyDto = z.infer<
+  typeof UpdateCurrentUserBodySchema
+>;
+
+export interface UpdateCurrentUserResponseDto {
+  success: boolean;
+  error?: string;
+}
+
 // GET /users/publics - Get multiple users by IDs
 export const GetUsersByIdsQuerySchema = z.object({
   userIds: z

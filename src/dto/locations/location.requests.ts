@@ -537,6 +537,7 @@ export const UpdateLocationBodySchema = z.object({
   chatRequiresPaidCredit: z.boolean().optional(),
 
   isAdminChat: z.boolean().optional(),
+  isSensitive: z.boolean().optional(),
 });
 
 export type UpdateLocationBodyDto = z.infer<typeof UpdateLocationBodySchema>;
