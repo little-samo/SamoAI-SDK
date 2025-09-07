@@ -201,7 +201,7 @@ export const AgentConfigSchema = z.object({
   ),
 
   languages: z
-    .array(z.string())
+    .array(z.string().max(32))
     .max(4)
     .describe(
       'Communication language settings for the agent (max 4). Examples: ["English"] = English only, ["ALL", "English"] = English-based but can adapt to other languages, ["Spanish", "French"] = specific languages only.'
