@@ -552,6 +552,7 @@ export const UpdateLocationBodySchema = z.object({
 
   isAdminChat: z.boolean().optional(),
   isSensitive: z.boolean().optional(),
+  isAllowCopy: z.boolean().optional(),
 });
 
 export type UpdateLocationBodyDto = z.infer<typeof UpdateLocationBodySchema>;
