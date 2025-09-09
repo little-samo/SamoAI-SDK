@@ -146,6 +146,17 @@ export interface CreateAgentResponseDto {
   agent: AgentPrivateDto;
 }
 
+// POST /agents/copy - Copy agent
+export const CopyAgentSchema = z.object({
+  agentId: z.coerce.bigint(),
+});
+
+export type CopyAgentDto = z.infer<typeof CopyAgentSchema>;
+
+export interface CopyAgentResponseDto {
+  agent: AgentPrivateDto;
+}
+
 // POST /agents/from-preset - Create agent from preset
 export const CreateAgentFromPresetSchema = z.object({
   presetId: z.coerce.bigint(),
