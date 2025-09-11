@@ -17,6 +17,16 @@ export interface GetCurrentUserResponseDto {
 
 // PUT /users/me - Update current user
 export const UpdateCurrentUserBodySchema = z.object({
+  username: z
+    .string()
+    .min(4)
+    .max(16)
+    .regex(/^[a-zA-Z0-9_]+$/)
+    .optional(),
+  nickname: z.string().min(4).max(32).optional(),
+  profilePicture: z.string().max(2000).optional(),
+  appearance: z.string().max(500).optional(),
+
   isAllowSensitive: z.boolean().optional(),
 });
 
@@ -27,6 +37,26 @@ export type UpdateCurrentUserBodyDto = z.infer<
 export interface UpdateCurrentUserResponseDto {
   success: boolean;
   error?: string;
+}
+
+// POST /users/validate - Validate username or nickname before update
+export const ValidateUserFieldBodySchema = z.object({
+  username: z
+    .string()
+    .min(4)
+    .max(16)
+    .regex(/^[a-zA-Z0-9_]+$/)
+    .optional(),
+  nickname: z.string().min(4).max(32).optional(),
+});
+
+export type ValidateUserFieldBodyDto = z.infer<
+  typeof ValidateUserFieldBodySchema
+>;
+
+export interface ValidateUserFieldResponseDto {
+  isValid: boolean;
+  message?: string;
 }
 
 // GET /users/publics - Get multiple users by IDs
