@@ -210,7 +210,7 @@ export const AgentConfigSchema = z.object({
     .string()
     .max(32)
     .describe(
-      'Agent timezone for time-based operations (e.g., "America/New_York")'
+      'Agent timezone for time-based operations using IANA Time Zone Database standard (e.g., "America/New_York", "Europe/London", "Asia/Seoul", "UTC").'
     ),
   greeting: z
     .string()
