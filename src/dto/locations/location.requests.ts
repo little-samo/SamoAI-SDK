@@ -545,6 +545,7 @@ export const UpdateLocationBodySchema = z.object({
   visibility: z.enum(['private', 'public', 'publish']).optional(),
   maxUsers: z.number().int().min(1).max(99).optional(),
   publishDescription: z.string().max(500).optional(),
+  hashtags: z.array(z.string().max(16)).max(3).optional(),
 
   useLocationCreditOnly: z.boolean().optional(),
   creditCostPerChat: z.number().int().min(0).max(1000).optional(),

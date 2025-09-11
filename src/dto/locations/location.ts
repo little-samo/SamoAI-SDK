@@ -36,6 +36,7 @@ export interface LocationPublicDto {
   isPublished: boolean;
   publishedAt: Date | null;
   publishDescription: string | null;
+  hashtags: string[];
 
   param1: bigint;
   param2: bigint;
