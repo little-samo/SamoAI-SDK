@@ -6,7 +6,10 @@ export interface UserPublicDto {
   nickname: string;
   firstName: string | null;
   lastName: string | null;
+  birthDate: Date | null;
+  email: string | null;
   profilePicture: string | null;
+  appearance: string | null;
 }
 
 export interface UserPrivateDto extends UserPublicDto {

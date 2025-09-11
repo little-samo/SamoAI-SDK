@@ -24,6 +24,7 @@ export const UpdateCurrentUserBodySchema = z.object({
     .regex(/^[a-zA-Z0-9_]+$/)
     .optional(),
   nickname: z.string().min(4).max(32).optional(),
+  birthDate: z.coerce.date().optional(),
   appearance: z.string().max(500).optional(),
 
   isAllowSensitive: z.boolean().optional(),
