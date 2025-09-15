@@ -21,7 +21,7 @@ export const UpdateCurrentUserBodySchema = z.object({
     .string()
     .min(4)
     .max(16)
-    .regex(/^[a-zA-Z0-9_]+$/)
+    .regex(/^[a-z0-9_]+$/)
     .optional(),
   nickname: z.string().min(4).max(32).optional(),
   birthDate: z.coerce.date().optional(),
@@ -45,7 +45,7 @@ export const ValidateUserFieldBodySchema = z.object({
     .string()
     .min(4)
     .max(16)
-    .regex(/^[a-zA-Z0-9_]+$/)
+    .regex(/^[a-z0-9_]+$/)
     .optional(),
   nickname: z.string().min(4).max(32).optional(),
 });
