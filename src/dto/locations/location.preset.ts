@@ -5,7 +5,6 @@ import { GimmickPublicDto } from '../entities';
 export interface LocationPresetDto {
   id: bigint;
   name: string;
-  description: string;
   presetDescription: string;
 
   thumbnail: string | null;
