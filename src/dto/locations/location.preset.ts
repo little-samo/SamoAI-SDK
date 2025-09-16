@@ -1,16 +1,24 @@
-import { LocationConfig } from '@little-samo/samo-ai-sdk/models';
+import { UserId } from '@little-samo/samo-ai';
 
-import { UserPublicDto } from '../entities';
+import { GimmickPublicDto } from '../entities';
 
 export interface LocationPresetDto {
   id: bigint;
-  presetName: string;
-  presetShortDescription: string;
-  presetDescription: string;
   name: string;
   description: string;
-  config: Partial<LocationConfig>;
-  ownerUser?: UserPublicDto;
+  presetDescription: string;
+
+  thumbnail: string | null;
+  ownerUserId: UserId | null;
+  gimmicks: GimmickPublicDto[];
+
+  isPublished: boolean;
+  publishedAt: Date | null;
+  hashtags: string[];
+
+  isPublic: boolean;
+  isSensitive: boolean;
+
   createdAt: Date;
   updatedAt: Date;
 }
