@@ -776,7 +776,7 @@ export interface LocationMessagesResponseDto {
 // WS: sendMessage - Send message to location
 export const SendLocationMessageSchema = z.object({
   locationId: z.coerce.bigint(),
-  message: z.string().max(2000).optional(),
+  message: z.string().max(800).optional(),
   action: z.string().max(2000).optional(),
   image: z
     .string()
@@ -794,7 +794,7 @@ export interface SendMessageResponseDto {}
 // WS: sendSystemMessage - Send system message to location
 export const SendSystemMessageSchema = z.object({
   locationId: z.coerce.bigint(),
-  message: z.string().max(2000),
+  message: z.string().max(800),
   resumeUpdate: z.boolean().optional(),
 });
 
