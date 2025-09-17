@@ -15,6 +15,10 @@ export interface LocationPresetDto {
   publishedAt: Date | null;
   hashtags: string[];
 
+  locationCount: number;
+  totalUsedCredit: number;
+  totalMessageCount: number;
+
   isPublic: boolean;
   isAllowImport: boolean;
   isSensitive: boolean;
