@@ -193,7 +193,10 @@ export const CreateLocationPresetSchema = z.object({
   locationId: z.coerce.bigint(),
   presetDescription: z.string().max(500),
   messages: z.array(CreateLocationPresetMessageSchema).max(10),
+  hashtags: z.array(z.string().max(16)).max(3).optional(),
+
   isAllowImport: z.boolean().optional().default(false),
+  isSensitive: z.boolean().optional(),
 });
 
 export type CreateLocationPresetDto = z.infer<
