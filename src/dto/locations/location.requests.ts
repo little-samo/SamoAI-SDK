@@ -194,7 +194,7 @@ export const CreateLocationPresetSchema = z.object({
 
   visibility: z.enum(['private', 'public', 'publish']).optional(),
 
-  presetDescription: z.string().max(500).optional(),
+  presetDescription: z.string().max(500),
   messages: z.array(CreateLocationPresetMessageSchema).max(10).optional(),
   hashtags: z.array(z.string().max(16)).max(3).optional(),
 
