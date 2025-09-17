@@ -54,7 +54,6 @@ export interface LocationPublicDto {
   isPublic: boolean;
   isAdminChat: boolean;
   isSensitive: boolean;
-  isAllowCopy: boolean;
 
   createdAt: Date;
   updatedAt: Date;

@@ -7,7 +7,6 @@ import {
   LocationConfig,
   LocationConfigSchema,
 } from '../../models/locations/location.config';
-import { AgentPrivateDto } from '../entities/agents/agent';
 
 import {
   LocationContentDto,
@@ -192,19 +191,6 @@ export type CreateLocationDto = z.infer<typeof CreateLocationSchema>;
 
 export interface CreateLocationResponseDto {
   location: LocationPrivateDto;
-}
-
-// POST /locations/copy - Copy location
-export const CopyLocationSchema = z.object({
-  locationId: z.coerce.bigint(),
-  copyAgents: z.boolean().optional().default(false),
-});
-
-export type CopyLocationDto = z.infer<typeof CopyLocationSchema>;
-
-export interface CopyLocationResponseDto {
-  location: LocationPrivateDto;
-  agents: AgentPrivateDto[];
 }
 
 // POST /locations/from-preset - Create location from preset
@@ -553,7 +539,6 @@ export const UpdateLocationBodySchema = z.object({
 
   isAdminChat: z.boolean().optional(),
   isSensitive: z.boolean().optional(),
-  isAllowCopy: z.boolean().optional(),
 });
 
 export type UpdateLocationBodyDto = z.infer<typeof UpdateLocationBodySchema>;
