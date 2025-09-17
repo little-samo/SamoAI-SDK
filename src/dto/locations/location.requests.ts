@@ -16,6 +16,7 @@ import {
 } from './location';
 import { LocationMessageDto } from './location.message';
 import {
+  LocationPresetDetailDto,
   LocationPresetDto,
   LocationPresetMessageSchema,
 } from './location.preset';
@@ -172,7 +173,7 @@ export type LocationPresetsPaginationQueryDto = z.infer<
 >;
 
 export interface LocationPresetsPaginatedResponseDto {
-  data: LocationPresetDto[];
+  data: LocationPresetDetailDto[];
   meta: {
     total: number;
     page: number;
@@ -213,7 +214,7 @@ export type GetLocationPresetParamsDto = z.infer<
 >;
 
 export interface GetLocationPresetResponseDto {
-  preset: LocationPresetDto;
+  preset: LocationPresetDetailDto;
 }
 
 // PUT /locations/preset/:presetId - Update location preset
