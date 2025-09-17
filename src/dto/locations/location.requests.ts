@@ -1,5 +1,5 @@
 import { DayOfWeek } from '@little-samo/samo-ai/common';
-import { LocationId } from '@little-samo/samo-ai/models';
+import { EntityType, LocationId } from '@little-samo/samo-ai/models';
 import { LocationPlatform } from '@little-samo/samo-ai-sdk/models';
 import { z } from 'zod';
 
@@ -179,9 +179,16 @@ export interface LocationPresetsPaginatedResponseDto {
 }
 
 // POST /locations/preset - Create location preset
+export const CreateLocationPresetMessageSchema = z.object({
+  entityType: z.nativeEnum(EntityType),
+  entityId: z.coerce.bigint(),
+  message: z.string().max(800),
+});
+
 export const CreateLocationPresetSchema = z.object({
   locationId: z.coerce.bigint(),
   presetDescription: z.string().max(500),
+  messages: z.array(CreateLocationPresetMessageSchema).max(10),
   isAllowImport: z.boolean().optional().default(false),
 });
 
