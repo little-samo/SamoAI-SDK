@@ -1,5 +1,5 @@
 import { DayOfWeek } from '@little-samo/samo-ai/common';
-import { EntityType, LocationId } from '@little-samo/samo-ai/models';
+import { LocationId } from '@little-samo/samo-ai/models';
 import { LocationPlatform } from '@little-samo/samo-ai-sdk/models';
 import { z } from 'zod';
 
@@ -15,7 +15,10 @@ import {
   LocationPrivateDto,
 } from './location';
 import { LocationMessageDto } from './location.message';
-import { LocationPresetDto } from './location.preset';
+import {
+  LocationPresetDto,
+  LocationPresetMessageSchema,
+} from './location.preset';
 import { LocationScheduledMessageDto } from './location.scheduled-message';
 import { LocationSnapshotDto } from './location.snapshot';
 
@@ -179,23 +182,13 @@ export interface LocationPresetsPaginatedResponseDto {
 }
 
 // POST /locations/preset - Create location preset
-export const CreateLocationPresetMessageSchema = z.object({
-  entityType: z.nativeEnum(EntityType),
-  entityId: z.coerce.bigint(),
-  message: z.string().max(800),
-});
-
-export type CreateLocationPresetMessageDto = z.infer<
-  typeof CreateLocationPresetMessageSchema
->;
-
 export const CreateLocationPresetSchema = z.object({
   locationId: z.coerce.bigint(),
 
   visibility: z.enum(['private', 'public', 'publish']).optional(),
 
   presetDescription: z.string().max(500),
-  messages: z.array(CreateLocationPresetMessageSchema).max(10).optional(),
+  messages: z.array(LocationPresetMessageSchema).max(10).optional(),
   hashtags: z.array(z.string().max(16)).max(3).optional(),
 
   isAllowImport: z.boolean().optional(),
@@ -236,7 +229,7 @@ export const UpdateLocationPresetBodySchema = z.object({
   visibility: z.enum(['private', 'public', 'publish']).optional(),
 
   presetDescription: z.string().max(500).optional(),
-  messages: z.array(CreateLocationPresetMessageSchema).max(10).optional(),
+  messages: z.array(LocationPresetMessageSchema).max(10).optional(),
   hashtags: z.array(z.string().max(16)).max(3).optional(),
 
   isAllowImport: z.boolean().optional(),

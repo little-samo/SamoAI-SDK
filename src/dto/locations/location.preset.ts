@@ -1,4 +1,5 @@
-import { UserId } from '@little-samo/samo-ai';
+import { EntityType, UserId } from '@little-samo/samo-ai';
+import z from 'zod';
 
 import type {
   AgentCostDto,
@@ -6,6 +7,16 @@ import type {
   GimmickCostDto,
   GimmickPublicDto,
 } from '../entities';
+
+export const LocationPresetMessageSchema = z.object({
+  entityType: z.nativeEnum(EntityType),
+  entityId: z.coerce.bigint(),
+  message: z.string().max(800),
+});
+
+export type LocationPresetMessageDto = z.infer<
+  typeof LocationPresetMessageSchema
+>;
 
 export interface LocationPresetDto {
   id: bigint;
@@ -19,14 +30,11 @@ export interface LocationPresetDto {
   agentCosts: AgentCostDto[];
   gimmicks: GimmickPublicDto[];
   gimmickCosts: GimmickCostDto[];
+  messages: LocationPresetMessageDto[];
 
   isPublished: boolean;
   publishedAt: Date | null;
   hashtags: string[];
-
-  locationCount: number;
-  totalUsedCredit: number;
-  totalMessageCount: number;
 
   isPublic: boolean;
   isAllowImport: boolean;
@@ -34,4 +42,10 @@ export interface LocationPresetDto {
 
   createdAt: Date;
   updatedAt: Date;
+}
+
+export interface LocationPresetDetailDto extends LocationPresetDto {
+  locationCount: number;
+  totalUsedCredit: number;
+  totalMessageCount: number;
 }
