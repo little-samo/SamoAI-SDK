@@ -217,7 +217,7 @@ export interface GetLocationPresetResponseDto {
   preset: LocationPresetDetailDto;
 }
 
-// PUT /locations/preset/:presetId - Update location preset
+// PATCH /locations/preset/:presetId - Update location preset
 export const UpdateLocationPresetParamsSchema = z.object({
   presetId: z.coerce.bigint(),
 });
@@ -603,7 +603,7 @@ export type RemoveAgentFromLocationToolDto = z.infer<
   typeof RemoveAgentFromLocationToolSchema
 >;
 
-// PUT /locations/:locationId - Update location settings
+// PATCH /locations/:locationId - Update location settings
 export const UpdateLocationParamsSchema = z.object({
   locationId: z.coerce.bigint(),
 });
@@ -694,7 +694,7 @@ export type CreateLocationScheduledMessageToolDto = z.infer<
   typeof CreateLocationScheduledMessageToolSchema
 >;
 
-// PUT /locations/:locationId/scheduled-messages/:messageId - Update scheduled message
+// PATCH /locations/:locationId/scheduled-messages/:messageId - Update scheduled message
 export const UpdateLocationScheduledMessageParamsSchema = z.object({
   locationId: z.coerce.bigint(),
   messageId: z.string(),

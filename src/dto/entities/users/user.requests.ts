@@ -15,7 +15,7 @@ export interface GetCurrentUserResponseDto {
   user: UserPrivateDto;
 }
 
-// PUT /users/me - Update current user
+// PATCH /users/me - Update current user
 export const UpdateCurrentUserBodySchema = z.object({
   username: z
     .string()
