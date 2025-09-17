@@ -191,11 +191,14 @@ export type CreateLocationPresetMessageDto = z.infer<
 
 export const CreateLocationPresetSchema = z.object({
   locationId: z.coerce.bigint(),
-  presetDescription: z.string().max(500),
-  messages: z.array(CreateLocationPresetMessageSchema).max(10),
+
+  visibility: z.enum(['private', 'public', 'publish']).optional(),
+
+  presetDescription: z.string().max(500).optional(),
+  messages: z.array(CreateLocationPresetMessageSchema).max(10).optional(),
   hashtags: z.array(z.string().max(16)).max(3).optional(),
 
-  isAllowImport: z.boolean().optional().default(false),
+  isAllowImport: z.boolean().optional(),
   isSensitive: z.boolean().optional(),
 });
 
@@ -205,6 +208,61 @@ export type CreateLocationPresetDto = z.infer<
 
 export interface CreateLocationPresetResponseDto {
   preset: LocationPresetDto;
+}
+
+// GET /locations/preset/:presetId - Get location preset
+export const GetLocationPresetParamsSchema = z.object({
+  presetId: z.coerce.bigint(),
+});
+
+export type GetLocationPresetParamsDto = z.infer<
+  typeof GetLocationPresetParamsSchema
+>;
+
+export interface GetLocationPresetResponseDto {
+  preset: LocationPresetDto;
+}
+
+// PUT /locations/preset/:presetId - Update location preset
+export const UpdateLocationPresetParamsSchema = z.object({
+  presetId: z.coerce.bigint(),
+});
+
+export type UpdateLocationPresetParamsDto = z.infer<
+  typeof UpdateLocationPresetParamsSchema
+>;
+
+export const UpdateLocationPresetBodySchema = z.object({
+  visibility: z.enum(['private', 'public', 'publish']).optional(),
+
+  presetDescription: z.string().max(500).optional(),
+  messages: z.array(CreateLocationPresetMessageSchema).max(10).optional(),
+  hashtags: z.array(z.string().max(16)).max(3).optional(),
+
+  isAllowImport: z.boolean().optional(),
+  isSensitive: z.boolean().optional(),
+});
+
+export type UpdateLocationPresetBodyDto = z.infer<
+  typeof UpdateLocationPresetBodySchema
+>;
+
+export interface UpdateLocationPresetResponseDto {
+  preset: LocationPresetDto;
+}
+
+// DELETE /locations/preset/:presetId - Delete location preset
+export const DeleteLocationPresetParamsSchema = z.object({
+  presetId: z.coerce.bigint(),
+});
+
+export type DeleteLocationPresetParamsDto = z.infer<
+  typeof DeleteLocationPresetParamsSchema
+>;
+
+export interface DeleteLocationPresetResponseDto {
+  success: boolean;
+  error?: string;
 }
 
 // POST /locations - Create location
