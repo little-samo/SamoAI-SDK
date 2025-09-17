@@ -185,6 +185,10 @@ export const CreateLocationPresetMessageSchema = z.object({
   message: z.string().max(800),
 });
 
+export type CreateLocationPresetMessageDto = z.infer<
+  typeof CreateLocationPresetMessageSchema
+>;
+
 export const CreateLocationPresetSchema = z.object({
   locationId: z.coerce.bigint(),
   presetDescription: z.string().max(500),
