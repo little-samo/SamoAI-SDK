@@ -180,7 +180,8 @@ export interface LocationPresetsPaginatedResponseDto {
 
 // POST /locations/preset - Create location preset
 export const CreateLocationPresetSchema = z.object({
-  presetId: z.coerce.bigint(),
+  locationId: z.coerce.bigint(),
+  presetDescription: z.string().max(500),
   isAllowImport: z.boolean().optional().default(false),
 });
 
