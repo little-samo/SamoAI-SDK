@@ -16,6 +16,7 @@ export interface LocationPresetDto {
   hashtags: string[];
 
   isPublic: boolean;
+  isAllowImport: boolean;
   isSensitive: boolean;
 
   createdAt: Date;

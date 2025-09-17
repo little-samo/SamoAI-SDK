@@ -19,6 +19,8 @@ import { LocationPresetDto } from './location.preset';
 import { LocationScheduledMessageDto } from './location.scheduled-message';
 import { LocationSnapshotDto } from './location.snapshot';
 
+import type { AgentPrivateDto } from '../entities';
+
 // ================================
 // HTTP API DTOs
 // ================================
@@ -176,6 +178,20 @@ export interface LocationPresetsPaginatedResponseDto {
   };
 }
 
+// POST /locations/preset - Create location preset
+export const CreateLocationPresetSchema = z.object({
+  presetId: z.coerce.bigint(),
+  isAllowImport: z.boolean().optional().default(false),
+});
+
+export type CreateLocationPresetDto = z.infer<
+  typeof CreateLocationPresetSchema
+>;
+
+export interface CreateLocationPresetResponseDto {
+  preset: LocationPresetDto;
+}
+
 // POST /locations - Create location
 export const CreateLocationSchema = z.object({
   config: LocationConfigSchema.partial()
@@ -200,6 +216,7 @@ export const CreateLocationFromPresetSchema = z.object({
     .nativeEnum(LocationPlatform)
     .optional()
     .default(LocationPlatform.API),
+  import: z.boolean().optional().default(false),
 });
 
 export type CreateLocationFromPresetDto = z.infer<
@@ -208,6 +225,7 @@ export type CreateLocationFromPresetDto = z.infer<
 
 export interface CreateLocationFromPresetResponseDto {
   location: LocationPrivateDto;
+  agents: AgentPrivateDto[];
 }
 
 // GET /locations/helper - Get or create helper location
