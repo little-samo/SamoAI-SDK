@@ -1,6 +1,11 @@
 import { UserId } from '@little-samo/samo-ai';
 
-import { GimmickPublicDto } from '../entities';
+import type {
+  AgentCostDto,
+  AgentPublicDto,
+  GimmickCostDto,
+  GimmickPublicDto,
+} from '../entities';
 
 export interface LocationPresetDto {
   id: bigint;
@@ -9,7 +14,11 @@ export interface LocationPresetDto {
 
   thumbnail: string | null;
   ownerUserId: UserId | null;
+
+  agents: AgentPublicDto[];
+  agentCosts: AgentCostDto[];
   gimmicks: GimmickPublicDto[];
+  gimmickCosts: GimmickCostDto[];
 
   isPublished: boolean;
   publishedAt: Date | null;
