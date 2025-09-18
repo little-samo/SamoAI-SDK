@@ -22,6 +22,7 @@ export interface LocationPresetDto {
   id: bigint;
   name: string;
   presetDescription: string;
+  presetShortDescription: string;
 
   thumbnail: string | null;
   ownerUserId: UserId | null;
