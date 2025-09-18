@@ -2,6 +2,7 @@ import { AgentId, LocationId, UserId } from '@little-samo/samo-ai';
 
 export interface RankingEntity {
   locationId?: LocationId;
+  locationPresetId?: bigint;
   agentId?: AgentId;
   userId?: UserId;
 }
