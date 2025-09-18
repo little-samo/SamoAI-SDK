@@ -298,6 +298,19 @@ export interface DeleteLocationPresetResponseDto {
   error?: string;
 }
 
+// GET /locations/preset/:presetId/locations - Get locations created from preset
+export const GetLocationPresetLocationsParamsSchema = z.object({
+  presetId: z.coerce.bigint(),
+});
+
+export type GetLocationPresetLocationsParamsDto = z.infer<
+  typeof GetLocationPresetLocationsParamsSchema
+>;
+
+export interface GetLocationPresetLocationsResponseDto {
+  locations: LocationListItemDto[];
+}
+
 // POST /locations - Create location
 export const CreateLocationSchema = z.object({
   config: LocationConfigSchema.partial()
