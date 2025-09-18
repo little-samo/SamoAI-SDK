@@ -183,6 +183,38 @@ export interface LocationPresetsPaginatedResponseDto {
   };
 }
 
+// GET /locations/presets/published - Get published location presets
+export const PublishedLocationPresetsQuerySchema = z.object({
+  type: z.enum(['NOVEL']),
+  page: z.coerce.number().int().min(1).max(25).optional().default(1),
+  limit: z.coerce.number().min(1).max(10).default(10),
+});
+export type PublishedLocationPresetsQueryDto = z.infer<
+  typeof PublishedLocationPresetsQuerySchema
+>;
+
+export interface PublishedLocationPresetsResponseDto {
+  data: LocationPresetDetailDto[];
+  meta: {
+    total: number;
+    page: number;
+    limit: number;
+    totalPages: number;
+  };
+}
+
+// GET /locations/presets/trending - Get trending location presets
+export const TrendingLocationPresetsQuerySchema = z.object({
+  type: z.enum(['NOVEL']),
+});
+export type TrendingLocationPresetsQueryDto = z.infer<
+  typeof TrendingLocationPresetsQuerySchema
+>;
+
+export interface TrendingLocationPresetsResponseDto {
+  data: LocationPresetDetailDto[];
+}
+
 // POST /locations/preset - Create location preset
 export const CreateLocationPresetSchema = z.object({
   locationId: z.coerce.bigint(),
