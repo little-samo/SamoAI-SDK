@@ -301,7 +301,7 @@ export interface DeleteLocationPresetResponseDto {
 // GET /locations/preset/:presetId/locations - Get locations created from preset
 export const GetLocationPresetLocationsParamsSchema = z.object({
   presetId: z.coerce.bigint(),
-  page: z.coerce.number().int().min(1).optional().default(1),
+  cursor: z.string().optional(),
   limit: z.coerce.number().min(1).max(10).default(10),
 });
 
@@ -313,9 +313,7 @@ export interface GetLocationPresetLocationsResponseDto {
   locations: LocationListItemDto[];
   meta: {
     total: number;
-    page: number;
-    limit: number;
-    totalPages: number;
+    nextCursor?: string;
   };
 }
 
