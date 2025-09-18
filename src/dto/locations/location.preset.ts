@@ -18,6 +18,15 @@ export type LocationPresetMessageDto = z.infer<
   typeof LocationPresetMessageSchema
 >;
 
+export const LocationPresetCanvasSchema = z.object({
+  name: z.string().max(32),
+  text: z.string().max(5000),
+});
+
+export type LocationPresetCanvasDto = z.infer<
+  typeof LocationPresetCanvasSchema
+>;
+
 export interface LocationPresetDto {
   id: bigint;
   name: string;
@@ -31,6 +40,7 @@ export interface LocationPresetDto {
   agentCosts: AgentCostDto[];
   gimmicks: GimmickPublicDto[];
   gimmickCosts: GimmickCostDto[];
+  canvases: LocationPresetCanvasDto[];
   messages: LocationPresetMessageDto[];
 
   isPublished: boolean;

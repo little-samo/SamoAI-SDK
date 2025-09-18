@@ -16,6 +16,7 @@ import {
 } from './location';
 import { LocationMessageDto } from './location.message';
 import {
+  LocationPresetCanvasSchema,
   LocationPresetDetailDto,
   LocationPresetDto,
   LocationPresetMessageSchema,
@@ -190,6 +191,7 @@ export const CreateLocationPresetSchema = z.object({
 
   presetDescription: z.string().max(1000),
   presetShortDescription: z.string().max(80),
+  canvases: z.array(LocationPresetCanvasSchema).max(4).optional(),
   messages: z.array(LocationPresetMessageSchema).max(10).optional(),
   hashtags: z.array(z.string().max(16)).max(3).optional(),
 
@@ -232,6 +234,7 @@ export const UpdateLocationPresetBodySchema = z.object({
 
   presetDescription: z.string().max(1000).optional(),
   presetShortDescription: z.string().max(80).optional(),
+  canvases: z.array(LocationPresetCanvasSchema).max(4).optional(),
   messages: z.array(LocationPresetMessageSchema).max(10).optional(),
   hashtags: z.array(z.string().max(16)).max(3).optional(),
 
