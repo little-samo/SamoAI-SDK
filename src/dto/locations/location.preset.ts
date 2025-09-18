@@ -11,7 +11,11 @@ import type {
 export const LocationPresetMessageSchema = z.object({
   entityType: z.nativeEnum(EntityType),
   entityId: z.coerce.bigint(),
-  message: z.string().max(800),
+  message: z.string().max(800).optional(),
+  image: z
+    .string()
+    .max(4 * 1024 * 1024)
+    .optional(),
 });
 
 export type LocationPresetMessageDto = z.infer<
