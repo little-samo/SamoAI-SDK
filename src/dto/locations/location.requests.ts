@@ -188,7 +188,8 @@ export const CreateLocationPresetSchema = z.object({
 
   visibility: z.enum(['private', 'public', 'publish']).optional(),
 
-  presetDescription: z.string().max(500),
+  presetDescription: z.string().max(1000),
+  presetShortDescription: z.string().max(80),
   messages: z.array(LocationPresetMessageSchema).max(10).optional(),
   hashtags: z.array(z.string().max(16)).max(3).optional(),
 
@@ -229,7 +230,8 @@ export type UpdateLocationPresetParamsDto = z.infer<
 export const UpdateLocationPresetBodySchema = z.object({
   visibility: z.enum(['private', 'public', 'publish']).optional(),
 
-  presetDescription: z.string().max(500).optional(),
+  presetDescription: z.string().max(1000).optional(),
+  presetShortDescription: z.string().max(80).optional(),
   messages: z.array(LocationPresetMessageSchema).max(10).optional(),
   hashtags: z.array(z.string().max(16)).max(3).optional(),
 
