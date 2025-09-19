@@ -38,7 +38,8 @@ export const LocationConfigCoreSchema = z.object({
   maxAgentExecutions: z
     .number()
     .min(1)
-    .max(100)
+    .max(10)
+    .nullable()
     .optional()
     .describe('Maximum number of agent executions per cycle'),
 });
