@@ -691,6 +691,27 @@ export interface UpdateLocationResponseDto {
   error?: string;
 }
 
+// PATCH /locations/:locationId/canvas - Update location canvas
+export const UpdateLocationCanvasParamsSchema = z.object({
+  locationId: z.coerce.bigint(),
+});
+export type UpdateLocationCanvasParamsDto = z.infer<
+  typeof UpdateLocationCanvasParamsSchema
+>;
+
+export const UpdateLocationCanvasBodySchema = z.object({
+  name: z.string().max(32),
+  text: z.string().max(5000),
+});
+export type UpdateLocationCanvasBodyDto = z.infer<
+  typeof UpdateLocationCanvasBodySchema
+>;
+
+export interface UpdateLocationCanvasResponseDto {
+  success: boolean;
+  error?: string;
+}
+
 // GET /locations/:locationId/scheduled-messages - Get scheduled messages
 export const GetLocationScheduledMessagesParamsSchema = z.object({
   locationId: z.coerce.bigint(),
