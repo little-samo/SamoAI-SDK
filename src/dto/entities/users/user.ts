@@ -13,6 +13,7 @@ export interface UserPublicDto {
 export interface UserPrivateDto extends UserPublicDto {
   locale: string;
   country: string;
+  adminLevel: number;
 
   birthDate: Date | null;
   email: string | null;
