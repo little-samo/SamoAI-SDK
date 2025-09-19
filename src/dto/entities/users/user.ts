@@ -11,6 +11,9 @@ export interface UserPublicDto {
 }
 
 export interface UserPrivateDto extends UserPublicDto {
+  locale: string;
+  country: string;
+
   birthDate: Date | null;
   email: string | null;
 
