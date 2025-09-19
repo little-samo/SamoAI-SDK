@@ -35,6 +35,12 @@ export const LocationConfigCoreSchema = z.object({
     .describe(
       'Interval in milliseconds between agent executions. Use default value if not specified'
     ),
+  maxAgentExecutions: z
+    .number()
+    .min(1)
+    .max(100)
+    .optional()
+    .describe('Maximum number of agent executions per cycle'),
 });
 
 export type LocationConfigCore = z.infer<typeof LocationConfigCoreSchema>;
