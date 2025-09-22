@@ -8,6 +8,7 @@ import {
 
 import type {
   LocationConfig,
+  LocationConfigCanvas,
   LocationEnvironment,
   LocationPlatform,
   LocationType,
@@ -31,6 +32,7 @@ export interface LocationPublicDto {
 
   thumbnail: string | null;
   ownerUserId: UserId | null;
+  canvasConfigs: LocationConfigCanvas[];
   gimmicks: GimmickPublicDto[];
 
   isPublished: boolean;

@@ -1,6 +1,8 @@
 import { EntityType, UserId } from '@little-samo/samo-ai';
 import z from 'zod';
 
+import type { LocationConfigCanvas } from '@little-samo/samo-ai-sdk/models';
+
 import type {
   AgentCostDto,
   AgentPublicDto,
@@ -11,6 +13,7 @@ import type {
 export const LocationPresetMessageSchema = z.object({
   entityType: z.nativeEnum(EntityType),
   entityId: z.coerce.bigint(),
+
   message: z.string().max(800).optional(),
   image: z
     .string()
@@ -45,6 +48,7 @@ export interface LocationPresetDto {
   gimmicks: GimmickPublicDto[];
   gimmickCosts: GimmickCostDto[];
   canvases: LocationPresetCanvasDto[];
+  canvasConfigs: LocationConfigCanvas[];
   messages: LocationPresetMessageDto[];
 
   isPublished: boolean;
