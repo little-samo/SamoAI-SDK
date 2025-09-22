@@ -35,6 +35,8 @@ export interface LocationPublicDto {
   canvasConfigs: LocationConfigCanvas[];
   gimmicks: GimmickPublicDto[];
 
+  sourceLocationPresetId: bigint | null;
+
   isPublished: boolean;
   publishedAt: Date | null;
   publishDescription: string | null;
