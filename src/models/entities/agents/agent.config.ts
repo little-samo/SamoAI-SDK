@@ -255,7 +255,7 @@ export const AgentConfigSchema = z.object({
     .array(z.string().max(200))
     .max(20)
     .describe(
-      'Custom behavioral constraints and guidelines specific to this agent (max 20 rules, 200 chars each). These override default behaviors and enforce specific interaction patterns.'
+      'Critical behavioral constraints that the agent must strictly enforce. Use the character field for general personality and behavior traits. Rules should only contain mandatory restrictions or requirements that cannot be violated under any circumstances.'
     ),
 });
 

@@ -153,7 +153,7 @@ export const LocationConfigSchema = z.object({
     .array(z.string().max(200))
     .max(20)
     .describe(
-      'Location-specific rules that agents must follow in addition to their core rules'
+      'Critical location-specific constraints that all agents in this location must strictly enforce. These are mandatory restrictions that override agent preferences and cannot be violated under any circumstances.'
     ),
 
   canvases: z
