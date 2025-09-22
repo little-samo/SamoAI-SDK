@@ -153,6 +153,16 @@ const LlmPresetSchema = z.union([
     .describe(
       'OpenAI GPT - Versatile model delivering solid performance across diverse scenarios. Optimal balance of capability and cost-effectiveness.'
     ),
+  z
+    .literal('xai-low')
+    .describe(
+      'xAI Grok - Budget-friendly model optimized for efficient processing and basic conversational tasks. Cost-effective option for routine operations.'
+    ),
+  z
+    .literal('xai-medium')
+    .describe(
+      'xAI Grok - Balanced model offering strong performance for general-purpose applications. Good combination of reasoning capability and processing speed.'
+    ),
   // z.literal('anthropic-low').describe('Anthropic - Low cost'),
   // z.literal('anthropic-medium').describe('Anthropic - Balanced'),
   // z.literal('anthropic-high').describe('Anthropic - High performance'),
