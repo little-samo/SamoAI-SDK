@@ -5,6 +5,8 @@ export const GimmickCoreDescriptions = {
     'Searches the web for up-to-date or missing information using an LLM, providing both a summary and detailed results. Execution takes approximately 30 seconds',
   image_generator:
     'Generates an image using an LLM based on text prompts and optional reference images. Execution takes approximately 30 seconds',
+  character_image_generator:
+    'Generates anime-style character images using Stable Diffusion with gimmick appearance configuration as base prompt and additional custom prompts for image generation',
   notion:
     'Interacts with Notion platform for content management and collaboration',
 } as const;
