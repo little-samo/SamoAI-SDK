@@ -469,6 +469,24 @@ export interface GetLocationCostResponseDto {
   cost: LocationCostDto;
 }
 
+// POST /locations/:locationId/reset - Reset location
+export const ResetLocationParamsSchema = z.object({
+  locationId: z.coerce.bigint(),
+});
+
+export type ResetLocationParamsDto = z.infer<typeof ResetLocationParamsSchema>;
+
+export const ResetLocationBodySchema = z.object({
+  resetAgents: z.boolean().optional().default(false),
+});
+
+export type ResetLocationBodyDto = z.infer<typeof ResetLocationBodySchema>;
+
+export interface ResetLocationResponseDto {
+  success: boolean;
+  error?: string;
+}
+
 // POST /locations/:locationId/upload-thumbnail - Upload location thumbnail
 export const UploadLocationThumbnailParamsSchema = z.object({
   locationId: z.coerce.bigint(),
