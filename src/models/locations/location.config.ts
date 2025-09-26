@@ -80,6 +80,13 @@ export const LocationConfigGimmickImageSchema = z.object({
       ),
     z.string().max(32).describe('Reference message image key for API usage'),
   ]),
+  name: z
+    .string()
+    .max(64)
+    .optional()
+    .describe(
+      'Optional name of the image used by the gimmick for AI image generation.'
+    ),
   description: z
     .string()
     .max(500)
