@@ -75,6 +75,7 @@ export const LocationConfigGimmickImageSchema = z.object({
       .string()
       .max(2048)
       .regex(/^https?:\/\/.+/)
+      .optional()
       .describe(
         'Reference image URL (http/https URL pointing to png, jpeg, jpg, webp files under 3MB). This will be replaced by the URL of the file uploaded to a CDN, not the original address.'
       ),
@@ -118,7 +119,7 @@ export const LocationConfigGimmickSchema = z.object({
     .max(6)
     .optional()
     .describe(
-      'Optional reference images used by image_generator gimmick to maintain visual consistency in AI image generation. These can include character appearance references, art style samples, scene compositions, or background settings. Supports HTTP/HTTPS URLs for png, jpeg, jpg, webp images and message image keys for API usage. When provided, images will be replaced by CDN URLs when processed.'
+      'Optional reference images used by image_generator and character_image_generator gimmicks to maintain visual consistency in AI image generation. For image_generator: supports HTTP/HTTPS URLs for png, jpeg, jpg, webp images and message image keys for API usage (URLs will be replaced by CDN URLs when processed). For character_image_generator: uses name and description fields where description follows Stable Diffusion prompt style. These can include character appearance references, art style samples, scene compositions, or background settings.'
     ),
 });
 
