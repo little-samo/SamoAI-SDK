@@ -11,6 +11,7 @@ export interface LocationMessageDto {
   action?: string;
   emotion?: string;
   image?: string;
+  isImageSensitive?: boolean;
   processed?: boolean;
   createdAt: Date;
   updatedAt: Date;
