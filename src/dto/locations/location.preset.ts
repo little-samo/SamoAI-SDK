@@ -67,7 +67,7 @@ export interface LocationPresetDto {
 }
 
 export interface LocationPresetDetailDto extends LocationPresetDto {
-  userRating: 'like' | 'dislike' | null;
+  userRating: 'LIKE' | 'DISLIKE' | null;
   locationCount: number;
   totalUsedCredit: number;
   totalMessageCount: number;

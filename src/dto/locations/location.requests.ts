@@ -307,7 +307,7 @@ export type UpdateLocationPresetRatingParamsDto = z.infer<
 >;
 
 export const UpdateLocationPresetRatingBodySchema = z.object({
-  rating: z.enum(['like', 'dislike']).nullable(),
+  rating: z.enum(['LIKE', 'DISLIKE']).nullable(),
 });
 
 export type UpdateLocationPresetRatingBodyDto = z.infer<
