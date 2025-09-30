@@ -55,6 +55,8 @@ export interface LocationPresetDto {
   isPublished: boolean;
   publishedAt: Date | null;
   hashtags: string[];
+  likeCount: number;
+  dislikeCount: number;
 
   isPublic: boolean;
   isAllowImport: boolean;
@@ -65,6 +67,7 @@ export interface LocationPresetDto {
 }
 
 export interface LocationPresetDetailDto extends LocationPresetDto {
+  userRating: 'like' | 'dislike' | null;
   locationCount: number;
   totalUsedCredit: number;
   totalMessageCount: number;

@@ -297,6 +297,28 @@ export interface SyncLocationPresetVersionResponseDto {
   preset: LocationPresetDto;
 }
 
+// PATCH /locations/preset/:presetId/rating - Update location preset rating (like/dislike)
+export const UpdateLocationPresetRatingParamsSchema = z.object({
+  presetId: z.coerce.bigint(),
+});
+
+export type UpdateLocationPresetRatingParamsDto = z.infer<
+  typeof UpdateLocationPresetRatingParamsSchema
+>;
+
+export const UpdateLocationPresetRatingBodySchema = z.object({
+  rating: z.enum(['like', 'dislike']).nullable(),
+});
+
+export type UpdateLocationPresetRatingBodyDto = z.infer<
+  typeof UpdateLocationPresetRatingBodySchema
+>;
+
+export interface UpdateLocationPresetRatingResponseDto {
+  success: boolean;
+  error?: string;
+}
+
 // DELETE /locations/preset/:presetId - Delete location preset
 export const DeleteLocationPresetParamsSchema = z.object({
   presetId: z.coerce.bigint(),
