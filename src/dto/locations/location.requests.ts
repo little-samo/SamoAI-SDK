@@ -284,16 +284,16 @@ export interface UpdateLocationPresetResponseDto {
   preset: LocationPresetDto;
 }
 
-// POST /locations/preset/:presetId/update - Update location preset version
-export const UpdateLocationPresetVersionParamsSchema = z.object({
+// POST /locations/preset/:presetId/sync - Sync location preset to source location and increase version
+export const SyncLocationPresetVersionParamsSchema = z.object({
   presetId: z.coerce.bigint(),
 });
 
-export type UpdateLocationPresetVersionParamsDto = z.infer<
-  typeof UpdateLocationPresetVersionParamsSchema
+export type SyncLocationPresetVersionParamsDto = z.infer<
+  typeof SyncLocationPresetVersionParamsSchema
 >;
 
-export interface UpdateLocationPresetVersionResponseDto {
+export interface SyncLocationPresetVersionResponseDto {
   preset: LocationPresetDto;
 }
 
