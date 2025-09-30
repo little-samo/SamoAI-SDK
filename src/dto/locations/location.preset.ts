@@ -37,6 +37,7 @@ export type LocationPresetCanvasDto = z.infer<
 export interface LocationPresetDto {
   id: bigint;
   name: string;
+  version: number;
   presetDescription: string;
   presetShortDescription: string;
 

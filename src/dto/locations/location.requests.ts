@@ -284,6 +284,19 @@ export interface UpdateLocationPresetResponseDto {
   preset: LocationPresetDto;
 }
 
+// POST /locations/preset/:presetId/update - Update location preset version
+export const UpdateLocationPresetVersionParamsSchema = z.object({
+  presetId: z.coerce.bigint(),
+});
+
+export type UpdateLocationPresetVersionParamsDto = z.infer<
+  typeof UpdateLocationPresetVersionParamsSchema
+>;
+
+export interface UpdateLocationPresetVersionResponseDto {
+  preset: LocationPresetDto;
+}
+
 // DELETE /locations/preset/:presetId - Delete location preset
 export const DeleteLocationPresetParamsSchema = z.object({
   presetId: z.coerce.bigint(),
