@@ -1,4 +1,4 @@
-import { EntityType, UserId } from '@little-samo/samo-ai';
+import { EntityType, LocationId, UserId } from '@little-samo/samo-ai';
 import z from 'zod';
 
 import type { LocationConfigCanvas } from '@little-samo/samo-ai-sdk/models';
@@ -43,6 +43,7 @@ export interface LocationPresetDto {
 
   thumbnail: string | null;
   ownerUserId: UserId | null;
+  sourceLocationId: LocationId | null;
 
   agents: AgentPublicDto[];
   agentCosts: AgentCostDto[];
