@@ -56,7 +56,6 @@ export interface LocationPresetDto {
   publishedAt: Date | null;
   hashtags: string[];
   likeCount: number;
-  dislikeCount: number;
 
   isPublic: boolean;
   isAllowImport: boolean;
