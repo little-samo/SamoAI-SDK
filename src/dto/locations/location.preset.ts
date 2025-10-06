@@ -38,6 +38,7 @@ export interface LocationPresetDto {
   id: bigint;
   name: string;
   version: number;
+  versionUpdatedAt: Date;
   presetDescription: string;
   presetShortDescription: string;
 
