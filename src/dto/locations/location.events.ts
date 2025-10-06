@@ -7,6 +7,8 @@ export const LocationEventType = {
   AgentJoined: 'AgentJoined',
   AgentLeft: 'AgentLeft',
   AgentExecuting: 'AgentExecuting',
+  AgentSendMessageStream: 'AgentSendMessageStream',
+  AgentExecuteNextAction: 'AgentExecuteNextAction',
   AgentExecuted: 'AgentExecuted',
   UserJoined: 'UserJoined',
   UserLeft: 'UserLeft',
@@ -34,6 +36,22 @@ export interface LocationEventDtoBase {
 export interface LocationAgentExecutingEventDto extends LocationEventDtoBase {
   type: typeof LocationEventType.AgentExecuting;
   agentId: AgentId;
+}
+
+export interface LocationAgentSendMessageStreamEventDto
+  extends LocationEventDtoBase {
+  type: typeof LocationEventType.AgentSendMessageStream;
+  agentId: AgentId;
+  index: number;
+  sequence: number;
+  delta: string;
+}
+
+export interface LocationAgentExecuteNextActionEventDto
+  extends LocationEventDtoBase {
+  type: typeof LocationEventType.AgentExecuteNextAction;
+  agentId: AgentId;
+  index: number;
 }
 
 export interface LocationAgentExecutedEventDto extends LocationEventDtoBase {
@@ -119,6 +137,8 @@ export interface LocationUpdatedEventDto extends LocationEventDtoBase {
 
 export type LocationEventDto =
   | LocationAgentExecutingEventDto
+  | LocationAgentSendMessageStreamEventDto
+  | LocationAgentExecuteNextActionEventDto
   | LocationAgentExecutedEventDto
   | LocationAgentJoinedEventDto
   | LocationAgentLeftEventDto
