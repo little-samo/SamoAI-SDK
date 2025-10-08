@@ -128,6 +128,7 @@ export const CharacterSchema = z
   );
 
 const LlmPresetSchema = z.union([
+  z.literal('free').describe('Free tier model with basic capabilities.'),
   z
     .literal('gemini-low')
     .describe(
