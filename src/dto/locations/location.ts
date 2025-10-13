@@ -92,6 +92,7 @@ export interface LocationContentDto {
   id: LocationId;
   canvases: Record<string, LocationCanvasDto>;
   rendering: string | null;
+  suggestedResponses: string[] | null;
 }
 
 export interface LocationCostDto {

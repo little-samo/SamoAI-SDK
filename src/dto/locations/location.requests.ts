@@ -1023,6 +1023,17 @@ export type UpdateLocationRenderingDto = z.infer<
 
 export interface UpdateLocationRenderingResponseDto {}
 
+// WS: generateLocationSuggestedResponses - Generate suggested responses for user
+export const GenerateLocationSuggestedResponsesSchema = z.object({
+  locationId: z.coerce.bigint(),
+});
+
+export type GenerateLocationSuggestedResponsesDto = z.infer<
+  typeof GenerateLocationSuggestedResponsesSchema
+>;
+
+export interface GenerateLocationSuggestedResponsesResponseDto {}
+
 // WS: updateLocationAgentIsActive - Update agent active status
 export const UpdateLocationAgentIsActiveSchema = z.object({
   locationId: z.coerce.bigint(),
