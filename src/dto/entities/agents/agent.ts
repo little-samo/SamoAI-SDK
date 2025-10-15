@@ -1,5 +1,6 @@
 import { AgentId, UserId } from '@little-samo/samo-ai';
-import { AgentConfig, LlmPreset } from '@little-samo/samo-ai-sdk/models';
+
+import type { AgentConfig, LlmPreset } from '@little-samo/samo-ai-sdk/models';
 
 export interface AgentPublicDto {
   id: AgentId;
