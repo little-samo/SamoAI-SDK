@@ -1,5 +1,5 @@
 import { AgentId, UserId } from '@little-samo/samo-ai';
-import { AgentConfig } from '@little-samo/samo-ai-sdk/models';
+import { AgentConfig, LlmPreset } from '@little-samo/samo-ai-sdk/models';
 
 export interface AgentPublicDto {
   id: AgentId;
@@ -7,6 +7,8 @@ export interface AgentPublicDto {
   avatar: string | null;
   role: string | null;
   ownerUserId: UserId;
+
+  llmPreset: LlmPreset | null;
 }
 
 export interface AgentPrivateDto extends AgentPublicDto {
