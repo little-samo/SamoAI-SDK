@@ -77,22 +77,20 @@ export const LocationConfigGimmickImageSchema = z.object({
       .regex(/^https?:\/\/.+/)
       .optional()
       .describe(
-        'Reference image URL (http/https URL pointing to png, jpeg, jpg, webp files under 3MB). This will be replaced by the URL of the file uploaded to a CDN, not the original address.'
+        'Reference image URL (http/https pointing to png, jpeg, jpg, webp under 3MB). Will be replaced with CDN URL after upload'
       ),
-    z.string().max(32).describe('Reference message image key for API usage'),
+    z.string().max(32).describe('Message image key for API usage'),
   ]),
   name: z
     .string()
     .max(64)
     .optional()
-    .describe(
-      'Optional name of the image used by the gimmick for AI image generation.'
-    ),
+    .describe('Optional name identifying this reference image'),
   description: z
     .string()
     .max(500)
     .describe(
-      'Description of the image used by the gimmick for AI image generation.'
+      'Stable Diffusion-style prompt describing the image for AI generation'
     ),
 });
 
@@ -102,24 +100,24 @@ export type LocationConfigGimmickImage = z.infer<
 
 export const LocationConfigGimmickSchema = z.object({
   core: GimmickCoreSchema.describe(
-    'Core gimmick behavior that determines how the gimmick is executed'
+    'Core gimmick type determining execution behavior'
   ),
   name: z
     .string()
     .max(64)
-    .describe('Name of the gimmick that agents can reference'),
+    .describe('Gimmick display name for identification purposes'),
   appearance: z
     .string()
     .max(500)
     .describe(
-      'How the gimmick appears to agents and users in the location context'
+      'Base appearance prompt for character_image_generator. For other gimmicks, describes how the gimmick appears in the location'
     ),
   images: z
     .array(LocationConfigGimmickImageSchema)
     .max(6)
     .optional()
     .describe(
-      'Optional reference images used by image_generator and character_image_generator gimmicks to maintain visual consistency in AI image generation. For image_generator: supports HTTP/HTTPS URLs for png, jpeg, jpg, webp images and message image keys for API usage (URLs will be replaced by CDN URLs when processed). For character_image_generator: uses name and description fields where description follows Stable Diffusion prompt style. These can include character appearance references, art style samples, scene compositions, or background settings.'
+      'Reference images for image generation gimmicks. For image_generator: uses url and description for reference images. For character_image_generator: uses only name and description (Stable Diffusion prompts) without url. For scene_image_generator: uses url, name, and description for character references in scene composition'
     ),
 });
 
