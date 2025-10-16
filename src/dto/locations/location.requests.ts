@@ -266,6 +266,7 @@ export const UpdateLocationPresetBodySchema = z.object({
   visibility: z.enum(['private', 'public', 'publish']).optional(),
 
   name: z.string().max(64).optional(),
+  thumbnail: z.string().max(2048).optional(),
   presetDescription: z.string().max(1000).optional(),
   presetShortDescription: z.string().max(80).optional(),
   canvases: z.array(LocationPresetCanvasSchema).max(4).optional(),
