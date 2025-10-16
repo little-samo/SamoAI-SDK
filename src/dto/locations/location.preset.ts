@@ -15,10 +15,7 @@ export const LocationPresetMessageSchema = z.object({
   entityId: z.coerce.bigint(),
 
   message: z.string().max(800).optional(),
-  image: z
-    .string()
-    .max(4 * 1024 * 1024)
-    .optional(),
+  image: z.string().max(2048).optional(),
 });
 
 export type LocationPresetMessageDto = z.infer<

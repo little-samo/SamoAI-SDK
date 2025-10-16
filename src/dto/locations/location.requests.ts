@@ -961,10 +961,7 @@ export const SendLocationMessageSchema = z.object({
   locationId: z.coerce.bigint(),
   message: z.string().max(800).optional(),
   action: z.string().max(2000).optional(),
-  image: z
-    .string()
-    .max(4 * 1024 * 1024)
-    .optional(), // base64 encoded image, original max 3MB (encoded ~4MB)
+  image: z.string().max(2048).optional(),
 
   creditAmount: z.number().int().positive().optional(),
   paidCreditOnly: z.boolean().optional(),
@@ -988,7 +985,7 @@ export interface SendSystemMessageResponseDto {}
 // WS: updateLocationImage - Update location image
 export const UpdateLocationImageSchema = z.object({
   locationId: z.coerce.bigint(),
-  image: z.string().max(4 * 1024 * 1024),
+  image: z.string().max(2048),
   index: z.number().int().min(0).max(2).optional(),
 });
 
