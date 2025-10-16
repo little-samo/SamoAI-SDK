@@ -194,19 +194,6 @@ export interface GetAgentCostResponseDto {
   cost: AgentCostDto;
 }
 
-// POST /agents/:agentId/upload-avatar - Upload agent avatar
-export const UploadAgentAvatarParamsSchema = z.object({
-  agentId: z.coerce.bigint(),
-});
-
-export type UploadAgentAvatarParamsDto = z.infer<
-  typeof UploadAgentAvatarParamsSchema
->;
-
-export interface UploadAgentAvatarResponseDto {
-  avatarUrl: string;
-}
-
 // DELETE /agents/:agentId - Delete agent
 export const DeleteAgentParamsSchema = z.object({
   agentId: z.coerce.bigint(),
