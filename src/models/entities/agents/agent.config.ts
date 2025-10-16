@@ -13,17 +13,17 @@ export const AgentConfigCoreSchema = z.object({
     z
       .literal('evaluate_and_actions')
       .describe(
-        'Evaluates conditions and context before taking actions. Best for thoughtful, context-aware responses that require analysis of the situation before acting.'
+        'Analyzes context first, then acts. Use for agents that need thoughtful, situation-aware responses.'
       ),
     z
       .literal('execute_actions')
       .describe(
-        'Executes actions immediately without preliminary evaluation. Best for reactive agents that should respond quickly without extensive analysis.'
+        'Acts immediately without analysis. Use for fast, reactive agents.'
       ),
     z
       .literal('response_every_message')
       .describe(
-        'Responds to every new message in the location. Best for conversational agents that should actively participate in all discussions.'
+        'Replies to every message. Use for highly conversational agents.'
       ),
   ]),
 });
@@ -38,26 +38,26 @@ export const CharacterSchema = z
           .string()
           .max(500)
           .describe(
-            "**CRITICAL**. The agent's primary function and purpose (e.g., 'A helper agent for crafting new agents and discovering treasures)"
+            "**CRITICAL**: Agent's primary purpose. Example: 'Helper for crafting agents and discovering treasures'"
           )
           .optional(),
         gender: z
           .string()
           .max(30)
-          .describe("The agent's gender identity")
+          .describe("Agent's gender identity")
           .optional(),
         expertise: z
           .string()
           .max(500)
-          .describe('Specialized knowledge areas')
+          .describe('Areas of specialized knowledge')
           .optional(),
         backstory: z
           .string()
           .max(1000)
-          .describe("A brief history of the agent's experiences")
+          .describe("Agent's history and past experiences")
           .optional(),
       })
-      .describe("Defines the agent's core identity and backstory")
+      .describe("Agent's core identity and background")
       .optional(),
 
     speech: z
@@ -65,39 +65,45 @@ export const CharacterSchema = z
         tone: z
           .string()
           .max(500)
-          .describe("The emotional quality of the agent's voice")
+          .describe('Emotional quality (e.g., warm, serious, playful)')
           .optional(),
         style: z
           .string()
           .max(500)
-          .describe("The agent's manner of expression")
+          .describe('Expression style (e.g., concise, verbose, poetic)')
           .optional(),
         formality: z
           .string()
           .max(500)
-          .describe('The level of conventionality in language')
+          .describe(
+            'Language formality level (e.g., casual, professional, formal)'
+          )
           .optional(),
       })
-      .describe("Controls the agent's communication style")
+      .describe('How the agent communicates')
       .optional(),
 
     personality: z
       .object({
-        traits: z.string().max(500).describe('Key characteristics').optional(),
+        traits: z
+          .string()
+          .max(500)
+          .describe('Defining characteristics')
+          .optional(),
         interests: z
           .string()
           .max(500)
-          .describe('Hobbies and topics the agent enjoys')
+          .describe('Topics and activities the agent enjoys')
           .optional(),
         values: z
           .string()
           .max(500)
-          .describe("Core principles that guide the agent's actions")
+          .describe('Core principles guiding behavior')
           .optional(),
         quirks: z
           .string()
           .max(500)
-          .describe('Peculiar habits or eccentricities')
+          .describe('Unique habits or mannerisms')
           .optional(),
         mbti: z
           .union([
@@ -120,50 +126,36 @@ export const CharacterSchema = z
           ])
           .optional(),
       })
-      .describe("Describes the agent's distinctive traits and behaviors")
+      .describe("Agent's personality traits and behaviors")
       .optional(),
   })
   .describe(
-    "Defines the agent's character using a structured format with predefined categories and properties"
+    'Structured character definition with background, speech style, and personality'
   );
 
 const LlmPresetSchema = z.union([
-  z.literal('free').describe('Free tier model with basic capabilities.'),
+  z.literal('free').describe('Free tier: Basic capabilities'),
   z
     .literal('gemini-low')
-    .describe(
-      'Gemini - Economical model optimized for straightforward tasks and basic interactions. Cost-effective choice for simple operations.'
-    ),
+    .describe('Gemini Low: Cost-effective for simple tasks'),
   z
     .literal('gemini-medium')
     .describe(
-      'Gemini - Well-balanced model ideal for general-purpose applications. Recommended for most use cases requiring reliable performance.'
+      'Gemini Medium: **RECOMMENDED**. Best balanced performance for general use. Primary choice for most applications'
     ),
   z
     .literal('gemini-high')
     .describe(
-      'Gemini - Premium model with highest performance capabilities. Offers superior reasoning and complex task handling but comes with higher costs and slower processing times.'
+      'Gemini High: Premium reasoning for complex tasks. Higher cost and slower'
     ),
-  z
-    .literal('openai-low')
-    .describe(
-      'OpenAI GPT - Budget-friendly model designed for elementary tasks and routine operations. Efficient for basic conversational needs.'
-    ),
+  z.literal('openai-low').describe('OpenAI Low: Budget-friendly alternative'),
   z
     .literal('openai-medium')
-    .describe(
-      'OpenAI GPT - Versatile model delivering solid performance across diverse scenarios. Optimal balance of capability and cost-effectiveness.'
-    ),
-  z
-    .literal('xai-low')
-    .describe(
-      'xAI Grok - Budget-friendly model optimized for efficient processing and basic conversational tasks. Cost-effective option for routine operations.'
-    ),
+    .describe('OpenAI Medium: Alternative versatile option'),
+  z.literal('xai-low').describe('xAI Grok Low: Alternative for routine tasks'),
   z
     .literal('xai-medium')
-    .describe(
-      'xAI Grok - Balanced model offering strong performance for general-purpose applications. Good combination of reasoning capability and processing speed.'
-    ),
+    .describe('xAI Grok Medium: Alternative balanced option'),
   // z.literal('anthropic-low').describe('Anthropic - Low cost'),
   // z.literal('anthropic-medium').describe('Anthropic - Balanced'),
   // z.literal('anthropic-high').describe('Anthropic - High performance'),
@@ -189,66 +181,54 @@ export const AgentConfigSchema = z.object({
         .string()
         .max(2048)
         .regex(/^https?:\/\/.+/)
-        .describe(
-          'Custom avatar URL (http/https URL pointing to png, jpeg, jpg, webp files under 3MB). This will be replaced by the URL of the file uploaded to a CDN, not the original address.'
-        ),
-      z.string().max(32).describe('Location message image key for API usage'),
+        .describe('Official CDN URL (webp only)'),
+      z.string().max(32).describe('Location message image key'),
     ])
     .describe(
-      'Visual representation identifier for the agent. Supports predefined avatar options, custom URLs, and location message image keys for API usage. When a predefined avatar is selected, the appearance field will automatically update to match the avatar description. Image keys and custom URLs will be replaced by CDN URLs when processed.'
+      'Visual representation: predefined avatars, CDN URLs, or image keys. Predefined avatars auto-update the appearance field'
     ),
   appearance: z
     .string()
     .max(500)
     .describe(
-      "Internal character description used by the agent for role-playing and behavioral consistency. This field is automatically updated when avatar changes to a predefined option, but should also be updated when using custom images to maintain character consistency. Can be manually edited independently. Helps the agent understand and embody its character during interactions, influencing communication style, decision-making patterns, and personality expression. Primarily for agent's internal reference rather than user display."
+      "Character description for the agent's internal use. Influences role-playing, communication style, and behavior. Auto-updated with predefined avatars, but update manually for custom images to maintain consistency"
     ),
 
   core: AgentConfigCoreSchema.describe(
-    'Fundamental behavior pattern that determines how the agent decides when to take actions'
+    'Behavior pattern determining when and how the agent takes actions'
   ),
   llmPreset: LlmPresetSchema.describe(
-    'AI model selection that balances cost, performance, and capabilities. Higher tiers provide better reasoning but cost more per interaction.'
+    'AI model selection. Higher tiers = better reasoning + higher cost'
   ),
 
   languages: z
     .array(z.string().max(32))
     .max(4)
     .describe(
-      'Communication language settings for the agent (max 4). Examples: ["English"] = English only, ["ALL", "English"] = English-based but can adapt to other languages, ["Spanish", "French"] = specific languages only.'
+      'Languages (max 4). "ALL" is a special keyword enabling global multi-language support while maintaining the specified primary language(s). Examples: ["English"] = English only, ["ALL", "English"] = can communicate in any language worldwide but primarily uses English, ["ALL", "Korean", "English"] = global languages with Korean as primary and English as secondary, ["Spanish", "French"] = only Spanish and French without ALL keyword'
     ),
   timeZone: z
     .string()
     .max(32)
     .describe(
-      'Agent timezone for time-based operations using IANA Time Zone Database standard (e.g., "America/New_York", "Europe/London", "Asia/Seoul", "UTC").'
+      'IANA timezone for time operations (e.g., "America/New_York", "Europe/London", "UTC")'
     ),
   greeting: z
     .string()
     .max(500)
     .describe(
-      "Initial message the agent sends when first interacting or joining a location. Should reflect the agent's character and set expectations for interaction style."
+      "First message sent when joining a location. Should reflect the agent's character"
     ),
 
   actions: z
     .array(
       z.union([
-        z
-          .literal('todo')
-          .describe(
-            'Placeholder for future action capabilities - to be implemented'
-          ),
-        z
-          .literal('todo')
-          .describe(
-            'Placeholder for future action capabilities - to be implemented'
-          ),
+        z.literal('todo').describe('Placeholder - to be implemented'),
+        z.literal('todo').describe('Placeholder - to be implemented'),
       ])
     )
     .max(4)
-    .describe(
-      "Additional capabilities the agent can perform beyond basic conversation. Each action expands the agent's toolkit for specific use cases."
-    ),
+    .describe('Capabilities beyond conversation (e.g., tools, integrations)'),
 
   character: CharacterSchema,
 
@@ -256,7 +236,7 @@ export const AgentConfigSchema = z.object({
     .array(z.string().max(200))
     .max(20)
     .describe(
-      'Critical behavioral constraints that the agent must strictly enforce. Use the character field for general personality and behavior traits. Rules should only contain mandatory restrictions or requirements that cannot be violated under any circumstances.'
+      'Strict constraints that cannot be violated. Use character field for personality; use rules only for mandatory restrictions'
     ),
 });
 
