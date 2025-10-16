@@ -522,19 +522,6 @@ export interface ResetLocationResponseDto {
   error?: string;
 }
 
-// POST /locations/:locationId/upload-thumbnail - Upload location thumbnail
-export const UploadLocationThumbnailParamsSchema = z.object({
-  locationId: z.coerce.bigint(),
-});
-
-export type UploadLocationThumbnailParamsDto = z.infer<
-  typeof UploadLocationThumbnailParamsSchema
->;
-
-export interface UploadLocationThumbnailResponseDto {
-  thumbnailUrl: string;
-}
-
 // GET /locations/:locationId/content - Get location content
 export const GetLocationContentParamsSchema = z.object({
   locationId: z.coerce.bigint(),
