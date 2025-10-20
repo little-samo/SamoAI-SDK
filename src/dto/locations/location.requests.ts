@@ -268,6 +268,7 @@ export const UpdateLocationPresetBodySchema = z.object({
   name: z.string().max(64).optional(),
   presetDescription: z.string().max(1000).optional(),
   presetShortDescription: z.string().max(80).optional(),
+  thumbnail: z.string().max(2048).optional(),
   canvases: z.array(LocationPresetCanvasSchema).max(4).optional(),
   messages: z.array(LocationPresetMessageSchema).max(10).optional(),
   hashtags: z.array(z.string().max(16)).max(3).optional(),
