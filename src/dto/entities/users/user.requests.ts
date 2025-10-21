@@ -26,6 +26,8 @@ export const UpdateCurrentUserBodySchema = z.object({
   nickname: z.string().min(4).max(32).optional(),
   birthDate: z.coerce.date().optional(),
   profilePicture: z.string().max(2048).optional(),
+  avatar: z.string().max(2048).optional(),
+  referenceAvatar: z.string().max(2048).optional(),
   appearance: z.string().max(500).optional(),
 
   isAllowSensitive: z.boolean().optional(),
