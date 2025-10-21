@@ -46,6 +46,7 @@ export const CharacterSchema = z
           .max(30)
           .describe("Agent's gender identity")
           .optional(),
+        age: z.string().max(10).describe("Agent's age").optional(),
         expertise: z
           .string()
           .max(500)
