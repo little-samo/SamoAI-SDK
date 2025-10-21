@@ -25,6 +25,11 @@ export const AgentConfigCoreSchema = z.object({
       .describe(
         'Replies to every message. Use for highly conversational agents.'
       ),
+    z
+      .literal('no_action')
+      .describe(
+        'Does not perform any actions. Use for observation-only or passive agents.'
+      ),
   ]),
 });
 
