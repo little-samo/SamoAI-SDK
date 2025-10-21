@@ -193,6 +193,14 @@ export const AgentConfigSchema = z.object({
     .describe(
       'Visual representation: predefined avatars, CDN URLs, or image keys. Predefined avatars auto-update the appearance field'
     ),
+  referenceAvatar: z
+    .string()
+    .max(2048)
+    .regex(/^https?:\/\/.+/)
+    .optional()
+    .describe(
+      'Reference image URL used for generating scenes featuring the agent'
+    ),
   appearance: z
     .string()
     .max(500)
