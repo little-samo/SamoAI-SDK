@@ -6,9 +6,7 @@ export const GimmickCoreDescriptions = {
   image_generator:
     'Generates images from text prompts with optional reference images. Can modify existing images in context using text instructions. Takes ~30 seconds to execute',
   character_image_generator:
-    'Generates consistent character images using the gimmick\'s appearance as a base prompt to maintain character identity. Style defaults to "anime style" but can be customized (e.g., "realistic" for photorealistic). Optionally combines one image description from the images array with the base prompt',
-  scene_image_generator:
-    'Generates scene images with one or more characters using reference images and appearance prompts. Each image in the images array includes a reference image and its Stable Diffusion-style appearance prompt for scene composition',
+    'Generates consistent character images using the gimmick\'s appearance as a base prompt to maintain character identity. Style defaults to "anime style" but can be customized (e.g., "realistic" for photorealistic). Supports reference images for character consistency',
   notion: 'Interacts with Notion for content management and collaboration',
 } as const;
 

@@ -96,7 +96,7 @@ export const LocationConfigGimmickSchema = z.object({
     .max(6)
     .optional()
     .describe(
-      'Reference images. image_generator: url+description. character_image_generator: name+description only. scene_image_generator: url+name+description for character references'
+      'Reference images for image_generator and character_image_generator'
     ),
 });
 
