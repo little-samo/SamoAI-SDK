@@ -1,7 +1,11 @@
 import { EntityType, LocationId, UserId } from '@little-samo/samo-ai';
 import z from 'zod';
 
-import type { LocationConfigCanvas } from '@little-samo/samo-ai-sdk/models';
+import type {
+  AgentConfig,
+  LocationConfig,
+  LocationConfigCanvas,
+} from '@little-samo/samo-ai-sdk/models';
 
 import type {
   AgentCostDto,
@@ -69,4 +73,9 @@ export interface LocationPresetDetailDto extends LocationPresetDto {
   locationCount: number;
   totalUsedCredit: number;
   totalMessageCount: number;
+}
+
+export interface LocationPresetPrivateDto extends LocationPresetDto {
+  locationConfig: LocationConfig;
+  agentConfigs: AgentConfig[];
 }

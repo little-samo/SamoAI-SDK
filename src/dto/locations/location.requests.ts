@@ -1,6 +1,9 @@
 import { DayOfWeek } from '@little-samo/samo-ai/common';
 import { LocationId } from '@little-samo/samo-ai/models';
-import { LocationPlatform } from '@little-samo/samo-ai-sdk/models';
+import {
+  AgentConfigSchema,
+  LocationPlatform,
+} from '@little-samo/samo-ai-sdk/models';
 import { z } from 'zod';
 
 import {
@@ -20,6 +23,7 @@ import {
   LocationPresetDetailDto,
   LocationPresetDto,
   LocationPresetMessageSchema,
+  LocationPresetPrivateDto,
 } from './location.preset';
 import { LocationScheduledMessageDto } from './location.scheduled-message';
 import { LocationSnapshotDto } from './location.snapshot';
@@ -217,7 +221,7 @@ export interface TrendingLocationPresetsResponseDto {
 
 // POST /locations/preset - Create location preset
 export const CreateLocationPresetSchema = z.object({
-  locationId: z.coerce.bigint(),
+  locationId: z.coerce.bigint().optional(),
 
   visibility: z.enum(['private', 'public', 'publish']).optional(),
 
@@ -253,6 +257,19 @@ export interface GetLocationPresetResponseDto {
   preset: LocationPresetDetailDto;
 }
 
+// GET /locations/preset/:presetId/private - Get location preset private details
+export const GetLocationPresetPrivateParamsSchema = z.object({
+  presetId: z.coerce.bigint(),
+});
+
+export type GetLocationPresetPrivateParamsDto = z.infer<
+  typeof GetLocationPresetPrivateParamsSchema
+>;
+
+export interface GetLocationPresetPrivateResponseDto {
+  preset: LocationPresetPrivateDto;
+}
+
 // PATCH /locations/preset/:presetId - Update location preset
 export const UpdateLocationPresetParamsSchema = z.object({
   presetId: z.coerce.bigint(),
@@ -275,6 +292,9 @@ export const UpdateLocationPresetBodySchema = z.object({
 
   isAllowImport: z.boolean().optional(),
   isSensitive: z.boolean().optional(),
+
+  locationConfig: LocationConfigSchema.partial().optional(),
+  agentConfigs: z.array(AgentConfigSchema.partial().nullable()).optional(),
 });
 
 export type UpdateLocationPresetBodyDto = z.infer<
