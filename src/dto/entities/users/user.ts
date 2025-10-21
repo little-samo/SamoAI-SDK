@@ -29,3 +29,9 @@ export interface UserPrivateDto extends UserPublicDto {
 
   isAllowSensitive: boolean;
 }
+
+export interface UserAvatarDto {
+  avatar: string;
+  referenceAvatar: string | null;
+  appearance: string | null;
+}

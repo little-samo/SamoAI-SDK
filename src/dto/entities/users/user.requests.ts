@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { UserPrivateDto, UserPublicDto } from './user';
+import { UserAvatarDto, UserPrivateDto, UserPublicDto } from './user';
 
 // ================================
 // HTTP API DTOs
@@ -38,6 +38,39 @@ export type UpdateCurrentUserBodyDto = z.infer<
 >;
 
 export interface UpdateCurrentUserResponseDto {
+  success: boolean;
+  error?: string;
+}
+
+// GET /users/me/avatars - Get user's saved avatars
+export const GetUserAvatarsQuerySchema = z.object({});
+
+export type GetUserAvatarsQueryDto = z.infer<typeof GetUserAvatarsQuerySchema>;
+
+export interface GetUserAvatarsResponseDto {
+  avatars: (UserAvatarDto | null)[];
+}
+
+// PATCH /users/me/avatars/:index - Update avatar by index
+export const UpdateUserAvatarParamsSchema = z.object({
+  index: z.coerce.number().int().min(0),
+});
+
+export const UpdateUserAvatarBodySchema = z.object({
+  avatar: z.string().max(2048).optional(),
+  referenceAvatar: z.string().max(2048).optional(),
+  appearance: z.string().max(500).optional(),
+});
+
+export type UpdateUserAvatarParamsDto = z.infer<
+  typeof UpdateUserAvatarParamsSchema
+>;
+
+export type UpdateUserAvatarBodyDto = z.infer<
+  typeof UpdateUserAvatarBodySchema
+>;
+
+export interface UpdateUserAvatarResponseDto {
   success: boolean;
   error?: string;
 }
