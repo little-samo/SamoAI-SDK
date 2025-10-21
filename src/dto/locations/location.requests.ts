@@ -222,7 +222,7 @@ export const CreateLocationPresetSchema = z.object({
   visibility: z.enum(['private', 'public', 'publish']).optional(),
 
   name: z.string().max(64).optional(),
-  presetDescription: z.string().max(1000),
+  presetDescription: z.string().max(5000),
   presetShortDescription: z.string().max(80),
   canvases: z.array(LocationPresetCanvasSchema).max(4).optional(),
   messages: z.array(LocationPresetMessageSchema).max(10).optional(),
@@ -266,7 +266,7 @@ export const UpdateLocationPresetBodySchema = z.object({
   visibility: z.enum(['private', 'public', 'publish']).optional(),
 
   name: z.string().max(64).optional(),
-  presetDescription: z.string().max(1000).optional(),
+  presetDescription: z.string().max(5000).optional(),
   presetShortDescription: z.string().max(80).optional(),
   thumbnail: z.string().max(2048).optional(),
   canvases: z.array(LocationPresetCanvasSchema).max(4).optional(),
