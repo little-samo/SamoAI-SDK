@@ -15,6 +15,7 @@ export type GenerateAvatarImageBodyDto = z.infer<
 >;
 
 export interface GenerateAvatarImageResponseDto {
-  url: string;
+  avatarUrl: string;
+  referenceAvatarUrl: string;
   prompt: string;
 }
