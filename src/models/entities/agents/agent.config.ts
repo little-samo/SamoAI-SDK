@@ -35,7 +35,7 @@ export const AgentConfigCoreSchema = z.object({
 
 export type AgentConfigCore = z.infer<typeof AgentConfigCoreSchema>;
 
-export const CharacterSchema = z
+export const AgentConfigCharacterSchema = z
   .object({
     background: z
       .object({
@@ -138,6 +138,8 @@ export const CharacterSchema = z
   .describe(
     'Structured character definition with background, speech style, and personality'
   );
+
+export type AgentConfigCharacter = z.infer<typeof AgentConfigCharacterSchema>;
 
 const LlmPresetSchema = z.union([
   z.literal('free').describe('Free tier: Basic capabilities'),
@@ -244,7 +246,7 @@ export const AgentConfigSchema = z.object({
     .max(4)
     .describe('Capabilities beyond conversation (e.g., tools, integrations)'),
 
-  character: CharacterSchema,
+  character: AgentConfigCharacterSchema,
 
   rules: z
     .array(z.string().max(200))
