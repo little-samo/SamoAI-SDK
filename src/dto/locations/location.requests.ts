@@ -234,7 +234,7 @@ export const CreateLocationPresetSchema = z.object({
   isSensitive: z.boolean().optional(),
 
   locationConfig: LocationConfigSchema.partial().optional(),
-  agentConfigs: z.array(AgentConfigSchema.partial().nullable()).optional(),
+  agentConfigs: z.array(AgentConfigSchema.partial()).optional(),
 });
 
 export type CreateLocationPresetDto = z.infer<
