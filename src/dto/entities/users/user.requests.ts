@@ -57,10 +57,10 @@ export const UpdateUserAvatarParamsSchema = z.object({
 });
 
 export const UpdateUserAvatarBodySchema = z.object({
-  name: z.string().max(64).optional(),
-  avatar: z.string().max(2048).optional(),
-  referenceAvatar: z.string().max(2048).optional(),
-  appearance: z.string().max(500).optional(),
+  name: z.string().max(64).nullable(),
+  avatar: z.string().max(2048).nullable(),
+  referenceAvatar: z.string().max(2048).nullable(),
+  appearance: z.string().max(500).nullable(),
 });
 
 export type UpdateUserAvatarParamsDto = z.infer<
