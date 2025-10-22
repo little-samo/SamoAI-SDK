@@ -228,14 +228,13 @@ export const CreateLocationPresetSchema = z.object({
   name: z.string().max(64).optional(),
   presetDescription: z.string().max(5000),
   presetShortDescription: z.string().max(80),
-  canvases: z.array(LocationPresetCanvasSchema).max(4).optional(),
-  messages: z.array(LocationPresetMessageSchema).max(10).optional(),
   hashtags: z.array(z.string().max(16)).max(3).optional(),
 
   isAllowImport: z.boolean().optional(),
   isSensitive: z.boolean().optional(),
 
   locationConfig: LocationConfigSchema.partial().optional(),
+  agentConfigs: z.array(AgentConfigSchema.partial().nullable()).optional(),
 });
 
 export type CreateLocationPresetDto = z.infer<
