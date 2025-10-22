@@ -20,6 +20,7 @@ import {
 import { LocationMessageDto } from './location.message';
 import {
   LocationPresetCanvasSchema,
+  LocationPresetCommentDto,
   LocationPresetDetailDto,
   LocationPresetDto,
   LocationPresetMessageSchema,
@@ -372,6 +373,160 @@ export interface GetLocationPresetLocationsResponseDto {
     total: number;
     nextCursor?: string;
   };
+}
+
+// GET /locations/preset/:presetId/comments - Get comments for preset
+export const GetLocationPresetCommentsParamsSchema = z.object({
+  presetId: z.coerce.bigint(),
+});
+
+export type GetLocationPresetCommentsParamsDto = z.infer<
+  typeof GetLocationPresetCommentsParamsSchema
+>;
+
+export const GetLocationPresetCommentsQuerySchema = z.object({
+  sortBy: z.enum(['latest', 'recommended']).optional().default('latest'),
+  page: z.coerce.number().int().min(1).optional().default(1),
+  limit: z.coerce.number().int().min(1).max(50).optional().default(20),
+});
+
+export type GetLocationPresetCommentsQueryDto = z.infer<
+  typeof GetLocationPresetCommentsQuerySchema
+>;
+
+export interface GetLocationPresetCommentsResponseDto {
+  data: LocationPresetCommentDto[];
+  pinnedComment: LocationPresetCommentDto | null;
+  meta: {
+    total: number;
+    page: number;
+    limit: number;
+    totalPages: number;
+  };
+}
+
+// GET /locations/preset/:presetId/comments/:commentId/replies - Get replies for comment
+export const GetLocationPresetCommentRepliesParamsSchema = z.object({
+  commentId: z.coerce.bigint(),
+});
+
+export type GetLocationPresetCommentRepliesParamsDto = z.infer<
+  typeof GetLocationPresetCommentRepliesParamsSchema
+>;
+
+export const GetLocationPresetCommentRepliesQuerySchema = z.object({
+  page: z.coerce.number().int().min(1).optional().default(1),
+  limit: z.coerce.number().int().min(1).max(50).optional().default(20),
+});
+
+export type GetLocationPresetCommentRepliesQueryDto = z.infer<
+  typeof GetLocationPresetCommentRepliesQuerySchema
+>;
+
+export interface GetLocationPresetCommentRepliesResponseDto {
+  data: LocationPresetCommentDto[];
+  meta: {
+    total: number;
+    page: number;
+    limit: number;
+    totalPages: number;
+  };
+}
+
+// POST /locations/preset/:presetId/comments - Create comment
+export const CreateLocationPresetCommentParamsSchema = z.object({
+  presetId: z.coerce.bigint(),
+});
+
+export type CreateLocationPresetCommentParamsDto = z.infer<
+  typeof CreateLocationPresetCommentParamsSchema
+>;
+
+export const CreateLocationPresetCommentBodySchema = z.object({
+  content: z.string().min(1).max(2000),
+  parentCommentId: z.coerce.bigint().optional(),
+});
+
+export type CreateLocationPresetCommentBodyDto = z.infer<
+  typeof CreateLocationPresetCommentBodySchema
+>;
+
+export interface CreateLocationPresetCommentResponseDto {
+  comment: LocationPresetCommentDto;
+}
+
+// PATCH /locations/preset/:presetId/comments/:commentId/reaction - Update comment reaction
+export const UpdateLocationPresetCommentReactionParamsSchema = z.object({
+  commentId: z.coerce.bigint(),
+});
+
+export type UpdateLocationPresetCommentReactionParamsDto = z.infer<
+  typeof UpdateLocationPresetCommentReactionParamsSchema
+>;
+
+export const UpdateLocationPresetCommentReactionBodySchema = z.object({
+  reactionType: z.enum(['LIKE', 'DISLIKE']).nullable(),
+});
+
+export type UpdateLocationPresetCommentReactionBodyDto = z.infer<
+  typeof UpdateLocationPresetCommentReactionBodySchema
+>;
+
+export interface UpdateLocationPresetCommentReactionResponseDto {
+  success: boolean;
+  error?: string;
+}
+
+// POST /locations/preset/:presetId/comments/:commentId/report - Report comment
+export const ReportLocationPresetCommentParamsSchema = z.object({
+  presetId: z.coerce.bigint(),
+  commentId: z.coerce.bigint(),
+});
+
+export type ReportLocationPresetCommentParamsDto = z.infer<
+  typeof ReportLocationPresetCommentParamsSchema
+>;
+
+export interface ReportLocationPresetCommentResponseDto {
+  success: boolean;
+  error?: string;
+}
+
+// DELETE /locations/preset/:presetId/comments/:commentId - Delete comment
+export const DeleteLocationPresetCommentParamsSchema = z.object({
+  presetId: z.coerce.bigint(),
+  commentId: z.coerce.bigint(),
+});
+
+export type DeleteLocationPresetCommentParamsDto = z.infer<
+  typeof DeleteLocationPresetCommentParamsSchema
+>;
+
+export interface DeleteLocationPresetCommentResponseDto {
+  success: boolean;
+  error?: string;
+}
+
+// PATCH /locations/preset/:presetId/pin-comment - Pin or unpin comment
+export const PinLocationPresetCommentParamsSchema = z.object({
+  presetId: z.coerce.bigint(),
+});
+
+export type PinLocationPresetCommentParamsDto = z.infer<
+  typeof PinLocationPresetCommentParamsSchema
+>;
+
+export const PinLocationPresetCommentBodySchema = z.object({
+  commentId: z.coerce.bigint().nullable(),
+});
+
+export type PinLocationPresetCommentBodyDto = z.infer<
+  typeof PinLocationPresetCommentBodySchema
+>;
+
+export interface PinLocationPresetCommentResponseDto {
+  success: boolean;
+  error?: string;
 }
 
 // POST /locations - Create location

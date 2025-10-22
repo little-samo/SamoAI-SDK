@@ -79,3 +79,22 @@ export interface LocationPresetPrivateDto extends LocationPresetDto {
   locationConfig: LocationConfig;
   agentConfigs: AgentConfig[];
 }
+
+export interface LocationPresetCommentDto {
+  id: bigint;
+  content: string;
+  authorUserId: UserId;
+  locationPresetId: bigint;
+  parentCommentId: bigint | null;
+
+  likeCount: number;
+  dislikeCount: number;
+  replyCount: number;
+
+  userReaction: 'LIKE' | 'DISLIKE' | null;
+  hasReported: boolean;
+
+  isDeleted: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+}
