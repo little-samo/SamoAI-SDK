@@ -31,6 +31,7 @@ export interface UserPrivateDto extends UserPublicDto {
 }
 
 export interface UserAvatarDto {
+  name: string;
   avatar: string;
   referenceAvatar: string | null;
   appearance: string | null;
