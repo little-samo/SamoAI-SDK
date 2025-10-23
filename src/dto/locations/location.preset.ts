@@ -12,6 +12,7 @@ import type {
   AgentPublicDto,
   GimmickCostDto,
   GimmickPublicDto,
+  UserAvatarDto,
 } from '../entities';
 
 export const LocationPresetMessageSchema = z.object({
@@ -54,6 +55,7 @@ export interface LocationPresetDto {
   canvases: LocationPresetCanvasDto[];
   canvasConfigs: LocationConfigCanvas[];
   messages: LocationPresetMessageDto[];
+  userAvatar: UserAvatarDto | null;
 
   isPublished: boolean;
   publishedAt: Date | null;

@@ -26,6 +26,7 @@ export const UpdateCurrentUserBodySchema = z.object({
   nickname: z.string().min(4).max(32).optional(),
   birthDate: z.coerce.date().optional(),
   profilePicture: z.string().max(2048).optional(),
+  avatarName: z.string().max(64).optional(),
   avatar: z.string().max(2048).optional(),
   referenceAvatar: z.string().max(2048).optional(),
   appearance: z.string().max(500).optional(),
@@ -104,6 +105,7 @@ export const GetUsersByIdsQuerySchema = z.object({
     .refine((arr) => arr.length > 0 && arr.length <= 25, {
       message: 'userIds must contain 1-25 user IDs',
     }),
+  locationId: z.coerce.bigint().optional(),
 });
 
 export type GetUsersByIdsQueryDto = z.infer<typeof GetUsersByIdsQuerySchema>;
