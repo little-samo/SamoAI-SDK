@@ -52,21 +52,20 @@ export interface GetUserAvatarsResponseDto {
   avatars: (UserAvatarDto | null)[];
 }
 
-// PATCH /users/me/avatars/:index - Update avatar by index
-export const UpdateUserAvatarParamsSchema = z.object({
-  index: z.coerce.number().int().min(0),
-});
+// PATCH /users/me/avatars - Update user's avatar
+export const UpdateUserAvatarBodySchema = z
+  .object({
+    index: z.coerce.number().int().min(0).optional(),
+    locationId: z.coerce.bigint().optional(),
 
-export const UpdateUserAvatarBodySchema = z.object({
-  name: z.string().max(64).nullable(),
-  avatar: z.string().max(2048).nullable(),
-  referenceAvatar: z.string().max(2048).nullable(),
-  appearance: z.string().max(500).nullable(),
-});
-
-export type UpdateUserAvatarParamsDto = z.infer<
-  typeof UpdateUserAvatarParamsSchema
->;
+    name: z.string().max(64).nullable(),
+    avatar: z.string().max(2048).nullable(),
+    referenceAvatar: z.string().max(2048).nullable(),
+    appearance: z.string().max(500).nullable(),
+  })
+  .refine((data) => data.index !== undefined || data.locationId !== undefined, {
+    message: 'Either index or locationId must be provided',
+  });
 
 export type UpdateUserAvatarBodyDto = z.infer<
   typeof UpdateUserAvatarBodySchema
