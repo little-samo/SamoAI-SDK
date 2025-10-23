@@ -88,7 +88,6 @@ export interface LocationPresetCommentDto {
   parentCommentId: bigint | null;
 
   likeCount: number;
-  dislikeCount: number;
   replyCount: number;
 
   userReaction: 'LIKE' | 'DISLIKE' | null;
