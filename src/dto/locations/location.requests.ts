@@ -342,6 +342,20 @@ export interface UpdateLocationPresetRatingResponseDto {
   error?: string;
 }
 
+// POST /locations/preset/:presetId/report - Report location preset
+export const ReportLocationPresetParamsSchema = z.object({
+  presetId: z.coerce.bigint(),
+});
+
+export type ReportLocationPresetParamsDto = z.infer<
+  typeof ReportLocationPresetParamsSchema
+>;
+
+export interface ReportLocationPresetResponseDto {
+  success: boolean;
+  error?: string;
+}
+
 // DELETE /locations/preset/:presetId - Delete location preset
 export const DeleteLocationPresetParamsSchema = z.object({
   presetId: z.coerce.bigint(),

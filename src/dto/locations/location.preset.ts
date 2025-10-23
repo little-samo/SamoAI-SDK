@@ -70,6 +70,7 @@ export interface LocationPresetDto {
 
 export interface LocationPresetDetailDto extends LocationPresetDto {
   userRating: 'LIKE' | 'DISLIKE' | null;
+  hasReported: boolean;
   locationCount: number;
   totalUsedCredit: number;
   totalMessageCount: number;
