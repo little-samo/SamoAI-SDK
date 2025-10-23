@@ -10,6 +10,8 @@ import {
   LocationConfig,
   LocationConfigSchema,
 } from '../../models/locations/location.config';
+import { type AgentPrivateDto } from '../entities';
+import { UserAvatarSchema } from '../entities/users/user';
 
 import {
   LocationContentDto,
@@ -28,8 +30,6 @@ import {
 } from './location.preset';
 import { LocationScheduledMessageDto } from './location.scheduled-message';
 import { LocationSnapshotDto } from './location.snapshot';
-
-import type { AgentPrivateDto } from '../entities';
 
 // ================================
 // HTTP API DTOs
@@ -290,6 +290,7 @@ export const UpdateLocationPresetBodySchema = z.object({
   thumbnail: z.string().max(2048).optional(),
   canvases: z.array(LocationPresetCanvasSchema).max(4).optional(),
   messages: z.array(LocationPresetMessageSchema).max(10).optional(),
+  userAvatar: UserAvatarSchema.optional(),
   hashtags: z.array(z.string().max(16)).max(3).optional(),
 
   isAllowImport: z.boolean().optional(),

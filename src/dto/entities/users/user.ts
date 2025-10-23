@@ -1,4 +1,5 @@
 import { UserId } from '@little-samo/samo-ai';
+import z from 'zod';
 
 export interface UserPublicDto {
   id: UserId;
@@ -31,9 +32,11 @@ export interface UserPrivateDto extends UserPublicDto {
   isAllowSensitive: boolean;
 }
 
-export interface UserAvatarDto {
-  name: string;
-  avatar: string | null;
-  referenceAvatar: string | null;
-  appearance: string;
-}
+export const UserAvatarSchema = z.object({
+  name: z.string().max(64),
+  avatar: z.string().max(2048).nullable(),
+  referenceAvatar: z.string().max(2048).nullable(),
+  appearance: z.string().max(500),
+});
+
+export type UserAvatarDto = z.infer<typeof UserAvatarSchema>;
