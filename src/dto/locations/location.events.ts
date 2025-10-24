@@ -42,7 +42,7 @@ export interface LocationAgentExecutingEventDto extends LocationEventDtoBase {
 export interface LocationAgentSendMessageStreamEventDto
   extends LocationEventDtoBase {
   type: typeof LocationEventType.AgentSendMessageStream;
-  agentId: AgentId;
+  entityKey: string;
   index: number;
   sequence: number;
   delta: string;
