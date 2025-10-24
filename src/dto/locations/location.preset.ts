@@ -30,6 +30,7 @@ export type LocationPresetMessageDto = z.infer<
 export const LocationPresetCanvasSchema = z.object({
   name: z.string().max(32),
   text: z.string().max(5000),
+  isExplicit: z.boolean().optional(),
 });
 
 export type LocationPresetCanvasDto = z.infer<
