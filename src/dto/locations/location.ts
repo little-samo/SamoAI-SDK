@@ -85,7 +85,7 @@ export interface LocationCanvasDto {
   lastModifierEntityType: EntityType;
   lastModifierEntityId: EntityId;
   text: string;
-  isExplicit?: boolean;
+  showUpdates?: boolean;
   updatedAt: Date;
 }
 
