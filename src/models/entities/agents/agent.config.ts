@@ -43,7 +43,7 @@ export const AgentConfigCharacterSchema = z
           .string()
           .max(200)
           .describe(
-            "**CRITICAL**: Agent's primary purpose. Example: 'Helper for crafting agents and discovering treasures'"
+            "**DEPRECATED**: Use top-level 'role' field instead. This field is maintained for backward compatibility only."
           )
           .optional(),
         gender: z
@@ -191,6 +191,13 @@ export type LlmPreset = z.infer<typeof LlmPresetSchema>;
 
 export const AgentConfigSchema = z.object({
   name: z.string().max(64).describe('Agent name'),
+  role: z
+    .string()
+    .max(200)
+    .optional()
+    .describe(
+      `**CRITICAL**: Agent's primary purpose. Example: 'Helper for crafting agents and discovering treasures'`
+    ),
 
   avatar: z
     .union([
