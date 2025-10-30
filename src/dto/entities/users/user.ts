@@ -7,6 +7,7 @@ export interface UserPublicDto {
   nickname: string;
   firstName: string | null;
   lastName: string | null;
+  role: string | null;
   profilePicture: string | null;
   avatarName: string | null;
   avatar: string | null;
