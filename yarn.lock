@@ -203,7 +203,7 @@ __metadata:
   dependencies:
     "@eslint/eslintrc": "npm:^3.1.0"
     "@eslint/js": "npm:^9.13.0"
-    "@little-samo/samo-ai": "npm:^0.4.0"
+    "@little-samo/samo-ai": "npm:^0.5.0"
     "@types/lodash": "npm:^4"
     "@types/node": "npm:^20.3.1"
     "@typescript-eslint/eslint-plugin": "npm:^8.0.0"
@@ -224,16 +224,16 @@ __metadata:
     typescript: "npm:^5.7.2"
     zod: "npm:^3.24.1"
   peerDependencies:
-    "@little-samo/samo-ai": ^0.4.0
+    "@little-samo/samo-ai": ^0.5.0
     class-transformer: ^0.5.1
     class-validator: ^0.14.2
     zod: ^3.24.1
   languageName: unknown
   linkType: soft
 
-"@little-samo/samo-ai@npm:^0.4.0":
-  version: 0.4.0
-  resolution: "@little-samo/samo-ai@npm:0.4.0"
+"@little-samo/samo-ai@npm:^0.5.0":
+  version: 0.5.0
+  resolution: "@little-samo/samo-ai@npm:0.5.0"
   dependencies:
     "@anthropic-ai/sdk": "npm:^0.54.0"
     "@google/genai": "npm:^1.5.0"
@@ -245,7 +245,7 @@ __metadata:
     zod-to-json-schema: "npm:^3.24.1"
   peerDependencies:
     zod: ^3.24.1
-  checksum: 10c0/c80b8f65d71613e1704680be4b6ab142394428bd58601fbaba929e7a0e0a79d5877158a13e82388faa3ff18746b91f63526305df06e4c80e71abafd7b9fd472b
+  checksum: 10c0/2a066b89957df1136bb5afa96b6280bd292322389bc820838bad3a78bfc283f2f42963b6005bd51fac62627d77d9bcf03a013c2af1a4e5f21e7449dde5ead832
   languageName: node
   linkType: hard
 
