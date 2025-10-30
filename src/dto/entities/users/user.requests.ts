@@ -1,6 +1,11 @@
 import { z } from 'zod';
 
-import { UserAvatarDto, UserPrivateDto, UserPublicDto } from './user';
+import {
+  UserAvatarDto,
+  UserAvatarSchema,
+  UserPrivateDto,
+  UserPublicDto,
+} from './user';
 
 // ================================
 // HTTP API DTOs
@@ -57,11 +62,7 @@ export const UpdateUserAvatarBodySchema = z
   .object({
     index: z.coerce.number().int().min(0).optional(),
     locationId: z.coerce.bigint().optional(),
-
-    name: z.string().max(64).nullable(),
-    avatar: z.string().max(2048).nullable(),
-    referenceAvatar: z.string().max(2048).nullable(),
-    appearance: z.string().max(500).nullable(),
+    avatar: UserAvatarSchema.nullable().optional(),
   })
   .refine((data) => data.index !== undefined || data.locationId !== undefined, {
     message: 'Either index or locationId must be provided',
