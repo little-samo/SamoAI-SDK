@@ -34,9 +34,9 @@ export interface UserPrivateDto extends UserPublicDto {
 
 export const UserAvatarSchema = z.object({
   name: z.string().max(64),
+  role: z.string().max(200).optional(),
   avatar: z.string().max(2048),
   referenceAvatar: z.string().max(2048),
-  role: z.string().max(200).optional(),
   appearance: z.string().max(500),
 });
 
