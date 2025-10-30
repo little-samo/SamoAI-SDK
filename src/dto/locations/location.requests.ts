@@ -371,6 +371,40 @@ export interface DeleteLocationPresetResponseDto {
   error?: string;
 }
 
+// POST /locations/preset/:presetId/duplicate - Duplicate location preset
+export const DuplicateLocationPresetParamsSchema = z.object({
+  presetId: z.coerce.bigint(),
+});
+
+export type DuplicateLocationPresetParamsDto = z.infer<
+  typeof DuplicateLocationPresetParamsSchema
+>;
+
+export interface DuplicateLocationPresetResponseDto {
+  preset: LocationPresetDto;
+}
+
+// POST /locations/preset/:presetId/translate - Translate location preset
+export const TranslateLocationPresetParamsSchema = z.object({
+  presetId: z.coerce.bigint(),
+});
+
+export type TranslateLocationPresetParamsDto = z.infer<
+  typeof TranslateLocationPresetParamsSchema
+>;
+
+export const TranslateLocationPresetBodySchema = z.object({
+  targetLanguage: z.enum(['ko', 'en', 'ja']),
+});
+
+export type TranslateLocationPresetBodyDto = z.infer<
+  typeof TranslateLocationPresetBodySchema
+>;
+
+export interface TranslateLocationPresetResponseDto {
+  preset: LocationPresetDto;
+}
+
 // GET /locations/preset/:presetId/locations - Get locations created from preset
 export const GetLocationPresetLocationsParamsSchema = z.object({
   presetId: z.coerce.bigint(),
