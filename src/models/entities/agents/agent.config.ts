@@ -131,6 +131,22 @@ export const AgentConfigCharacterSchema = z
             z.literal('ESFP'),
           ])
           .optional(),
+        zodiac: z
+          .union([
+            z.literal('Aries'),
+            z.literal('Taurus'),
+            z.literal('Gemini'),
+            z.literal('Cancer'),
+            z.literal('Leo'),
+            z.literal('Virgo'),
+            z.literal('Libra'),
+            z.literal('Scorpio'),
+            z.literal('Sagittarius'),
+            z.literal('Capricorn'),
+            z.literal('Aquarius'),
+            z.literal('Pisces'),
+          ])
+          .optional(),
       })
       .describe("Agent's personality traits and behaviors")
       .optional(),
