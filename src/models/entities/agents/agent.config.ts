@@ -41,7 +41,7 @@ export const AgentConfigCharacterSchema = z
       .object({
         role: z
           .string()
-          .max(500)
+          .max(200)
           .describe(
             "**CRITICAL**: Agent's primary purpose. Example: 'Helper for crafting agents and discovering treasures'"
           )
