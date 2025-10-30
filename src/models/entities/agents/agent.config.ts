@@ -39,13 +39,6 @@ export const AgentConfigCharacterSchema = z
   .object({
     background: z
       .object({
-        role: z
-          .string()
-          .max(200)
-          .describe(
-            "**DEPRECATED**: Use top-level 'role' field instead. This field is maintained for backward compatibility only."
-          )
-          .optional(),
         gender: z
           .string()
           .max(30)
