@@ -170,6 +170,10 @@ export interface LocationDeleteCredentialResponseDto {
 
 // GET /locations/presets - Get location presets with pagination
 export const LocationPresetsPaginationQuerySchema = z.object({
+  visibility: z
+    .enum(['edited', 'private', 'public', 'publish'])
+    .optional()
+    .default('publish'),
   page: z.coerce.number().int().min(1).optional().default(1),
   limit: z.coerce.number().int().min(1).max(100).optional().default(20),
 });
@@ -229,7 +233,7 @@ export const CreateLocationPresetSchema = z.object({
   name: z.string().max(64).optional(),
   presetDescription: z.string().max(5000),
   presetShortDescription: z.string().max(80),
-  hashtags: z.array(z.string().max(16)).max(3).optional(),
+  hashtags: z.array(z.string().max(16)).max(10).optional(),
 
   isAllowImport: z.boolean().optional(),
   isSensitive: z.boolean().optional(),
@@ -291,7 +295,7 @@ export const UpdateLocationPresetBodySchema = z.object({
   canvases: z.array(LocationPresetCanvasSchema).max(4).optional(),
   messages: z.array(LocationPresetMessageSchema).max(10).optional(),
   userAvatar: UserAvatarSchema.nullable().optional(),
-  hashtags: z.array(z.string().max(16)).max(3).optional(),
+  hashtags: z.array(z.string().max(16)).max(10).optional(),
 
   isAllowImport: z.boolean().optional(),
   isSensitive: z.boolean().optional(),
@@ -945,7 +949,7 @@ export const UpdateLocationBodySchema = z.object({
   visibility: z.enum(['private', 'public', 'publish']).optional(),
   maxUsers: z.number().int().min(1).max(99).optional(),
   publishDescription: z.string().max(500).optional(),
-  hashtags: z.array(z.string().max(16)).max(3).optional(),
+  hashtags: z.array(z.string().max(16)).max(10).optional(),
 
   useLocationCreditOnly: z.boolean().optional(),
   creditCostPerChat: z.number().int().min(0).max(1000).optional(),
