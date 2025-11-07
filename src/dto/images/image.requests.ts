@@ -6,6 +6,10 @@ import { z } from 'zod';
 
 // POST /images/avatar - Generate avatar image
 export const GenerateAvatarImageBodySchema = z.object({
+  style: z
+    .enum(['realistic', 'webtoon', 'cartoon'])
+    .optional()
+    .default('webtoon'),
   image: z.string().max(2048).optional(),
   prompt: z.string().max(500).optional(),
 });
