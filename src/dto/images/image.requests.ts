@@ -7,7 +7,7 @@ import { z } from 'zod';
 // POST /images/avatar - Generate avatar image
 export const GenerateAvatarImageBodySchema = z.object({
   style: z
-    .enum(['realistic', 'webtoon', 'cartoon'])
+    .enum(['realistic', 'webtoon', 'cartoon', 'anime'])
     .optional()
     .default('webtoon'),
   image: z.string().max(2048).optional(),
