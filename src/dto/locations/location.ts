@@ -89,9 +89,23 @@ export interface LocationCanvasDto {
   updatedAt: Date;
 }
 
+export interface LocationObjectiveDto {
+  description: string;
+  completed: boolean;
+  completedAt?: Date;
+}
+
+export interface LocationMissionDto {
+  mainMission: string;
+  objectives: LocationObjectiveDto[];
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 export interface LocationContentDto {
   id: LocationId;
   canvases: Record<string, LocationCanvasDto>;
+  mission: LocationMissionDto | null;
   rendering: string | null;
   suggestedResponses: string[] | null;
 }

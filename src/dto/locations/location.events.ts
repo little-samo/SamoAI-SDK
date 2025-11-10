@@ -1,6 +1,6 @@
 import { AgentId, GimmickId, LocationId, UserId } from '@little-samo/samo-ai';
 
-import { LocationCanvasDto } from './location';
+import { LocationCanvasDto, LocationMissionDto } from './location';
 import { LocationMessageDto } from './location.message';
 
 export const LocationEventType = {
@@ -20,6 +20,7 @@ export const LocationEventType = {
   RenderingUpdated: 'RenderingUpdated',
   CanvasUpdated: 'CanvasUpdated',
   CanvasCleared: 'CanvasCleared',
+  MissionUpdated: 'MissionUpdated',
   SuggestedResponsesUpdated: 'SuggestedResponsesUpdated',
   PauseUpdateUntilUpdated: 'PauseUpdateUntilUpdated',
   LocationUpdated: 'LocationUpdated',
@@ -125,6 +126,11 @@ export interface LocationCanvasClearedEventDto extends LocationEventDtoBase {
   type: typeof LocationEventType.CanvasCleared;
 }
 
+export interface LocationMissionUpdatedEventDto extends LocationEventDtoBase {
+  type: typeof LocationEventType.MissionUpdated;
+  mission: LocationMissionDto | null;
+}
+
 export interface LocationSuggestedResponsesUpdatedEventDto
   extends LocationEventDtoBase {
   type: typeof LocationEventType.SuggestedResponsesUpdated;
@@ -159,6 +165,7 @@ export type LocationEventDto =
   | LocationRenderingUpdatedEventDto
   | LocationCanvasUpdatedEventDto
   | LocationCanvasClearedEventDto
+  | LocationMissionUpdatedEventDto
   | LocationSuggestedResponsesUpdatedEventDto
   | LocationPauseUpdateUntilUpdatedEventDto
   | LocationUpdatedEventDto;
