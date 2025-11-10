@@ -312,6 +312,19 @@ export interface UpdateLocationPresetResponseDto {
   preset: LocationPresetDto;
 }
 
+// POST /locations/preset/:presetId/save - Save location preset
+export const SaveLocationPresetParamsSchema = z.object({
+  presetId: z.coerce.bigint(),
+});
+
+export type SaveLocationPresetParamsDto = z.infer<
+  typeof SaveLocationPresetParamsSchema
+>;
+
+export interface SaveLocationPresetResponseDto {
+  preset: LocationPresetDto;
+}
+
 // POST /locations/preset/:presetId/sync - Sync location preset to source location and increase version
 export const SyncLocationPresetVersionParamsSchema = z.object({
   presetId: z.coerce.bigint(),
