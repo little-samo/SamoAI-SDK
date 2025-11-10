@@ -26,6 +26,7 @@ import {
   LocationPresetDetailDto,
   LocationPresetDto,
   LocationPresetMessageSchema,
+  LocationPresetMissionSchema,
   LocationPresetPrivateDto,
 } from './location.preset';
 import { LocationScheduledMessageDto } from './location.scheduled-message';
@@ -291,6 +292,7 @@ export const UpdateLocationPresetBodySchema = z.object({
   presetShortDescription: z.string().max(80).optional(),
   thumbnail: z.string().max(2048).optional(),
   canvases: z.array(LocationPresetCanvasSchema).max(4).optional(),
+  mission: LocationPresetMissionSchema.nullable().optional(),
   messages: z.array(LocationPresetMessageSchema).max(10).optional(),
   userAvatar: UserAvatarSchema.nullable().optional(),
   hashtags: z.array(z.string().max(16)).max(10).optional(),

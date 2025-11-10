@@ -39,11 +39,13 @@ export type LocationPresetCanvasDto = z.infer<
 
 export const LocationPresetMissionSchema = z.object({
   mainMission: z.string().max(200),
-  objectives: z.array(
-    z.object({
-      description: z.string().max(200),
-    })
-  ),
+  objectives: z
+    .array(
+      z.object({
+        description: z.string().max(200),
+      })
+    )
+    .max(5),
 });
 
 export type LocationPresetMissionDto = z.infer<
