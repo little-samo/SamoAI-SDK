@@ -313,11 +313,18 @@ export interface UpdateLocationPresetResponseDto {
 // POST /locations/preset/:presetId/save - Save location preset
 export const SaveLocationPresetParamsSchema = z.object({
   presetId: z.coerce.bigint(),
-  visibility: z.enum(['private', 'public', 'publish']).optional(),
 });
 
 export type SaveLocationPresetParamsDto = z.infer<
   typeof SaveLocationPresetParamsSchema
+>;
+
+export const SaveLocationPresetBodySchema = z.object({
+  visibility: z.enum(['private', 'public', 'publish']).optional(),
+});
+
+export type SaveLocationPresetBodyDto = z.infer<
+  typeof SaveLocationPresetBodySchema
 >;
 
 export interface SaveLocationPresetResponseDto {
@@ -327,11 +334,18 @@ export interface SaveLocationPresetResponseDto {
 // POST /locations/preset/:presetId/publish - Publish location preset
 export const PublishLocationPresetParamsSchema = z.object({
   presetId: z.coerce.bigint(),
-  visibility: z.enum(['private', 'public', 'publish']).optional(),
 });
 
 export type PublishLocationPresetParamsDto = z.infer<
   typeof PublishLocationPresetParamsSchema
+>;
+
+export const PublishLocationPresetBodySchema = z.object({
+  visibility: z.enum(['private', 'public', 'publish']).optional(),
+});
+
+export type PublishLocationPresetBodyDto = z.infer<
+  typeof PublishLocationPresetBodySchema
 >;
 
 export interface PublishLocationPresetResponseDto {
