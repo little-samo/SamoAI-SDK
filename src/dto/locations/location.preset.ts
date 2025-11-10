@@ -37,6 +37,19 @@ export type LocationPresetCanvasDto = z.infer<
   typeof LocationPresetCanvasSchema
 >;
 
+export const LocationPresetMissionSchema = z.object({
+  mainMission: z.string().max(200),
+  objectives: z.array(
+    z.object({
+      description: z.string().max(200),
+    })
+  ),
+});
+
+export type LocationPresetMissionDto = z.infer<
+  typeof LocationPresetMissionSchema
+>;
+
 export interface LocationPresetDto {
   id: bigint;
   name: string;
@@ -53,6 +66,7 @@ export interface LocationPresetDto {
   gimmickCosts: GimmickCostDto[];
   canvases: LocationPresetCanvasDto[];
   canvasConfigs: LocationConfigCanvas[];
+  mission: LocationPresetMissionDto | null;
   messages: LocationPresetMessageDto[];
   userAvatar: UserAvatarDto | null;
 
