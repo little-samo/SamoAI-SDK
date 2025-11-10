@@ -341,7 +341,7 @@ export type PublishLocationPresetParamsDto = z.infer<
 >;
 
 export const PublishLocationPresetBodySchema = z.object({
-  visibility: z.enum(['private', 'public', 'publish']).optional(),
+  visibility: z.enum(['private', 'public', 'publish']),
 });
 
 export type PublishLocationPresetBodyDto = z.infer<
