@@ -26,6 +26,10 @@ export interface GenerateAvatarImageResponseDto {
 
 // POST /images/thumbnail - Generate thumbnail image
 export const GenerateThumbnailImageBodySchema = z.object({
+  style: z
+    .enum(['realistic', 'webtoon', 'cartoon', 'anime'])
+    .optional()
+    .default('webtoon'),
   image: z.string().max(2048).optional(),
   prompt: z.string().max(500).optional(),
 });
