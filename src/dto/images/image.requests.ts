@@ -6,6 +6,7 @@ import { z } from 'zod';
 
 // POST /images/avatar - Generate avatar image
 export const GenerateAvatarImageBodySchema = z.object({
+  type: z.enum(['avatar', 'reference']).optional().default('avatar'),
   style: z
     .enum(['realistic', 'webtoon', 'cartoon', 'anime'])
     .optional()
@@ -19,7 +20,20 @@ export type GenerateAvatarImageBodyDto = z.infer<
 >;
 
 export interface GenerateAvatarImageResponseDto {
-  avatarUrl: string;
-  referenceAvatarUrl: string;
   prompt: string;
+  imageUrl: string;
+}
+
+// POST /images/thumbnail - Generate thumbnail image
+export const GenerateThumbnailImageBodySchema = z.object({
+  image: z.string().max(2048).optional(),
+  prompt: z.string().max(500).optional(),
+});
+
+export type GenerateThumbnailImageBodyDto = z.infer<
+  typeof GenerateThumbnailImageBodySchema
+>;
+
+export interface GenerateThumbnailImageResponseDto {
+  imageUrl: string;
 }
