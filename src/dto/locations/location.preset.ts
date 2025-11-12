@@ -59,6 +59,7 @@ export interface LocationPresetDto {
   presetShortDescription: string;
 
   thumbnail: string | null;
+  thumbnails: string[];
   ownerUserId: UserId | null;
   sourceLocationId: LocationId | null;
 
