@@ -21,6 +21,7 @@ export const LocationEnvironment = {
   LOCATION_HELPER: 'LOCATION_HELPER',
   AGENT_DM: 'AGENT_DM',
   NOVEL: 'NOVEL',
+  BROWSER: 'BROWSER',
 } as const;
 
 export type LocationEnvironment =

@@ -11,6 +11,9 @@ export const LocationEnvironmentSchema = z.union([
   z
     .literal(LocationEnvironment.NOVEL)
     .describe('Novel writing environment with specialized UI'),
+  z
+    .literal(LocationEnvironment.BROWSER)
+    .describe('Browser environment for web browsing'),
 ]);
 
 export const LocationConfigCoreSchema = z.object({
