@@ -299,6 +299,7 @@ export const UpdateLocationPresetBodySchema = z.object({
   mission: LocationPresetMissionSchema.nullable().optional(),
   messages: z.array(LocationPresetMessageSchema).max(10).optional(),
   userAvatar: UserAvatarSchema.nullable().optional(),
+  tags: z.array(z.string().max(32)).max(8).optional(),
   hashtags: z.array(z.string().max(16)).max(10).optional(),
 
   isAllowImport: z.boolean().optional(),

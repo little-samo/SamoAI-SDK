@@ -80,6 +80,7 @@ export interface LocationPresetDto {
 
   isPublished: boolean;
   publishedAt: Date | null;
+  tags: string[];
   hashtags: string[];
   likeCount: number;
 
