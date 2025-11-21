@@ -196,6 +196,8 @@ export interface LocationPresetsPaginatedResponseDto {
 // GET /locations/presets/published - Get published location presets
 export const PublishedLocationPresetsQuerySchema = z.object({
   type: z.enum(['NOVEL']),
+  gender: z.enum(['all', 'male', 'female']).optional().default('all'),
+  tag: z.string().max(32).optional(),
   page: z.coerce.number().int().min(1).max(25).optional().default(1),
   limit: z.coerce.number().min(1).max(10).default(10),
 });
@@ -216,6 +218,7 @@ export interface PublishedLocationPresetsResponseDto {
 // GET /locations/presets/trending - Get trending location presets
 export const TrendingLocationPresetsQuerySchema = z.object({
   type: z.enum(['NOVEL']),
+  gender: z.enum(['all', 'male', 'female']).optional().default('all'),
 });
 export type TrendingLocationPresetsQueryDto = z.infer<
   typeof TrendingLocationPresetsQuerySchema
