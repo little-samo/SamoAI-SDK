@@ -1284,6 +1284,18 @@ export type UpdateLocationRenderingDto = z.infer<
 
 export interface UpdateLocationRenderingResponseDto {}
 
+// WS: updateLocationMission - Update location mission
+export const UpdateLocationMissionSchema = z.object({
+  locationId: z.coerce.bigint(),
+  mission: LocationPresetMissionSchema.nullable(),
+});
+
+export type UpdateLocationMissionDto = z.infer<
+  typeof UpdateLocationMissionSchema
+>;
+
+export interface UpdateLocationMissionResponseDto {}
+
 // WS: generateLocationSuggestedResponses - Generate suggested responses for user
 export const GenerateLocationSuggestedResponsesSchema = z.object({
   locationId: z.coerce.bigint(),
