@@ -13,6 +13,7 @@ export interface UserPublicDto {
   avatar: string | null;
   referenceAvatar: string | null;
   appearance: string | null;
+  level: number;
 }
 
 export interface UserPrivateDto extends UserPublicDto {
@@ -31,6 +32,8 @@ export interface UserPrivateDto extends UserPublicDto {
   maxAgentLocations: number;
 
   isAllowSensitive: boolean;
+
+  exp: number;
 }
 
 export const UserAvatarSchema = z.object({
