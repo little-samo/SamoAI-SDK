@@ -59,7 +59,7 @@ export interface UserLocationsResponseDto {
 
 // GET /locations/published - Get published locations
 export const PublishedLocationsQuerySchema = z.object({
-  page: z.coerce.number().int().min(1).max(25).optional().default(1),
+  page: z.coerce.number().int().min(1).optional().default(1),
   limit: z.coerce.number().min(1).max(10).default(10),
 });
 
@@ -213,6 +213,41 @@ export interface PublishedLocationPresetsResponseDto {
     limit: number;
     totalPages: number;
   };
+}
+
+// GET /locations/presets/search - Search location presets
+export const SearchLocationPresetsQuerySchema = z.object({
+  query: z.string().min(1).max(100),
+  type: z.enum(['NOVEL']),
+  gender: z.enum(['all', 'male', 'female']).optional().default('all'),
+  sortBy: z.enum(['popular', 'latest']).optional().default('popular'),
+  page: z.coerce.number().int().min(1).max(10).optional().default(1),
+  limit: z.coerce.number().min(1).max(10).default(10),
+});
+
+export type SearchLocationPresetsQueryDto = z.infer<
+  typeof SearchLocationPresetsQuerySchema
+>;
+
+export interface SearchLocationPresetsResponseDto {
+  data: LocationPresetDetailDto[];
+  meta: {
+    total: number;
+    page: number;
+    limit: number;
+    totalPages: number;
+  };
+}
+
+// GET /locations/presets/search/rankings - Get search query rankings
+export const SearchQueryRankingsQuerySchema = z.object({});
+
+export type SearchQueryRankingsQueryDto = z.infer<
+  typeof SearchQueryRankingsQuerySchema
+>;
+
+export interface SearchQueryRankingsResponseDto {
+  queries: string[];
 }
 
 // GET /locations/presets/trending - Get trending location presets
