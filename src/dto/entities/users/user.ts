@@ -34,6 +34,7 @@ export interface UserPrivateDto extends UserPublicDto {
   isAllowSensitive: boolean;
 
   exp: number;
+  nextExp: number;
 }
 
 export const UserAvatarSchema = z.object({
