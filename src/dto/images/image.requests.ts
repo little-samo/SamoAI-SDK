@@ -8,7 +8,7 @@ import { z } from 'zod';
 export const GenerateAvatarImageBodySchema = z.object({
   type: z.enum(['avatar', 'reference']).optional().default('avatar'),
   style: z
-    .enum(['realistic', 'webtoon', 'illustration', 'anime'])
+    .enum(['realistic', 'webtoon', 'webtoon2', 'illustration', 'anime'])
     .optional()
     .default('webtoon'),
   image: z.string().max(2048).optional(),
@@ -27,7 +27,7 @@ export interface GenerateAvatarImageResponseDto {
 // POST /images/thumbnail - Generate thumbnail image
 export const GenerateThumbnailImageBodySchema = z.object({
   style: z
-    .enum(['realistic', 'webtoon', 'illustration', 'anime'])
+    .enum(['realistic', 'webtoon', 'webtoon2', 'illustration', 'anime'])
     .optional()
     .default('webtoon'),
   image: z.string().max(2048).optional(),
