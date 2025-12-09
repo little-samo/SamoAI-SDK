@@ -88,6 +88,11 @@ export interface GetAttendanceResponseDto {
   rewards: number[];
   minRewardCredits: number;
   maxRewardCredits: number;
+  cycleDays: number;
+  bonusInterval: number;
+  bonusMultiplier: number;
+  finalDayMultiplier: number;
+  maxSkipDays: number;
 }
 
 // POST /users/me/attendance - Check attendance
