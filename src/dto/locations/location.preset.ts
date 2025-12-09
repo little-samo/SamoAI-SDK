@@ -107,10 +107,12 @@ export interface LocationPresetPrivateDto extends LocationPresetDto {
 
 export interface LocationPresetCommentDto {
   id: bigint;
-  content: string;
   authorUserId: UserId;
   locationPresetId: bigint;
   parentCommentId: bigint | null;
+
+  content: string;
+  contentImageUrl: string | null;
 
   likeCount: number;
   replyCount: number;
@@ -118,7 +120,8 @@ export interface LocationPresetCommentDto {
   userReaction: 'LIKE' | 'DISLIKE' | null;
   hasReported: boolean;
 
-  isDeleted: boolean;
+  isSecret: boolean;
+
   createdAt: Date;
   updatedAt: Date;
 }

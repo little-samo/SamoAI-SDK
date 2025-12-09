@@ -578,8 +578,10 @@ export type CreateLocationPresetCommentParamsDto = z.infer<
 >;
 
 export const CreateLocationPresetCommentBodySchema = z.object({
-  content: z.string().min(1).max(2000),
   parentCommentId: z.coerce.bigint().optional(),
+  content: z.string().min(1).max(2000),
+  contentImageUrl: z.string().url().optional(),
+  isSecret: z.boolean().optional().default(false),
 });
 
 export type CreateLocationPresetCommentBodyDto = z.infer<
