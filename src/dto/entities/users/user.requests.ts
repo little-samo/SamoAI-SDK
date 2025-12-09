@@ -3,6 +3,7 @@ import { z } from 'zod';
 import {
   UserAvatarDto,
   UserAvatarSchema,
+  UserCommentDto,
   UserPrivateDto,
   UserPublicDto,
 } from './user';
@@ -139,6 +140,139 @@ export type GetUsersByIdsQueryDto = z.infer<typeof GetUsersByIdsQuerySchema>;
 
 export interface GetUserPublicsByIdsResponseDto {
   users: UserPublicDto[];
+}
+
+// GET /users/:userId/comments - Get comments for user
+export const GetUserCommentsParamsSchema = z.object({
+  userId: z.coerce.bigint(),
+});
+
+export type GetUserCommentsParamsDto = z.infer<
+  typeof GetUserCommentsParamsSchema
+>;
+
+export const GetUserCommentsQuerySchema = z.object({
+  sortBy: z.enum(['latest', 'recommended']).optional().default('latest'),
+  page: z.coerce.number().int().min(1).optional().default(1),
+  limit: z.coerce.number().int().min(1).max(50).optional().default(20),
+});
+
+export type GetUserCommentsQueryDto = z.infer<
+  typeof GetUserCommentsQuerySchema
+>;
+
+export interface GetUserCommentsResponseDto {
+  data: UserCommentDto[];
+  meta: {
+    total: number;
+    page: number;
+    limit: number;
+    totalPages: number;
+  };
+}
+
+// GET /users/:userId/comments/:commentId/replies - Get replies for comment
+export const GetUserCommentRepliesParamsSchema = z.object({
+  commentId: z.coerce.bigint(),
+});
+
+export type GetUserCommentRepliesParamsDto = z.infer<
+  typeof GetUserCommentRepliesParamsSchema
+>;
+
+export const GetUserCommentRepliesQuerySchema = z.object({
+  page: z.coerce.number().int().min(1).optional().default(1),
+  limit: z.coerce.number().int().min(1).max(50).optional().default(20),
+});
+
+export type GetUserCommentRepliesQueryDto = z.infer<
+  typeof GetUserCommentRepliesQuerySchema
+>;
+
+export interface GetUserCommentRepliesResponseDto {
+  data: UserCommentDto[];
+  meta: {
+    total: number;
+    page: number;
+    limit: number;
+    totalPages: number;
+  };
+}
+
+// POST /users/:userId/comments - Create comment
+export const CreateUserCommentParamsSchema = z.object({
+  userId: z.coerce.bigint(),
+});
+
+export type CreateUserCommentParamsDto = z.infer<
+  typeof CreateUserCommentParamsSchema
+>;
+
+export const CreateUserCommentBodySchema = z.object({
+  parentCommentId: z.coerce.bigint().optional(),
+  content: z.string().min(1).max(2000),
+  contentImageUrl: z.string().url().optional(),
+  isSecret: z.boolean().optional().default(false),
+});
+
+export type CreateUserCommentBodyDto = z.infer<
+  typeof CreateUserCommentBodySchema
+>;
+
+export interface CreateUserCommentResponseDto {
+  comment: UserCommentDto;
+}
+
+// PATCH /users/:userId/comments/:commentId/reaction - Update comment reaction
+export const UpdateUserCommentReactionParamsSchema = z.object({
+  commentId: z.coerce.bigint(),
+});
+
+export type UpdateUserCommentReactionParamsDto = z.infer<
+  typeof UpdateUserCommentReactionParamsSchema
+>;
+
+export const UpdateUserCommentReactionBodySchema = z.object({
+  reactionType: z.enum(['LIKE', 'DISLIKE']).nullable(),
+});
+
+export type UpdateUserCommentReactionBodyDto = z.infer<
+  typeof UpdateUserCommentReactionBodySchema
+>;
+
+export interface UpdateUserCommentReactionResponseDto {
+  success: boolean;
+  error?: string;
+}
+
+// POST /users/:userId/comments/:commentId/report - Report comment
+export const ReportUserCommentParamsSchema = z.object({
+  userId: z.coerce.bigint(),
+  commentId: z.coerce.bigint(),
+});
+
+export type ReportUserCommentParamsDto = z.infer<
+  typeof ReportUserCommentParamsSchema
+>;
+
+export interface ReportUserCommentResponseDto {
+  success: boolean;
+  error?: string;
+}
+
+// DELETE /users/:userId/comments/:commentId - Delete comment
+export const DeleteUserCommentParamsSchema = z.object({
+  userId: z.coerce.bigint(),
+  commentId: z.coerce.bigint(),
+});
+
+export type DeleteUserCommentParamsDto = z.infer<
+  typeof DeleteUserCommentParamsSchema
+>;
+
+export interface DeleteUserCommentResponseDto {
+  success: boolean;
+  error?: string;
 }
 
 // ================================

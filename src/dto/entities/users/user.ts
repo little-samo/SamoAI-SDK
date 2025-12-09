@@ -48,3 +48,24 @@ export const UserAvatarSchema = z.object({
 });
 
 export type UserAvatarDto = z.infer<typeof UserAvatarSchema>;
+
+export interface UserCommentDto {
+  id: bigint;
+  authorUserId: UserId;
+  targetUserId: UserId;
+  parentCommentId: bigint | null;
+
+  content: string;
+  contentImageUrl: string | null;
+
+  likeCount: number;
+  replyCount: number;
+
+  userReaction: 'LIKE' | 'DISLIKE' | null;
+  hasReported: boolean;
+
+  isSecret: boolean;
+
+  createdAt: Date;
+  updatedAt: Date;
+}
