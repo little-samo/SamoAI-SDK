@@ -59,7 +59,6 @@ export interface UserLocationsResponseDto {
 
 // GET /locations/published - Get published locations
 export const PublishedLocationsQuerySchema = z.object({
-  ownerUserId: z.coerce.bigint().optional(),
   page: z.coerce.number().int().min(1).optional().default(1),
   limit: z.coerce.number().min(1).max(10).default(10),
 });
@@ -199,6 +198,7 @@ export const PublishedLocationPresetsQuerySchema = z.object({
   type: z.enum(['NOVEL']),
   gender: z.enum(['all', 'male', 'female']).optional().default('all'),
   tag: z.string().max(32).optional(),
+  ownerUserId: z.coerce.bigint().optional(),
   page: z.coerce.number().int().min(1).max(25).optional().default(1),
   limit: z.coerce.number().min(1).max(10).default(10),
 });
