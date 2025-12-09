@@ -17,6 +17,7 @@ export interface UserNotificationDto {
   userCommentId: bigint | null;
   locationPresetId: bigint | null;
   locationPresetCommentId: bigint | null;
+  content: string | null;
   count: number | null;
   isAcknowledged: boolean;
   isRead: boolean;
