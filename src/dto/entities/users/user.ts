@@ -14,6 +14,8 @@ export interface UserPublicDto {
   referenceAvatar: string | null;
   appearance: string | null;
   level: number;
+  ownedPresetLocationCount: number | null;
+  ownedPresetMessageCount: number | null;
 }
 
 export interface UserPrivateDto extends UserPublicDto {
