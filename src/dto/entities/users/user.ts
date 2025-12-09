@@ -39,6 +39,8 @@ export interface UserPrivateDto extends UserPublicDto {
   nextExp: number;
   missionObjectiveBonusExp: number;
   missionBonusExp: number;
+
+  createdAt: Date;
 }
 
 export const UserAvatarSchema = z.object({

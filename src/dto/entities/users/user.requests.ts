@@ -275,6 +275,36 @@ export interface DeleteUserCommentResponseDto {
   error?: string;
 }
 
+// GET /users/me/referral - Get current user's referral info
+export const GetUserReferralQuerySchema = z.object({});
+
+export type GetUserReferralQueryDto = z.infer<
+  typeof GetUserReferralQuerySchema
+>;
+
+export interface GetUserReferralResponseDto {
+  referralCode: string;
+  referrerId: bigint | null;
+  referrerCode: string | null;
+  totalRewardCredits: number;
+  referralCount: number;
+  rewardCreditsPerReferral: number;
+}
+
+// POST /users/me/referral - Set referrer code
+export const SetUserReferrerBodySchema = z.object({
+  referralCode: z
+    .string()
+    .length(6)
+    .regex(/^[A-Z0-9]+$/),
+});
+
+export type SetUserReferrerBodyDto = z.infer<typeof SetUserReferrerBodySchema>;
+
+export interface SetUserReferrerResponseDto {
+  rewardCredits: number;
+}
+
 // ================================
 // WebSocket DTOs
 // ================================
