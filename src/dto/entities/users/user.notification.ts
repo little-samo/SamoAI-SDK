@@ -7,7 +7,6 @@ export type UserNotificationType =
   | 'SYSTEM_REWARD_LEVEL_UP'
   | 'COMMENT_USER'
   | 'COMMENT_LOCATION_PRESET'
-  | 'LIKE_USER'
   | 'LIKE_LOCATION_PRESET';
 
 export interface UserNotificationDto {
