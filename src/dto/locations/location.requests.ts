@@ -59,6 +59,7 @@ export interface UserLocationsResponseDto {
 
 // GET /locations/published - Get published locations
 export const PublishedLocationsQuerySchema = z.object({
+  ownerUserId: z.coerce.bigint().optional(),
   page: z.coerce.number().int().min(1).optional().default(1),
   limit: z.coerce.number().min(1).max(10).default(10),
 });
