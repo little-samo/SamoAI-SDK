@@ -7,6 +7,8 @@ import {
   UserPrivateDto,
   UserPublicDto,
 } from './user';
+import { NoticeDto } from './user.notice';
+import { UserNotificationDto } from './user.notification';
 
 // ================================
 // HTTP API DTOs
@@ -304,6 +306,84 @@ export type SetUserReferrerBodyDto = z.infer<typeof SetUserReferrerBodySchema>;
 export interface SetUserReferrerResponseDto {
   rewardCredits: number;
 }
+
+// GET /users/me/notices - Get published notices for current user (auth optional)
+export const GetNoticesQuerySchema = z.object({
+  page: z.coerce.number().int().min(1).optional().default(1),
+  limit: z.coerce.number().int().min(1).max(20).optional().default(20),
+});
+
+export type GetNoticesQueryDto = z.infer<typeof GetNoticesQuerySchema>;
+
+export interface GetNoticesResponseDto {
+  data: NoticeDto[];
+  meta: {
+    total: number;
+    page: number;
+    limit: number;
+    totalPages: number;
+  };
+  unacknowledgedCount: number;
+}
+
+// POST /users/me/notices/acknowledge - acknowledge all notices
+export const AcknowledgeNoticesBodySchema = z.object({});
+
+export type AcknowledgeNoticesBodyDto = z.infer<
+  typeof AcknowledgeNoticesBodySchema
+>;
+
+export interface AcknowledgeNoticesResponseDto {}
+
+// POST /users/me/notices/:noticeId/read
+export const ReadNoticeParamsSchema = z.object({
+  noticeId: z.coerce.bigint(),
+});
+
+export type ReadNoticeParamsDto = z.infer<typeof ReadNoticeParamsSchema>;
+
+export interface ReadNoticeResponseDto {}
+
+// GET /users/me/notifications - Get notifications for current user
+export const GetUserNotificationsQuerySchema = z.object({
+  page: z.coerce.number().int().min(1).optional().default(1),
+  limit: z.coerce.number().int().min(1).max(20).optional().default(20),
+});
+
+export type GetUserNotificationsQueryDto = z.infer<
+  typeof GetUserNotificationsQuerySchema
+>;
+
+export interface GetUserNotificationsResponseDto {
+  data: UserNotificationDto[];
+  meta: {
+    total: number;
+    page: number;
+    limit: number;
+    totalPages: number;
+  };
+  unacknowledgedCount: number;
+}
+
+// POST /users/me/notifications/acknowledge - acknowledge all
+export const AcknowledgeUserNotificationsBodySchema = z.object({});
+
+export type AcknowledgeUserNotificationsBodyDto = z.infer<
+  typeof AcknowledgeUserNotificationsBodySchema
+>;
+
+export interface AcknowledgeUserNotificationsResponseDto {}
+
+// POST /users/me/notifications/:notificationId/read
+export const ReadUserNotificationParamsSchema = z.object({
+  notificationId: z.coerce.bigint(),
+});
+
+export type ReadUserNotificationParamsDto = z.infer<
+  typeof ReadUserNotificationParamsSchema
+>;
+
+export interface ReadUserNotificationResponseDto {}
 
 // ================================
 // WebSocket DTOs
