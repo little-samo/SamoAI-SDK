@@ -77,6 +77,28 @@ export interface UpdateUserAvatarResponseDto {
   error?: string;
 }
 
+// GET /users/me/attendance - Get attendance records
+export const GetAttendanceQuerySchema = z.object({});
+
+export type GetAttendanceQueryDto = z.infer<typeof GetAttendanceQuerySchema>;
+
+export interface GetAttendanceResponseDto {
+  lastAttendanceAt: Date | null;
+  attendanceStreak: number;
+  rewards: number[];
+  minRewardCredits: number;
+  maxRewardCredits: number;
+}
+
+// POST /users/me/attendance - Check attendance
+export const CheckAttendanceBodySchema = z.object({});
+
+export type CheckAttendanceBodyDto = z.infer<typeof CheckAttendanceBodySchema>;
+
+export interface CheckAttendanceResponseDto {
+  rewardCredits: number;
+}
+
 // POST /users/validate - Validate username or nickname before update
 export const ValidateUserFieldBodySchema = z.object({
   username: z
