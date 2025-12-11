@@ -38,6 +38,7 @@ export const UpdateCurrentUserBodySchema = z.object({
   avatar: z.string().max(2048).optional(),
   referenceAvatar: z.string().max(2048).optional(),
   appearance: z.string().max(500).optional(),
+  bio: z.string().max(500).optional(),
 
   isAllowSensitive: z.boolean().optional(),
 });

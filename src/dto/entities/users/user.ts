@@ -12,6 +12,7 @@ export interface UserPublicDto {
   avatarName: string | null;
   avatar: string | null;
   referenceAvatar: string | null;
+  bio: string | null;
   appearance: string | null;
   level: number;
   ownedPresetLocationCount: number | null;
