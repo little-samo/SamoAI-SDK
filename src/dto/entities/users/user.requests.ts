@@ -90,6 +90,7 @@ export interface GetAttendanceResponseDto {
   lastAttendanceAt: Date | null;
   attendanceStreak: number;
   rewards: number[];
+  intervals: number[];
   minRewardCredits: number;
   maxRewardCredits: number;
   cycleDays: number;
