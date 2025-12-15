@@ -337,9 +337,16 @@ export type AcknowledgeNoticesBodyDto = z.infer<
 
 export interface AcknowledgeNoticesResponseDto {}
 
+// POST /users/me/notices/read - read all notices
+export const ReadAllNoticesBodySchema = z.object({});
+
+export type ReadAllNoticesBodyDto = z.infer<typeof ReadAllNoticesBodySchema>;
+
+export interface ReadAllNoticesResponseDto {}
+
 // POST /users/me/notices/:noticeId/read
 export const ReadNoticeParamsSchema = z.object({
-  noticeId: z.coerce.bigint().optional(),
+  noticeId: z.coerce.bigint(),
 });
 
 export type ReadNoticeParamsDto = z.infer<typeof ReadNoticeParamsSchema>;
@@ -375,6 +382,15 @@ export type AcknowledgeUserNotificationsBodyDto = z.infer<
 >;
 
 export interface AcknowledgeUserNotificationsResponseDto {}
+
+// POST /users/me/notifications/read - read all notifications
+export const ReadAllUserNotificationsBodySchema = z.object({});
+
+export type ReadAllUserNotificationsBodyDto = z.infer<
+  typeof ReadAllUserNotificationsBodySchema
+>;
+
+export interface ReadAllUserNotificationsResponseDto {}
 
 // POST /users/me/notifications/:notificationId/read
 export const ReadUserNotificationParamsSchema = z.object({
