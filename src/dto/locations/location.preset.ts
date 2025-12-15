@@ -103,6 +103,8 @@ export interface LocationPresetDetailDto extends LocationPresetDto {
 export interface LocationPresetPrivateDto extends LocationPresetDto {
   locationConfig: LocationConfig;
   agentConfigs: AgentConfig[];
+
+  totalPaidCreditUsed: number;
 }
 
 export interface LocationPresetCommentDto {
