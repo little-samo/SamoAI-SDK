@@ -41,6 +41,8 @@ export interface UserPrivateDto extends UserPublicDto {
   missionObjectiveBonusExp: number;
   missionBonusExp: number;
 
+  totalLocationPresetPaidCreditUsed: number;
+
   createdAt: Date;
 }
 
