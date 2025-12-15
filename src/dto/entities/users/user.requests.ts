@@ -339,7 +339,7 @@ export interface AcknowledgeNoticesResponseDto {}
 
 // POST /users/me/notices/:noticeId/read
 export const ReadNoticeParamsSchema = z.object({
-  noticeId: z.coerce.bigint(),
+  noticeId: z.coerce.bigint().optional(),
 });
 
 export type ReadNoticeParamsDto = z.infer<typeof ReadNoticeParamsSchema>;
