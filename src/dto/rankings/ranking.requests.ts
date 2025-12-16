@@ -17,8 +17,4 @@ export type GetRankingsQueryDto = z.infer<typeof GetRankingsQuerySchema>;
 export interface GetRankingsResponseDto {
   rankings: RankingDto[];
   myRanking: RankingDto | null;
-  meta: {
-    total: number;
-    limit: number;
-  };
 }
