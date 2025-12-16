@@ -146,6 +146,80 @@ export interface GetUserPublicsByIdsResponseDto {
   users: UserPublicDto[];
 }
 
+// POST /users/:userId/follow - Follow a user
+export const FollowUserParamsSchema = z.object({
+  userId: z.coerce.bigint(),
+});
+
+export type FollowUserParamsDto = z.infer<typeof FollowUserParamsSchema>;
+
+export interface FollowUserResponseDto {}
+
+// DELETE /users/:userId/follow - Unfollow a user
+export const UnfollowUserParamsSchema = z.object({
+  userId: z.coerce.bigint(),
+});
+
+export type UnfollowUserParamsDto = z.infer<typeof UnfollowUserParamsSchema>;
+
+export interface UnfollowUserResponseDto {}
+
+// GET /users/:userId/followers - Get user's followers
+export const GetUserFollowersParamsSchema = z.object({
+  userId: z.coerce.bigint(),
+});
+
+export type GetUserFollowersParamsDto = z.infer<
+  typeof GetUserFollowersParamsSchema
+>;
+
+export const GetUserFollowersQuerySchema = z.object({
+  page: z.coerce.number().int().min(1).optional().default(1),
+  limit: z.coerce.number().int().min(1).max(20).optional().default(20),
+});
+
+export type GetUserFollowersQueryDto = z.infer<
+  typeof GetUserFollowersQuerySchema
+>;
+
+export interface GetUserFollowersResponseDto {
+  users: UserPublicDto[];
+  meta: {
+    total: number;
+    page: number;
+    limit: number;
+    totalPages: number;
+  };
+}
+
+// GET /users/:userId/following - Get users that a user is following
+export const GetUserFollowingParamsSchema = z.object({
+  userId: z.coerce.bigint(),
+});
+
+export type GetUserFollowingParamsDto = z.infer<
+  typeof GetUserFollowingParamsSchema
+>;
+
+export const GetUserFollowingQuerySchema = z.object({
+  page: z.coerce.number().int().min(1).optional().default(1),
+  limit: z.coerce.number().int().min(1).max(20).optional().default(20),
+});
+
+export type GetUserFollowingQueryDto = z.infer<
+  typeof GetUserFollowingQuerySchema
+>;
+
+export interface GetUserFollowingResponseDto {
+  users: UserPublicDto[];
+  meta: {
+    total: number;
+    page: number;
+    limit: number;
+    totalPages: number;
+  };
+}
+
 // GET /users/:userId/comments - Get comments for user
 export const GetUserCommentsParamsSchema = z.object({
   userId: z.coerce.bigint(),

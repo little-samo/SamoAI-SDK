@@ -216,6 +216,24 @@ export interface PublishedLocationPresetsResponseDto {
   };
 }
 
+// GET /locations/presets/following - Get published location presets from followed users
+export const FollowingLocationPresetsQuerySchema = z.object({
+  page: z.coerce.number().int().min(1).max(10).optional().default(1),
+  limit: z.coerce.number().min(1).max(10).default(10),
+});
+
+export type FollowingLocationPresetsQueryDto = z.infer<
+  typeof FollowingLocationPresetsQuerySchema
+>;
+
+export interface FollowingLocationPresetsResponseDto {
+  data: LocationPresetDetailDto[];
+  meta: {
+    page: number;
+    limit: number;
+  };
+}
+
 // GET /locations/presets/search - Search location presets
 export const SearchLocationPresetsQuerySchema = z.object({
   query: z.string().min(1).max(100),
