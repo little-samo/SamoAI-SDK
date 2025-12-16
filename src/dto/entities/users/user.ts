@@ -19,7 +19,8 @@ export interface UserPublicDto {
   ownedPresetMessageCount: number | null;
   followingCount: number | null;
   followerCount: number | null;
-  isFollowing: boolean | null;
+  following: boolean | null;
+  followedBy: boolean | null;
 }
 
 export interface UserPrivateDto extends UserPublicDto {
