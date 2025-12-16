@@ -291,7 +291,7 @@ export const CreateLocationPresetSchema = z.object({
   name: z.string().max(64).optional(),
   presetDescription: z.string().max(5000),
   presetShortDescription: z.string().max(80),
-  hashtags: z.array(z.string().max(16)).max(10).optional(),
+  hashtags: z.array(z.string().max(21)).max(10).optional(),
 
   isAllowImport: z.boolean().optional(),
   isSensitive: z.boolean().optional(),
@@ -354,7 +354,7 @@ export const UpdateLocationPresetBodySchema = z.object({
   messages: z.array(LocationPresetMessageSchema).max(10).optional(),
   userAvatar: UserAvatarSchema.nullable().optional(),
   tags: z.array(z.string().max(32)).max(8).optional(),
-  hashtags: z.array(z.string().max(16)).max(10).optional(),
+  hashtags: z.array(z.string().max(21)).max(10).optional(),
 
   isAllowImport: z.boolean().optional(),
   isSensitive: z.boolean().optional(),
@@ -1052,7 +1052,7 @@ export const UpdateLocationBodySchema = z.object({
   visibility: z.enum(['private', 'public', 'publish']).optional(),
   maxUsers: z.number().int().min(1).max(99).optional(),
   publishDescription: z.string().max(500).optional(),
-  hashtags: z.array(z.string().max(16)).max(10).optional(),
+  hashtags: z.array(z.string().max(21)).max(10).optional(),
 
   useLocationCreditOnly: z.boolean().optional(),
   creditCostPerChat: z.number().int().min(0).max(1000).optional(),
