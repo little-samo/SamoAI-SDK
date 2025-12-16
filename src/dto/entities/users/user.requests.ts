@@ -1,3 +1,4 @@
+import { UserId } from '@little-samo/samo-ai';
 import { z } from 'zod';
 
 import {
@@ -184,7 +185,7 @@ export type GetUserFollowersQueryDto = z.infer<
 >;
 
 export interface GetUserFollowersResponseDto {
-  users: UserPublicDto[];
+  userIds: UserId[];
   meta: {
     total: number;
     page: number;
@@ -212,7 +213,7 @@ export type GetUserFollowingQueryDto = z.infer<
 >;
 
 export interface GetUserFollowingResponseDto {
-  users: UserPublicDto[];
+  userIds: UserId[];
   meta: {
     total: number;
     page: number;
