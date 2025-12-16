@@ -17,6 +17,8 @@ export interface UserPublicDto {
   level: number;
   ownedPresetLocationCount: number | null;
   ownedPresetMessageCount: number | null;
+  followingCount: number | null;
+  followerCount: number | null;
 }
 
 export interface UserPrivateDto extends UserPublicDto {
