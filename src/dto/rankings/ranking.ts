@@ -9,7 +9,7 @@ export interface RankingEntity {
 
 export interface RankingDto {
   type: number;
-  date: Date;
+  date: Date | null;
   rank: number;
   entity: RankingEntity;
   score: number;
