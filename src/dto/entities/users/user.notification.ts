@@ -8,7 +8,8 @@ export type UserNotificationType =
   | 'SYSTEM_REWARD_REFERRAL'
   | 'COMMENT_USER'
   | 'COMMENT_LOCATION_PRESET'
-  | 'LIKE_LOCATION_PRESET';
+  | 'LIKE_LOCATION_PRESET'
+  | 'FOLLOW_USER';
 
 export interface UserNotificationDto {
   id: bigint;
