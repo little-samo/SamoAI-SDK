@@ -66,7 +66,7 @@ export interface LocationPublicDto {
 export interface LocationPrivateDto extends LocationPublicDto {
   config: LocationConfig | null;
   credentialTypes: string[];
-  overrideAgentLlmLevel: 'FREE' | 'LOW' | 'MEDIUM' | 'HIGH' | null;
+  overrideAgentLlmLevel: 'FREE' | 'BASE' | 'PRO' | 'ULTRA' | null; // LOW, MEDIUM, HIGH are deprecated
 
   isEditable: boolean;
 }

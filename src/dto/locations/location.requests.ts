@@ -1046,7 +1046,7 @@ export type UpdateLocationParamsDto = z.infer<
 
 export const UpdateLocationBodySchema = z.object({
   overrideAgentLlmLevel: z
-    .enum(['FREE', 'LOW', 'MEDIUM', 'HIGH'])
+    .enum(['FREE', 'BASE', 'PRO', 'ULTRA']) // LOW, MEDIUM, HIGH are deprecated
     .nullable()
     .optional(),
 
