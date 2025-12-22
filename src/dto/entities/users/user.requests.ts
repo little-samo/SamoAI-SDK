@@ -54,6 +54,17 @@ export interface UpdateCurrentUserResponseDto {
   error?: string;
 }
 
+// DELETE /users/me - Delete current user (withdrawal)
+export const DeleteCurrentUserBodySchema = z.object({
+  reason: z.string().min(1).max(500),
+});
+
+export type DeleteCurrentUserBodyDto = z.infer<
+  typeof DeleteCurrentUserBodySchema
+>;
+
+export interface DeleteCurrentUserResponseDto {}
+
 // GET /users/me/avatars - Get user's saved avatars
 export const GetUserAvatarsQuerySchema = z.object({});
 
