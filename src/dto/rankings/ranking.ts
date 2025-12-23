@@ -18,5 +18,4 @@ export interface RankingDto {
   rank: number;
   entity: RankingEntity;
   score: number;
-  rewards: RankingReward[] | null;
 }

@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { RankingDto } from './ranking';
+import { RankingDto, RankingReward } from './ranking';
 
 // ================================
 // HTTP API DTOs
@@ -17,4 +17,5 @@ export type GetRankingsQueryDto = z.infer<typeof GetRankingsQuerySchema>;
 export interface GetRankingsResponseDto {
   rankings: RankingDto[];
   myRanking: RankingDto | null;
+  rewards: RankingReward[] | null;
 }
