@@ -505,7 +505,7 @@ export type GetUserSettingsQueryDto = z.infer<
 >;
 
 export interface GetUserSettingsResponseDto {
-  settings: Record<string, string | number | boolean | object>;
+  settings: Record<string, string | number | boolean | object | null>;
 }
 
 // ================================
