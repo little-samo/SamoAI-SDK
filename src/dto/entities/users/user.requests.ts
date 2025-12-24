@@ -490,6 +490,24 @@ export type ReadUserNotificationParamsDto = z.infer<
 
 export interface ReadUserNotificationResponseDto {}
 
+// GET /users/me/settings - Get user settings/constants by keys
+export const GetUserSettingsQuerySchema = z.object({
+  keys: z
+    .string()
+    .transform((val) => val.split(',').map((key) => key.trim()))
+    .refine((arr) => arr.length > 0, {
+      message: 'At least one key must be provided',
+    }),
+});
+
+export type GetUserSettingsQueryDto = z.infer<
+  typeof GetUserSettingsQuerySchema
+>;
+
+export interface GetUserSettingsResponseDto {
+  settings: Record<string, string | number | boolean | object>;
+}
+
 // ================================
 // WebSocket DTOs
 // ================================
