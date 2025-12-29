@@ -41,3 +41,11 @@ export type GenerateThumbnailImageBodyDto = z.infer<
 export interface GenerateThumbnailImageResponseDto {
   imageUrl: string;
 }
+
+// GET /images/scene.webp - Get scene image (returns image file directly)
+export const GetSceneImageQuerySchema = z.object({
+  avatar: z.coerce.bigint(),
+  scene: z.string().max(1000),
+});
+
+export type GetSceneImageQueryDto = z.infer<typeof GetSceneImageQuerySchema>;
