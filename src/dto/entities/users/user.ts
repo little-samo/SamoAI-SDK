@@ -51,13 +51,13 @@ export interface UserPrivateDto extends UserPublicDto {
 }
 
 export const UserAvatarSchema = z.object({
-  id: z.coerce.bigint(),
+  id: z.coerce.bigint().optional(),
   name: z.string().max(64),
   role: z.string().max(200).optional(),
   avatar: z.string().max(2048),
   referenceAvatar: z.string().max(2048),
   appearance: z.string().max(500),
-  createdAt: z.coerce.date(),
+  createdAt: z.coerce.date().optional(),
 });
 
 export type UserAvatarDto = z.infer<typeof UserAvatarSchema>;
