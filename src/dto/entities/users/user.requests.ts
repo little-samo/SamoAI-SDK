@@ -3,7 +3,6 @@ import { z } from 'zod';
 
 import {
   UserAvatarDto,
-  UserAvatarSchema,
   UserCommentDto,
   UserPrivateDto,
   UserPublicDto,
@@ -66,33 +65,48 @@ export type DeleteCurrentUserBodyDto = z.infer<
 export interface DeleteCurrentUserResponseDto {}
 
 // GET /users/me/avatars - Get user's saved avatars
-export const GetUserAvatarsQuerySchema = z.object({});
+export const GetUserAvatarsQuerySchema = z.object({
+  page: z.coerce.number().int().min(1).optional().default(1),
+  limit: z.coerce.number().int().min(1).max(20).optional().default(20),
+});
 
 export type GetUserAvatarsQueryDto = z.infer<typeof GetUserAvatarsQuerySchema>;
 
 export interface GetUserAvatarsResponseDto {
-  avatars: (UserAvatarDto | null)[];
+  data: UserAvatarDto[];
+  meta: {
+    total: number;
+    page: number;
+    limit: number;
+    totalPages: number;
+  };
 }
 
-// PATCH /users/me/avatars - Update user's avatar
-export const UpdateUserAvatarBodySchema = z
-  .object({
-    index: z.coerce.number().int().min(0).optional(),
-    locationId: z.coerce.bigint().optional(),
-    avatar: UserAvatarSchema.nullable().optional(),
-  })
-  .refine((data) => data.index !== undefined || data.locationId !== undefined, {
-    message: 'Either index or locationId must be provided',
-  });
+// POST /users/me/avatars - Create user's avatar
+export const CreateUserAvatarBodySchema = z.object({
+  name: z.string().max(64),
+  role: z.string().max(200).optional(),
+  avatar: z.string().max(2048),
+  referenceAvatar: z.string().max(2048),
+  appearance: z.string().max(500),
+});
 
-export type UpdateUserAvatarBodyDto = z.infer<
-  typeof UpdateUserAvatarBodySchema
+export type CreateUserAvatarBodyDto = z.infer<
+  typeof CreateUserAvatarBodySchema
 >;
 
-export interface UpdateUserAvatarResponseDto {
-  success: boolean;
-  error?: string;
+export interface CreateUserAvatarResponseDto {
+  avatar: UserAvatarDto;
 }
+
+// DELETE /users/me/avatars/:id - Delete user's avatar
+export const DeleteUserAvatarBodySchema = z.object({});
+
+export type DeleteUserAvatarBodyDto = z.infer<
+  typeof DeleteUserAvatarBodySchema
+>;
+
+export interface DeleteUserAvatarResponseDto {}
 
 // GET /users/me/attendance - Get attendance records
 export const GetAttendanceQuerySchema = z.object({});
