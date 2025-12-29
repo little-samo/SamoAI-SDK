@@ -1,5 +1,7 @@
 import { z } from 'zod';
 
+import { ImageStyleSchema } from './image';
+
 // ================================
 // HTTP API DTOs
 // ================================
@@ -7,10 +9,7 @@ import { z } from 'zod';
 // POST /images/avatar - Generate avatar image
 export const GenerateAvatarImageBodySchema = z.object({
   type: z.enum(['avatar', 'reference']).optional().default('avatar'),
-  style: z
-    .enum(['realistic', 'webtoon', 'webtoon2', 'illustration', 'anime'])
-    .optional()
-    .default('webtoon'),
+  style: ImageStyleSchema.optional().default('webtoon'),
   image: z.string().max(2048).optional(),
   prompt: z.string().max(500).optional(),
 });
@@ -26,10 +25,7 @@ export interface GenerateAvatarImageResponseDto {
 
 // POST /images/thumbnail - Generate thumbnail image
 export const GenerateThumbnailImageBodySchema = z.object({
-  style: z
-    .enum(['realistic', 'webtoon', 'webtoon2', 'illustration', 'anime'])
-    .optional()
-    .default('webtoon'),
+  style: ImageStyleSchema.optional().default('webtoon'),
   image: z.string().max(2048).optional(),
   prompt: z.string().max(500).optional(),
 });
@@ -46,6 +42,7 @@ export interface GenerateThumbnailImageResponseDto {
 export const GetSceneImageQuerySchema = z.object({
   avatar: z.coerce.bigint(),
   scene: z.string().max(1000),
+  style: ImageStyleSchema.optional().default('webtoon'),
 });
 
 export type GetSceneImageQueryDto = z.infer<typeof GetSceneImageQuerySchema>;
