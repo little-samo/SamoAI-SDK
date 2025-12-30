@@ -62,11 +62,6 @@ export const UserAvatarSchema = z.object({
 
 export type UserAvatarDto = z.infer<typeof UserAvatarSchema>;
 
-// API Key Types
-export const UserApiKeyTypeSchema = z.enum(['AVATAR']);
-
-export type UserApiKeyType = z.infer<typeof UserApiKeyTypeSchema>;
-
 export interface UserCommentDto {
   id: bigint;
   authorUserId: UserId;
