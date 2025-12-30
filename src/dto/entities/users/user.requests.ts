@@ -83,17 +83,6 @@ export interface GetUserAvatarsResponseDto {
   };
 }
 
-// GET /users/me/avatars/:id - Get user's avatar by ID
-export const GetUserAvatarParamsSchema = z.object({
-  id: z.coerce.bigint(),
-});
-
-export type GetUserAvatarParamsDto = z.infer<typeof GetUserAvatarParamsSchema>;
-
-export interface GetUserAvatarResponseDto {
-  avatar: UserAvatarDto;
-}
-
 // POST /users/me/avatars - Create user's avatar
 export const CreateUserAvatarBodySchema = z.object({
   name: z.string().max(64),
@@ -183,6 +172,17 @@ export type GetUsersByIdsQueryDto = z.infer<typeof GetUsersByIdsQuerySchema>;
 
 export interface GetUserPublicsByIdsResponseDto {
   users: UserPublicDto[];
+}
+
+// GET /users/avatars/:id - Get user's avatar by ID
+export const GetUserAvatarParamsSchema = z.object({
+  id: z.coerce.bigint(),
+});
+
+export type GetUserAvatarParamsDto = z.infer<typeof GetUserAvatarParamsSchema>;
+
+export interface GetUserAvatarResponseDto {
+  avatar: UserAvatarDto;
 }
 
 // POST /users/:userId/follow - Follow a user
