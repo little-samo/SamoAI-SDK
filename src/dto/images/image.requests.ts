@@ -38,7 +38,7 @@ export interface GenerateThumbnailImageResponseDto {
   imageUrl: string;
 }
 
-// GET /images/scene.webp - Get scene image (returns image file directly)
+// GET /images/scene - Get scene image (returns image file directly)
 export const GetSceneImageQuerySchema = z.object({
   avatar: z.coerce.bigint(),
   scene: z.string().max(1000),
