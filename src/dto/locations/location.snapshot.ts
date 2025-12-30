@@ -11,6 +11,7 @@ export interface LocationSnapshotDto {
   locationEnvironment: LocationEnvironment;
   locationName: string;
   locationOwnerUserId: UserId;
+  locationSourcePresetId: bigint | null;
 
   messages: LocationMessageDto[];
   createdAt: Date;
