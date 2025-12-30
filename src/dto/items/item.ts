@@ -1,3 +1,5 @@
+import { z } from 'zod';
+
 export interface ItemDto {
   id: number;
   itemDataId: number;
@@ -19,3 +21,9 @@ export interface ItemUpdateDto {
   param4: number;
   updatedAt: Date;
 }
+
+export const ItemStackSchema = z.object({
+  itemDataId: z.number().int().positive(),
+  count: z.number().int().positive(),
+});
+export type ItemStackDto = z.infer<typeof ItemStackSchema>;

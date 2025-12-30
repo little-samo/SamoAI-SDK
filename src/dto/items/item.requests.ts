@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { ItemDto } from './item';
+import { ItemDto, ItemStackSchema } from './item';
 
 // ================================
 // HTTP API DTOs
@@ -26,5 +26,17 @@ export const GetUserItemsQuerySchema = z.object({
 export type GetUserItemsQueryDto = z.infer<typeof GetUserItemsQuerySchema>;
 
 export interface GetUserItemsResponseDto {
+  items: ItemDto[];
+}
+
+// POST /items/exchange - Exchange items
+export const ExchangeItemsBodySchema = z.object({
+  requiredItems: z.array(ItemStackSchema).min(1).max(10),
+  receivedItems: z.array(ItemStackSchema).min(1).max(10),
+});
+
+export type ExchangeItemsBodyDto = z.infer<typeof ExchangeItemsBodySchema>;
+
+export interface ExchangeItemsResponseDto {
   items: ItemDto[];
 }
