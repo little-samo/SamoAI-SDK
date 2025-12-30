@@ -2,6 +2,7 @@ import { UserId } from '@little-samo/samo-ai';
 import { z } from 'zod';
 
 import {
+  UserApiKeyTypeSchema,
   UserAvatarDto,
   UserCommentDto,
   UserPrivateDto,
@@ -520,6 +521,30 @@ export type GetUserSettingsQueryDto = z.infer<
 
 export interface GetUserSettingsResponseDto {
   settings: Record<string, string | number | boolean | object | null>;
+}
+
+// GET /users/me/api-keys - Get API key for specific type
+export const GetUserApiKeyQuerySchema = z.object({
+  type: UserApiKeyTypeSchema,
+});
+
+export type GetUserApiKeyQueryDto = z.infer<typeof GetUserApiKeyQuerySchema>;
+
+export interface GetUserApiKeyResponseDto {
+  apiKey: string;
+}
+
+// POST /users/me/api-keys/regenerate - Regenerate API key for specific type
+export const RegenerateUserApiKeyBodySchema = z.object({
+  type: UserApiKeyTypeSchema,
+});
+
+export type RegenerateUserApiKeyBodyDto = z.infer<
+  typeof RegenerateUserApiKeyBodySchema
+>;
+
+export interface RegenerateUserApiKeyResponseDto {
+  apiKey: string;
 }
 
 // ================================
