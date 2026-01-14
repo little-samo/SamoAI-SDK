@@ -174,6 +174,26 @@ export interface GetUserPublicsByIdsResponseDto {
   users: UserPublicDto[];
 }
 
+// GET /users/avatars - Get all user's avatars
+export const GetAllUserAvatarsQuerySchema = z.object({
+  page: z.coerce.number().int().min(1).optional().default(1),
+  limit: z.coerce.number().int().min(1).max(20).optional().default(20),
+});
+
+export type GetAllUserAvatarsQueryDto = z.infer<
+  typeof GetAllUserAvatarsQuerySchema
+>;
+
+export interface GetAllUserAvatarsResponseDto {
+  avatars: UserAvatarDto[];
+  meta: {
+    total: number;
+    page: number;
+    limit: number;
+    totalPages: number;
+  };
+}
+
 // GET /users/avatars/:id - Get user's avatar by ID
 export const GetUserAvatarParamsSchema = z.object({
   id: z.coerce.bigint(),
