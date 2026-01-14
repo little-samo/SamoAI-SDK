@@ -1,6 +1,8 @@
 import { UserId } from '@little-samo/samo-ai';
 import { z } from 'zod';
 
+import { ImageStyleSchema } from '../../images';
+
 import {
   UserApiKeyTypeSchema,
   UserAvatarDto,
@@ -89,7 +91,10 @@ export const CreateUserAvatarBodySchema = z.object({
   role: z.string().max(200).optional(),
   avatar: z.string().max(2048),
   referenceAvatar: z.string().max(2048),
+  examplePoses: z.array(z.string().max(2048)).optional(),
   appearance: z.string().max(500),
+  style: ImageStyleSchema.optional(),
+  isPublic: z.boolean().optional().default(false),
 });
 
 export type CreateUserAvatarBodyDto = z.infer<
