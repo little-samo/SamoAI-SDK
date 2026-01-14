@@ -1,5 +1,6 @@
 import { UserId } from '@little-samo/samo-ai';
 import z from 'zod';
+
 import { ImageStyleSchema } from '../../images';
 
 export interface UserPublicDto {
