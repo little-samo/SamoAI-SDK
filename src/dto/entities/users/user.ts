@@ -1,5 +1,6 @@
 import { UserId } from '@little-samo/samo-ai';
 import z from 'zod';
+import { ImageStyleSchema } from '../../images';
 
 export interface UserPublicDto {
   id: UserId;
@@ -57,6 +58,7 @@ export const UserAvatarSchema = z.object({
   avatar: z.string().max(2048),
   referenceAvatar: z.string().max(2048),
   appearance: z.string().max(500),
+  style: ImageStyleSchema.optional(),
   createdAt: z.coerce.date().optional(),
 });
 

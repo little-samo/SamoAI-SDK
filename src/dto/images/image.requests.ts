@@ -42,7 +42,7 @@ export interface GenerateThumbnailImageResponseDto {
 export const GetSceneImageQuerySchema = z.object({
   avatar: z.coerce.bigint(),
   scene: z.string().max(1000),
-  style: ImageStyleSchema.optional().default('webtoon'),
+  style: ImageStyleSchema.optional(),
 });
 
 export type GetSceneImageQueryDto = z.infer<typeof GetSceneImageQuerySchema>;
