@@ -106,6 +106,14 @@ export interface CreateUserAvatarResponseDto {
 }
 
 // PATCH /users/me/avatars/:id - Update user's avatar
+export const UpdateUserAvatarParamsSchema = z.object({
+  id: z.coerce.bigint(),
+});
+
+export type UpdateUserAvatarParamsDto = z.infer<
+  typeof UpdateUserAvatarParamsSchema
+>;
+
 export const UpdateUserAvatarBodySchema = z.object({
   examplePoses: z.array(z.string().max(2048)).optional(),
   isPublic: z.boolean().optional(),
@@ -120,6 +128,14 @@ export interface UpdateUserAvatarResponseDto {
 }
 
 // DELETE /users/me/avatars/:id - Delete user's avatar
+export const DeleteUserAvatarParamsSchema = z.object({
+  id: z.coerce.bigint(),
+});
+
+export type DeleteUserAvatarParamsDto = z.infer<
+  typeof DeleteUserAvatarParamsSchema
+>;
+
 export const DeleteUserAvatarBodySchema = z.object({});
 
 export type DeleteUserAvatarBodyDto = z.infer<
