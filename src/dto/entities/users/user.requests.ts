@@ -111,6 +111,14 @@ export const UpdateUserAvatarBodySchema = z.object({
   isPublic: z.boolean().optional(),
 });
 
+export type UpdateUserAvatarBodyDto = z.infer<
+  typeof UpdateUserAvatarBodySchema
+>;
+
+export interface UpdateUserAvatarResponseDto {
+  avatar: UserAvatarDto;
+}
+
 // DELETE /users/me/avatars/:id - Delete user's avatar
 export const DeleteUserAvatarBodySchema = z.object({});
 
