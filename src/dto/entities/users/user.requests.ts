@@ -100,6 +100,12 @@ export interface CreateUserAvatarResponseDto {
   avatar: UserAvatarDto;
 }
 
+// PATCH /users/me/avatars/:id - Update user's avatar
+export const UpdateUserAvatarBodySchema = z.object({
+  examplePoses: z.array(z.string().max(2048)).optional(),
+  isPublic: z.boolean().optional(),
+});
+
 // DELETE /users/me/avatars/:id - Delete user's avatar
 export const DeleteUserAvatarBodySchema = z.object({});
 
