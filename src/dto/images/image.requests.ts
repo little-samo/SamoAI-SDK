@@ -8,10 +8,12 @@ import { ImageStyleSchema } from './image';
 
 // POST /images/avatar - Generate avatar image
 export const GenerateAvatarImageBodySchema = z.object({
-  type: z.enum(['avatar', 'reference']).optional().default('avatar'),
+  type: z.enum(['avatar', 'reference', 'pose']).optional().default('avatar'),
   style: ImageStyleSchema.optional().default('webtoon'),
   image: z.string().max(2048).optional(),
   prompt: z.string().max(500).optional(),
+  rawPrompt: z.string().max(500).optional(),
+  pose: z.string().max(1000).optional(),
 });
 
 export type GenerateAvatarImageBodyDto = z.infer<
