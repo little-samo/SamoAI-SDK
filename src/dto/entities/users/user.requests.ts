@@ -240,6 +240,34 @@ export interface GetUserAvatarResponseDto {
   avatar: UserAvatarDto;
 }
 
+// GET /users/:userId/avatars - Get specific user's public avatars
+export const GetUserPublicAvatarsParamsSchema = z.object({
+  userId: z.coerce.bigint(),
+});
+
+export type GetUserPublicAvatarsParamsDto = z.infer<
+  typeof GetUserPublicAvatarsParamsSchema
+>;
+
+export const GetUserPublicAvatarsQuerySchema = z.object({
+  page: z.coerce.number().int().min(1).optional().default(1),
+  limit: z.coerce.number().int().min(1).max(20).optional().default(20),
+});
+
+export type GetUserPublicAvatarsQueryDto = z.infer<
+  typeof GetUserPublicAvatarsQuerySchema
+>;
+
+export interface GetUserPublicAvatarsResponseDto {
+  avatars: UserAvatarDto[];
+  meta: {
+    total: number;
+    page: number;
+    limit: number;
+    totalPages: number;
+  };
+}
+
 // POST /users/:userId/follow - Follow a user
 export const FollowUserParamsSchema = z.object({
   userId: z.coerce.bigint(),
