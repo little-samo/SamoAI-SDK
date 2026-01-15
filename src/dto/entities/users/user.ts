@@ -17,6 +17,8 @@ export interface UserPublicDto {
   bio: string | null;
   appearance: string | null;
   level: number;
+  ownedPublicAvatarCount: number | null;
+  ownedAvatarUsageCount: number | null;
   ownedPresetLocationCount: number | null;
   ownedPresetMessageCount: number | null;
   followingCount: number | null;
