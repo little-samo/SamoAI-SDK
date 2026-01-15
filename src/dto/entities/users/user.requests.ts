@@ -144,6 +144,26 @@ export type DeleteUserAvatarBodyDto = z.infer<
 
 export interface DeleteUserAvatarResponseDto {}
 
+// GET /users/me/avatars/liked - Get liked avatars
+export const GetLikedUserAvatarsQuerySchema = z.object({
+  page: z.coerce.number().int().min(1).optional().default(1),
+  limit: z.coerce.number().int().min(1).max(20).optional().default(20),
+});
+
+export type GetLikedUserAvatarsQueryDto = z.infer<
+  typeof GetLikedUserAvatarsQuerySchema
+>;
+
+export interface GetLikedUserAvatarsResponseDto {
+  avatars: UserAvatarDto[];
+  meta: {
+    total: number;
+    page: number;
+    limit: number;
+    totalPages: number;
+  };
+}
+
 // GET /users/me/attendance - Get attendance records
 export const GetAttendanceQuerySchema = z.object({});
 
@@ -266,6 +286,34 @@ export interface GetUserPublicAvatarsResponseDto {
     limit: number;
     totalPages: number;
   };
+}
+
+// POST /users/avatars/:avatarId/like - Like an avatar
+export const LikeUserAvatarParamsSchema = z.object({
+  avatarId: z.coerce.bigint(),
+});
+
+export type LikeUserAvatarParamsDto = z.infer<
+  typeof LikeUserAvatarParamsSchema
+>;
+
+export interface LikeUserAvatarResponseDto {
+  likeCount: number;
+  isLiked: boolean;
+}
+
+// DELETE /users/avatars/:avatarId/like - Unlike an avatar
+export const UnlikeUserAvatarParamsSchema = z.object({
+  avatarId: z.coerce.bigint(),
+});
+
+export type UnlikeUserAvatarParamsDto = z.infer<
+  typeof UnlikeUserAvatarParamsSchema
+>;
+
+export interface UnlikeUserAvatarResponseDto {
+  likeCount: number;
+  isLiked: boolean;
 }
 
 // POST /users/:userId/follow - Follow a user
