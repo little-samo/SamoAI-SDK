@@ -58,6 +58,7 @@ export interface UserPrivateDto extends UserPublicDto {
 
 export const UserAvatarSchema = z.object({
   id: z.coerce.bigint().optional(),
+  ownerUserId: z.coerce.bigint().optional(),
   name: z.string().max(64),
   role: z.string().max(200).optional(),
   avatar: z.string().max(2048),
