@@ -11,6 +11,7 @@ export interface UserPublicDto {
   lastName: string | null;
   role: string | null;
   profilePicture: string | null;
+  coverPicture: string | null;
   avatarName: string | null;
   avatar: string | null;
   referenceAvatar: string | null;
