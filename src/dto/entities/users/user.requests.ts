@@ -92,7 +92,7 @@ export const CreateUserAvatarBodySchema = z.object({
   role: z.string().max(200).optional(),
   avatar: z.string().max(2048),
   referenceAvatar: z.string().max(2048).optional(),
-  examplePoses: z.array(z.string().max(2048)).optional(),
+  examplePoses: z.array(z.string().max(2048)).max(2).optional(),
   appearance: z.string().max(500),
   style: ImageStyleSchema.optional(),
   isPublic: z.boolean().optional().default(false),
