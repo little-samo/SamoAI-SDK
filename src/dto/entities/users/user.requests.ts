@@ -252,7 +252,7 @@ export interface GetPublicAvatarsResponseDto {
 // GET /users/avatars/search - Search public avatars
 export const SearchPublicAvatarsQuerySchema = z.object({
   query: z.string().min(1).max(100),
-  page: z.coerce.number().int().min(1).optional().default(1),
+  page: z.coerce.number().int().min(1).max(10).optional().default(1),
   limit: z.coerce.number().int().min(1).max(20).optional().default(20),
 });
 
