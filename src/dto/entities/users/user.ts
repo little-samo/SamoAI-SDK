@@ -42,6 +42,7 @@ export interface UserPrivateDto extends UserPublicDto {
   maxLocationAgents: number;
   maxLocationAgentsHardLimit: number;
   maxAgentLocations: number;
+  maxAvatars: number;
 
   isAllowSensitive: boolean;
 
