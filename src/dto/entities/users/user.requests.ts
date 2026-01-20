@@ -249,6 +249,27 @@ export interface GetPublicAvatarsResponseDto {
   };
 }
 
+// GET /users/avatars/search - Search public avatars
+export const SearchPublicAvatarsQuerySchema = z.object({
+  query: z.string().min(1).max(100),
+  page: z.coerce.number().int().min(1).optional().default(1),
+  limit: z.coerce.number().int().min(1).max(20).optional().default(20),
+});
+
+export type SearchPublicAvatarsQueryDto = z.infer<
+  typeof SearchPublicAvatarsQuerySchema
+>;
+
+export interface SearchPublicAvatarsResponseDto {
+  avatars: UserAvatarDto[];
+  meta: {
+    total: number;
+    page: number;
+    limit: number;
+    totalPages: number;
+  };
+}
+
 // GET /users/avatars/:id - Get user's avatar by ID
 export const GetUserAvatarParamsSchema = z.object({
   id: z.coerce.bigint(),
