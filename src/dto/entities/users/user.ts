@@ -63,6 +63,7 @@ export const UserAvatarSchema = z.object({
   examplePoses: z.array(z.string().max(2048)).optional(),
   appearance: z.string().max(500),
   style: ImageStyleSchema.optional(),
+  usageCount: z.number().int().optional(),
   likeCount: z.number().int().optional(),
   isLiked: z.boolean().optional(),
   isPublic: z.boolean().optional(),
