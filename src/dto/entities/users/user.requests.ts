@@ -116,7 +116,7 @@ export type UpdateUserAvatarParamsDto = z.infer<
 >;
 
 export const UpdateUserAvatarBodySchema = z.object({
-  examplePoses: z.array(z.string().max(2048)).optional(),
+  name: z.string().max(64).optional(),
   isPublic: z.boolean().optional(),
 });
 
