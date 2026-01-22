@@ -63,6 +63,7 @@ export interface UserPrivateDto extends UserPublicDto {
     | 'TRIALING'
     | 'UNPAID'
     | 'PAUSED';
+  subscriptionEndsAt: Date | null;
 
   createdAt: Date;
 }
