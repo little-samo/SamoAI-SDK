@@ -215,12 +215,26 @@ export interface ValidateUserFieldResponseDto {
 
 // GET /users/publics - Get multiple users by IDs
 export const GetUsersByIdsQuerySchema = z.object({
-  userIds: z
-    .string()
-    .transform((val) => val.split(',').map((id) => BigInt(id.trim())))
-    .refine((arr) => arr.length > 0 && arr.length <= 25, {
-      message: 'userIds must contain 1-25 user IDs',
-    }),
+  userIds: z.preprocess((val) => {
+    if (typeof val === 'string') {
+      const parts = val
+        .split(',')
+        .map((s) => s.trim())
+        .filter((s) => s.length > 0);
+      return parts.length > 0 ? parts : undefined;
+    }
+    return val;
+  }, z.array(z.coerce.bigint()).max(25).optional()),
+  userNames: z.preprocess((val) => {
+    if (typeof val === 'string') {
+      const parts = val
+        .split(',')
+        .map((s) => s.trim())
+        .filter((s) => s.length > 0);
+      return parts.length > 0 ? parts : undefined;
+    }
+    return val;
+  }, z.array(z.string().trim()).max(25).optional()),
   locationId: z.coerce.bigint().optional(),
 });
 
