@@ -53,6 +53,17 @@ export interface UserPrivateDto extends UserPublicDto {
 
   totalLocationPresetPaidCreditUsed: number;
 
+  subscriptionPlan: 'FREE' | 'HOBBY' | 'PRO';
+  subscriptionStatus:
+    | 'ACTIVE'
+    | 'CANCELED'
+    | 'INCOMPLETE'
+    | 'INCOMPLETE_EXPIRED'
+    | 'PAST_DUE'
+    | 'TRIALING'
+    | 'UNPAID'
+    | 'PAUSED';
+
   createdAt: Date;
 }
 
