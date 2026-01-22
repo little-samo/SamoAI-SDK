@@ -225,7 +225,7 @@ export const GetUsersByIdsQuerySchema = z.object({
     }
     return val;
   }, z.array(z.coerce.bigint()).max(25).optional()),
-  userNames: z.preprocess((val) => {
+  usernames: z.preprocess((val) => {
     if (typeof val === 'string') {
       const parts = val
         .split(',')
