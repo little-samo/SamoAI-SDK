@@ -64,6 +64,7 @@ export interface UserPrivateDto extends UserPublicDto {
     | 'UNPAID'
     | 'PAUSED';
   subscriptionEndsAt: Date | null;
+  nextSubscriptionPlan: 'FREE' | 'HOBBY' | 'PRO' | null;
 
   createdAt: Date;
 }
