@@ -6,6 +6,7 @@ export const ImageStyleSchema = z.enum([
   'webtoon2',
   'illustration',
   'anime',
+  'beauty',
   'korean',
 ]);
 
